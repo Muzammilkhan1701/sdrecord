@@ -18,117 +18,61 @@
                     <th><?= $this->Paginator->sort('class') ?></th>
                     <!-- Term-1 -->
                     <!-- subject-1 -->
-                    <!-- <th><?= $this->Paginator->sort('English') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_1_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_1_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_1_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_1_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('English total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-2 -->
-                    <!-- <th><?= $this->Paginator->sort('Hindi') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_2_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_2_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_2_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_2_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Hindi total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-3 -->
-                    <!-- <th><?= $this->Paginator->sort('Marathi/Sanskrit') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_3_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_3_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_3_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_3_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Marathi total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-4 -->
-                    <!-- <th><?= $this->Paginator->sort('Mathematics') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_4_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_4_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_4_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_4_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Mathematics total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-5 -->
-                    <!-- <th><?= $this->Paginator->sort('Science') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_5_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_5_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_5_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_5_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Science total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-6 -->
-                    <!-- <th><?= $this->Paginator->sort('Social Science') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_6_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_6_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_6_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_6_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Social total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-7 -->
-                    <!-- <th><?= $this->Paginator->sort('Computer') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term1_subject_7_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_7_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_7_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term1_subject_7_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Computer total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <th><?= $this->Paginator->sort('term1_total') ?></th>
                     <!-- Term-2 -->
                      <!-- subject-1 -->
-                    <!-- <th><?= $this->Paginator->sort('English') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_1_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_1_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_1_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_1_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('English total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-2 -->
-                    <!-- <th><?= $this->Paginator->sort('Hindi') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_2_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_2_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_2_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_2_portfolio') ?></th> -->
+                   
                     <th><?= $this->Paginator->sort('Hindi total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-3 -->
-                    <!-- <th><?= $this->Paginator->sort('Marathi') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_3_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_3_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_3_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_3_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Marathi total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-4 -->
-                    <!-- <th><?= $this->Paginator->sort('Mathematics') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_4_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_4_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_4_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_4_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Mathematics total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-5 -->
-                    <!-- <th><?= $this->Paginator->sort('Science') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_5_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_5_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_5_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_5_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Science total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-6 -->
-                    <!-- <th><?= $this->Paginator->sort('Social Science') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_6_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_6_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_6_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_6_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Social total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <!-- subject-7 -->
-                    <!-- <th><?= $this->Paginator->sort('Computer') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('term2_subject_7_periodic_test') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_7_subject_enrichment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_7_multiple_assessment') ?></th>
-                    <th><?= $this->Paginator->sort('term2_subject_7_portfolio') ?></th> -->
+                    
                     <th><?= $this->Paginator->sort('Computer total') ?></th>
                     <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
                     <th><?= $this->Paginator->sort('term2_total') ?></th>
