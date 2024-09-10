@@ -38,6 +38,12 @@ class ResultsController extends AppController
         $this->viewBuilder()->setLayout('home');
     }
 
+    public function finalview()
+    {
+        $this->viewBuilder()->setLayout('home');
+
+
+    }
 
     // src/Controller/ResultsController.php
     public function marksheet()
@@ -75,6 +81,16 @@ class ResultsController extends AppController
                     $this->set('results', $student->result); // Set results data
                     $this->set('term', $term); // Set term for conditional display
                     $this->set('excellence', $excellence);
+
+                    // Load different views based on the selected term
+                if ($term === 'Term1' || $term === 'Term2') {
+                    // For either Term 1 or Term 2, load the single-term template
+                    $this->viewBuilder()->setTemplate('marksheet'); // View for Term1 or Term2
+                } elseif ($term === 'Term1+Term2') {
+                    // For combined Term 1 + Term 2, load the combined-term template
+                    $this->viewBuilder()->setTemplate('finalview'); // View for Term1+Term2
+                }
+
                 } else {
                     $this->Flash->error(__('Marks not found for the given Roll No.'));
                 }
@@ -85,11 +101,6 @@ class ResultsController extends AppController
             $this->Flash->error(__('Invalid request method.'));
         }
     }
-
-
-
-
-
 
 
 
