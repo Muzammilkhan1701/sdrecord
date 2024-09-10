@@ -20,11 +20,11 @@ class StudentsFixture extends TestFixture
         $this->records = [
             [
                 'student_id' => 1,
+                'Admission_no' => 'Lorem ips',
                 'name' => 'Lorem ipsum dolor sit amet',
-                'section' => 'Lorem ipsum dolor sit amet',
                 'mother_name' => 'Lorem ipsum dolor sit amet',
+                'section' => 'Lorem ipsum dolor sit amet',
                 'admission_year' => 'Lorem ipsum dolor sit amet',
-                'pass_year' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

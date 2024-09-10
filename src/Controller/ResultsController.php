@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -17,12 +18,13 @@ class ResultsController extends AppController
         $this->loadModel('Students');
         $this->loadModel('Marks');
         $this->loadModel('Results');
-        $this->loadModel('academicYears');
+        $this->loadModel('AcademicYears');
+        $this->loadModel('Excellence');
         // Load other models if needed
     }
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        
+
         parent::beforeFilter($event);
         $this->viewBuilder()->setLayout('uhome');
 
@@ -34,57 +36,62 @@ class ResultsController extends AppController
     {
 
         $this->viewBuilder()->setLayout('home');
-
     }
 
-    
-        // src/Controller/ResultsController.php
-        public function marksheet()
-{
-    $this->viewBuilder()->setLayout('home');
-    
-    if ($this->request->is('post')) {
-        $data = $this->request->getData();
 
-        // Get roll number and term from form data
-        $rollNo = isset($data['rollno']) ? $data['rollno'] : null;
-        $term = isset($data['term']) ? $data['term'] : 'Term1';
+    // src/Controller/ResultsController.php
+    public function marksheet()
+    {
+        $this->viewBuilder()->setLayout('home');
 
-        if ($rollNo) {
-            // Fetch marks and related student data based on roll number
-            $student = $this->Marks->find()
-                ->contain([
-                    'Students',
-                    'Results' => function ($q) {
-                        return $q; // No need to specify rollno here if using student_id
-                    }
-                ])
-                ->where(['Marks.rollno' => $rollNo]) // Search by roll number in Marks table
-                ->first();
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
 
-            if ($student) {
-                // Set the data for the view
-                $this->set('marks', $student); // Set marks
-                $this->set('student', $student->student); // Set student data
-                $this->set('results', $student->result); // Set results data
-                $this->set('term', $term); // Set term for conditional display
+            // Get roll number and term from form data
+            $rollNo = isset($data['rollno']) ? $data['rollno'] : null;
+            $term = isset($data['term']) ? $data['term'] : 'Term1';
+
+            if ($rollNo) {
+                // Fetch marks and related student data based on roll number
+                $student = $this->Marks->find()
+                    ->contain([
+                        'Students',
+                        'Results' => function ($q) {
+                            return $q; // No need to specify rollno here if using student_id
+                        }
+                    ])
+                    ->where(['Marks.rollno' => $rollNo]) // Search by roll number in Marks table
+                    ->first();
+
+                // Fetch excellence data
+    $excellence = $this->Excellence->find()
+    ->where(['student_id' => $student->student_id])
+    ->first();
+
+                if ($student) {
+                    // Set the data for the view
+                    $this->set('marks', $student); // Set marks
+                    $this->set('student', $student->student); // Set student data
+                    $this->set('results', $student->result); // Set results data
+                    $this->set('term', $term); // Set term for conditional display
+                    $this->set('excellence', $excellence);
+                } else {
+                    $this->Flash->error(__('Marks not found for the given Roll No.'));
+                }
             } else {
-                $this->Flash->error(__('Marks not found for the given Roll No.'));
+                $this->Flash->error(__('Roll No is required.'));
             }
         } else {
-            $this->Flash->error(__('Roll No is required.'));
+            $this->Flash->error(__('Invalid request method.'));
         }
-    } else {
-        $this->Flash->error(__('Invalid request method.'));
     }
-}
-
-
-        
 
 
 
-    
+
+
+
+
 
     /**
      * Index method
@@ -92,7 +99,7 @@ class ResultsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      */
 
-    
+
     public function index()
     {
         $this->paginate = [
@@ -102,8 +109,8 @@ class ResultsController extends AppController
 
         $this->set(compact('results'));
     }
-    
-    
+
+
 
     /**
      * View method

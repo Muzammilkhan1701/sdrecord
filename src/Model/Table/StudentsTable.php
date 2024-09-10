@@ -51,16 +51,16 @@ class StudentsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->scalar('Admission_no')
+            ->maxLength('Admission_no', 11)
+            ->requirePresence('Admission_no', 'create')
+            ->notEmptyString('Admission_no');
+
+        $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->notEmptyString('name');
-
-        $validator
-            ->scalar('section')
-            ->maxLength('section', 50)
-            ->requirePresence('section', 'create')
-            ->notEmptyString('section');
 
         $validator
             ->scalar('mother_name')
@@ -69,13 +69,15 @@ class StudentsTable extends Table
             ->notEmptyString('mother_name');
 
         $validator
+            ->scalar('section')
+            ->maxLength('section', 50)
+            ->requirePresence('section', 'create')
+            ->notEmptyString('section');
+
+        $validator
             ->scalar('admission_year')
             ->requirePresence('admission_year', 'create')
             ->notEmptyString('admission_year');
-
-        $validator
-            ->scalar('pass_year')
-            ->allowEmptyString('pass_year');
 
         return $validator;
     }

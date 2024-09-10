@@ -560,7 +560,7 @@
 <!-- chatgpt template-2 -->
 
 
-    <div class="container py-5">
+<div class="container py-5">
     <div class="card shadow-lg border-0 rounded-3">
         <div class="card-header bg-primary text-white text-center py-4 rounded-top">
             <h2>Student Report Card</h2>
@@ -629,7 +629,8 @@
                                 <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_portfolio' : $subject[2].'_portfolio'}) ?></td>
                                 <td><?= h($marks->{$term == 'Term1' ? $subject[1] : $subject[2]}) ?></td>
                                 <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_total' : $subject[2].'_total'}) ?></td>
-                                <td><?= h($term == 'Term1' ? $results->term1_grade : $results->term2_grade) ?></td>
+                                <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_grade' : $subject[2].'_grade'}) ?></td>
+                                <!-- <td><?= h($term == 'Term1' ? $results->term1_grade : $results->term2_grade) ?></td> -->
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -644,7 +645,7 @@
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="bg-light p-3 rounded text-center">
-                        <h5>Total Marks: <?= h($term == 'Term1' ? $marks->term1_total_marks : $marks->term2_total_marks) ?></h5>
+                        <h5>Total Marks: <?= h($term == 'Term1' ? $results->term1_total_marks : $results->term2_total_marks) ?></h5>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -658,6 +659,52 @@
                 <h5>Percentage: <?= h($term == 'Term1' ? $results->term1_percentage : $results->term2_percentage ) ?>%</h5>
             </div>
         </div>
+
+
+        
+        <div class="table-responsive d-flex justify-content-center  ">
+            
+
+    <table class="table table-bordered border-dark w-75 text-center m-5">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th colspan="2">Co-Scholastic Areas: Term <?= $term == 'Term1' ? 'I' : 'II' ?> (on a 3-point grading scale)</th>            
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>---</td>
+                    <td>Grade</td>
+                </tr>
+                <tr>
+                <?php if (isset($excellence) && isset($term)): ?>
+
+                    <td>Work Education (or Pre-Vocational Education)</td>
+                    <td><?= h($term == 'Term1' ? $excellence->term1_work_education : $excellence->term2_work_education) ?></td>
+                </tr>
+                <tr>
+                    <td>Art Education</td>
+                    <td><?= h($term == 'Term1' ? $excellence->term1_art_education : $excellence->term2_art_education) ?></td>
+                    </tr>
+                <tr>
+                    <td>Health & Physical Education</td>
+                    <td><?= h($term == 'Term1' ? $excellence->term1_physical_education : $excellence->term2_physical_education) ?></td>
+                    </tr>
+                <tr>
+                <td>Discipline: Term <?= $term == 'Term1' ? 'I' : 'II' ?> (on a 3-point grading scale)</td>
+                <td><?= h($term == 'Term1' ? $excellence->term1_discipline : $excellence->term2_discipline) ?></td>
+                </tr>
+            </tbody>
+            <?php else : ?>
+            <tr>
+                <td colspan="2">No grades found for the selected term.</td>
+            </tr>
+            <?php endif; ?>
+
+    </table>
+</div>
+
+
 
         <div class="text-center mb-5">
             <a href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'landing']) ?>" class="btn btn-primary px-5">Home</a>

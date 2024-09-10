@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2024 at 02:45 PM
+-- Generation Time: Sep 10, 2024 at 02:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,42 @@ CREATE TABLE `academic_years` (
   `student_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `academic_years`
+--
+
+INSERT INTO `academic_years` (`year_id`, `academic_year`, `student_id`) VALUES
+(1, '2023', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `excellence`
+--
+
+CREATE TABLE `excellence` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `term1_work_education` varchar(2) DEFAULT NULL,
+  `term1_art_education` varchar(2) DEFAULT NULL,
+  `term1_physical_education` varchar(2) DEFAULT NULL,
+  `term1_discipline` varchar(2) DEFAULT NULL,
+  `term2_work_education` varchar(2) DEFAULT NULL,
+  `term2_art_education` varchar(2) DEFAULT NULL,
+  `term2_physical_education` varchar(2) DEFAULT NULL,
+  `term2_discipline` varchar(2) DEFAULT NULL,
+  `created` datetime DEFAULT current_timestamp(),
+  `modified` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `excellence`
+--
+
+INSERT INTO `excellence` (`id`, `student_id`, `term1_work_education`, `term1_art_education`, `term1_physical_education`, `term1_discipline`, `term2_work_education`, `term2_art_education`, `term2_physical_education`, `term2_discipline`, `created`, `modified`) VALUES
+(4, 1, 'A1', 'A1', 'B1', 'B2', 'A2', 'C1', 'C2', 'B1', '2024-09-10 09:56:09', '2024-09-10 09:56:09'),
+(5, 2, 'A1', 'A2', 'B1', 'B2', 'A2', 'C1', 'C2', 'B1', '2024-09-10 07:30:34', '2024-09-10 07:34:32');
+
 -- --------------------------------------------------------
 
 --
@@ -51,49 +87,49 @@ CREATE TABLE `marks` (
   `term1_subject_1_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_1_portfolio` int(11) DEFAULT 0,
   `term1_subject_1_total` int(11) GENERATED ALWAYS AS (`term1_subject_1` + `term1_subject_1_periodic_test` + `term1_subject_1_subject_enrichment` + `term1_subject_1_multiple_assessment` + `term1_subject_1_portfolio`) STORED,
-  `term1_subject_1_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_1_total` >= 90 then 'A' when `term1_subject_1_total` >= 80 then 'B' when `term1_subject_1_total` >= 70 then 'C' when `term1_subject_1_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_1_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_1_total` >= 91 then 'A1' when `term1_subject_1_total` >= 81 then 'A2' when `term1_subject_1_total` >= 71 then 'B1' when `term1_subject_1_total` >= 61 then 'B2' when `term1_subject_1_total` >= 51 then 'C1' when `term1_subject_1_total` >= 41 then 'C2' when `term1_subject_1_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_2` int(11) DEFAULT 0,
   `term1_subject_2_periodic_test` int(11) DEFAULT 0,
   `term1_subject_2_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_2_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_2_portfolio` int(11) DEFAULT 0,
   `term1_subject_2_total` int(11) GENERATED ALWAYS AS (`term1_subject_2` + `term1_subject_2_periodic_test` + `term1_subject_2_subject_enrichment` + `term1_subject_2_multiple_assessment` + `term1_subject_2_portfolio`) STORED,
-  `term1_subject_2_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_2_total` >= 90 then 'A' when `term1_subject_2_total` >= 80 then 'B' when `term1_subject_2_total` >= 70 then 'C' when `term1_subject_2_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_2_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_2_total` >= 91 then 'A1' when `term1_subject_2_total` >= 81 then 'A2' when `term1_subject_2_total` >= 71 then 'B1' when `term1_subject_2_total` >= 61 then 'B2' when `term1_subject_2_total` >= 51 then 'C1' when `term1_subject_2_total` >= 41 then 'C2' when `term1_subject_2_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_3` int(11) DEFAULT 0,
   `term1_subject_3_periodic_test` int(11) DEFAULT 0,
   `term1_subject_3_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_3_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_3_portfolio` int(11) DEFAULT 0,
   `term1_subject_3_total` int(11) GENERATED ALWAYS AS (`term1_subject_3` + `term1_subject_3_periodic_test` + `term1_subject_3_subject_enrichment` + `term1_subject_3_multiple_assessment` + `term1_subject_3_portfolio`) STORED,
-  `term1_subject_3_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_3_total` >= 90 then 'A' when `term1_subject_3_total` >= 80 then 'B' when `term1_subject_3_total` >= 70 then 'C' when `term1_subject_3_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_3_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_3_total` >= 91 then 'A1' when `term1_subject_3_total` >= 81 then 'A2' when `term1_subject_3_total` >= 71 then 'B1' when `term1_subject_3_total` >= 61 then 'B2' when `term1_subject_3_total` >= 51 then 'C1' when `term1_subject_3_total` >= 41 then 'C2' when `term1_subject_3_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_4` int(11) DEFAULT 0,
   `term1_subject_4_periodic_test` int(11) DEFAULT 0,
   `term1_subject_4_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_4_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_4_portfolio` int(11) DEFAULT 0,
   `term1_subject_4_total` int(11) GENERATED ALWAYS AS (`term1_subject_4` + `term1_subject_4_periodic_test` + `term1_subject_4_subject_enrichment` + `term1_subject_4_multiple_assessment` + `term1_subject_4_portfolio`) STORED,
-  `term1_subject_4_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_4_total` >= 90 then 'A' when `term1_subject_4_total` >= 80 then 'B' when `term1_subject_4_total` >= 70 then 'C' when `term1_subject_4_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_4_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_4_total` >= 91 then 'A1' when `term1_subject_4_total` >= 81 then 'A2' when `term1_subject_4_total` >= 71 then 'B1' when `term1_subject_4_total` >= 61 then 'B2' when `term1_subject_4_total` >= 51 then 'C1' when `term1_subject_4_total` >= 41 then 'C2' when `term1_subject_4_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_5` int(11) DEFAULT 0,
   `term1_subject_5_periodic_test` int(11) DEFAULT 0,
   `term1_subject_5_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_5_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_5_portfolio` int(11) DEFAULT 0,
   `term1_subject_5_total` int(11) GENERATED ALWAYS AS (`term1_subject_5` + `term1_subject_5_periodic_test` + `term1_subject_5_subject_enrichment` + `term1_subject_5_multiple_assessment` + `term1_subject_5_portfolio`) STORED,
-  `term1_subject_5_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_5_total` >= 90 then 'A' when `term1_subject_5_total` >= 80 then 'B' when `term1_subject_5_total` >= 70 then 'C' when `term1_subject_5_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_5_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_5_total` >= 91 then 'A1' when `term1_subject_5_total` >= 81 then 'A2' when `term1_subject_5_total` >= 71 then 'B1' when `term1_subject_5_total` >= 61 then 'B2' when `term1_subject_5_total` >= 51 then 'C1' when `term1_subject_5_total` >= 41 then 'C2' when `term1_subject_5_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_6` int(11) DEFAULT 0,
   `term1_subject_6_periodic_test` int(11) DEFAULT 0,
   `term1_subject_6_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_6_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_6_portfolio` int(11) DEFAULT 0,
   `term1_subject_6_total` int(11) GENERATED ALWAYS AS (`term1_subject_6` + `term1_subject_6_periodic_test` + `term1_subject_6_subject_enrichment` + `term1_subject_6_multiple_assessment` + `term1_subject_6_portfolio`) STORED,
-  `term1_subject_6_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_6_total` >= 90 then 'A' when `term1_subject_6_total` >= 80 then 'B' when `term1_subject_6_total` >= 70 then 'C' when `term1_subject_6_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_6_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_6_total` >= 91 then 'A1' when `term1_subject_6_total` >= 81 then 'A2' when `term1_subject_6_total` >= 71 then 'B1' when `term1_subject_6_total` >= 61 then 'B2' when `term1_subject_6_total` >= 51 then 'C1' when `term1_subject_6_total` >= 41 then 'C2' when `term1_subject_6_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_7` int(11) DEFAULT 0,
   `term1_subject_7_periodic_test` int(11) DEFAULT 0,
   `term1_subject_7_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_7_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_7_portfolio` int(11) DEFAULT 0,
   `term1_subject_7_total` int(11) GENERATED ALWAYS AS (`term1_subject_7` + `term1_subject_7_periodic_test` + `term1_subject_7_subject_enrichment` + `term1_subject_7_multiple_assessment` + `term1_subject_7_portfolio`) STORED,
-  `term1_subject_7_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_7_total` >= 90 then 'A' when `term1_subject_7_total` >= 80 then 'B' when `term1_subject_7_total` >= 70 then 'C' when `term1_subject_7_total` >= 60 then 'D' else 'F' end) STORED,
+  `term1_subject_7_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_7_total` >= 91 then 'A1' when `term1_subject_7_total` >= 81 then 'A2' when `term1_subject_7_total` >= 71 then 'B1' when `term1_subject_7_total` >= 61 then 'B2' when `term1_subject_7_total` >= 51 then 'C1' when `term1_subject_7_total` >= 41 then 'C2' when `term1_subject_7_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_total` int(11) GENERATED ALWAYS AS (`term1_subject_1_total` + `term1_subject_2_total` + `term1_subject_3_total` + `term1_subject_4_total` + `term1_subject_5_total` + `term1_subject_6_total` + `term1_subject_7_total`) STORED,
   `term2_subject_1` int(11) DEFAULT 0,
   `term2_subject_1_periodic_test` int(11) DEFAULT 0,
@@ -101,49 +137,49 @@ CREATE TABLE `marks` (
   `term2_subject_1_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_1_portfolio` int(11) DEFAULT 0,
   `term2_subject_1_total` int(11) GENERATED ALWAYS AS (`term2_subject_1` + `term2_subject_1_periodic_test` + `term2_subject_1_subject_enrichment` + `term2_subject_1_multiple_assessment` + `term2_subject_1_portfolio`) STORED,
-  `term2_subject_1_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_1_total` >= 90 then 'A' when `term2_subject_1_total` >= 80 then 'B' when `term2_subject_1_total` >= 70 then 'C' when `term2_subject_1_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_1_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_1_total` >= 91 then 'A1' when `term2_subject_1_total` >= 81 then 'A2' when `term2_subject_1_total` >= 71 then 'B1' when `term2_subject_1_total` >= 61 then 'B2' when `term2_subject_1_total` >= 51 then 'C1' when `term2_subject_1_total` >= 41 then 'C2' when `term2_subject_1_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_2` int(11) DEFAULT 0,
   `term2_subject_2_periodic_test` int(11) DEFAULT 0,
   `term2_subject_2_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_2_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_2_portfolio` int(11) DEFAULT 0,
   `term2_subject_2_total` int(11) GENERATED ALWAYS AS (`term2_subject_2` + `term2_subject_2_periodic_test` + `term2_subject_2_subject_enrichment` + `term2_subject_2_multiple_assessment` + `term2_subject_2_portfolio`) STORED,
-  `term2_subject_2_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_2_total` >= 90 then 'A' when `term2_subject_2_total` >= 80 then 'B' when `term2_subject_2_total` >= 70 then 'C' when `term2_subject_2_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_2_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_2_total` >= 91 then 'A1' when `term2_subject_2_total` >= 81 then 'A2' when `term2_subject_2_total` >= 71 then 'B1' when `term2_subject_2_total` >= 61 then 'B2' when `term2_subject_2_total` >= 51 then 'C1' when `term2_subject_2_total` >= 41 then 'C2' when `term2_subject_2_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_3` int(11) DEFAULT 0,
   `term2_subject_3_periodic_test` int(11) DEFAULT 0,
   `term2_subject_3_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_3_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_3_portfolio` int(11) DEFAULT 0,
   `term2_subject_3_total` int(11) GENERATED ALWAYS AS (`term2_subject_3` + `term2_subject_3_periodic_test` + `term2_subject_3_subject_enrichment` + `term2_subject_3_multiple_assessment` + `term2_subject_3_portfolio`) STORED,
-  `term2_subject_3_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_3_total` >= 90 then 'A' when `term2_subject_3_total` >= 80 then 'B' when `term2_subject_3_total` >= 70 then 'C' when `term2_subject_3_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_3_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_3_total` >= 91 then 'A1' when `term2_subject_3_total` >= 81 then 'A2' when `term2_subject_3_total` >= 71 then 'B1' when `term2_subject_3_total` >= 61 then 'B2' when `term2_subject_3_total` >= 51 then 'C1' when `term2_subject_3_total` >= 41 then 'C2' when `term2_subject_3_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_4` int(11) DEFAULT 0,
   `term2_subject_4_periodic_test` int(11) DEFAULT 0,
   `term2_subject_4_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_4_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_4_portfolio` int(11) DEFAULT 0,
   `term2_subject_4_total` int(11) GENERATED ALWAYS AS (`term2_subject_4` + `term2_subject_4_periodic_test` + `term2_subject_4_subject_enrichment` + `term2_subject_4_multiple_assessment` + `term2_subject_4_portfolio`) STORED,
-  `term2_subject_4_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_4_total` >= 90 then 'A' when `term2_subject_4_total` >= 80 then 'B' when `term2_subject_4_total` >= 70 then 'C' when `term2_subject_4_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_4_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_4_total` >= 91 then 'A1' when `term2_subject_4_total` >= 81 then 'A2' when `term2_subject_4_total` >= 71 then 'B1' when `term2_subject_4_total` >= 61 then 'B2' when `term2_subject_4_total` >= 51 then 'C1' when `term2_subject_4_total` >= 41 then 'C2' when `term2_subject_4_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_5` int(11) DEFAULT 0,
   `term2_subject_5_periodic_test` int(11) DEFAULT 0,
   `term2_subject_5_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_5_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_5_portfolio` int(11) DEFAULT 0,
   `term2_subject_5_total` int(11) GENERATED ALWAYS AS (`term2_subject_5` + `term2_subject_5_periodic_test` + `term2_subject_5_subject_enrichment` + `term2_subject_5_multiple_assessment` + `term2_subject_5_portfolio`) STORED,
-  `term2_subject_5_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_5_total` >= 90 then 'A' when `term2_subject_5_total` >= 80 then 'B' when `term2_subject_5_total` >= 70 then 'C' when `term2_subject_5_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_5_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_5_total` >= 91 then 'A1' when `term2_subject_5_total` >= 81 then 'A2' when `term2_subject_5_total` >= 71 then 'B1' when `term2_subject_5_total` >= 61 then 'B2' when `term2_subject_5_total` >= 51 then 'C1' when `term2_subject_5_total` >= 41 then 'C2' when `term2_subject_5_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_6` int(11) DEFAULT 0,
   `term2_subject_6_periodic_test` int(11) DEFAULT 0,
   `term2_subject_6_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_6_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_6_portfolio` int(11) DEFAULT 0,
   `term2_subject_6_total` int(11) GENERATED ALWAYS AS (`term2_subject_6` + `term2_subject_6_periodic_test` + `term2_subject_6_subject_enrichment` + `term2_subject_6_multiple_assessment` + `term2_subject_6_portfolio`) STORED,
-  `term2_subject_6_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_6_total` >= 90 then 'A' when `term2_subject_6_total` >= 80 then 'B' when `term2_subject_6_total` >= 70 then 'C' when `term2_subject_6_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_6_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_6_total` >= 91 then 'A1' when `term2_subject_6_total` >= 81 then 'A2' when `term2_subject_6_total` >= 71 then 'B1' when `term2_subject_6_total` >= 61 then 'B2' when `term2_subject_6_total` >= 51 then 'C1' when `term2_subject_6_total` >= 41 then 'C2' when `term2_subject_6_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_subject_7` int(11) DEFAULT 0,
   `term2_subject_7_periodic_test` int(11) DEFAULT 0,
   `term2_subject_7_subject_enrichment` int(11) DEFAULT 0,
   `term2_subject_7_multiple_assessment` int(11) DEFAULT 0,
   `term2_subject_7_portfolio` int(11) DEFAULT 0,
   `term2_subject_7_total` int(11) GENERATED ALWAYS AS (`term2_subject_7` + `term2_subject_7_periodic_test` + `term2_subject_7_subject_enrichment` + `term2_subject_7_multiple_assessment` + `term2_subject_7_portfolio`) STORED,
-  `term2_subject_7_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_7_total` >= 90 then 'A' when `term2_subject_7_total` >= 80 then 'B' when `term2_subject_7_total` >= 70 then 'C' when `term2_subject_7_total` >= 60 then 'D' else 'F' end) STORED,
+  `term2_subject_7_grade` varchar(5) GENERATED ALWAYS AS (case when `term2_subject_7_total` >= 91 then 'A1' when `term2_subject_7_total` >= 81 then 'A2' when `term2_subject_7_total` >= 71 then 'B1' when `term2_subject_7_total` >= 61 then 'B2' when `term2_subject_7_total` >= 51 then 'C1' when `term2_subject_7_total` >= 41 then 'C2' when `term2_subject_7_total` >= 33 then 'D' else 'E' end) STORED,
   `term2_total` int(11) GENERATED ALWAYS AS (`term2_subject_1_total` + `term2_subject_2_total` + `term2_subject_3_total` + `term2_subject_4_total` + `term2_subject_5_total` + `term2_subject_6_total` + `term2_subject_7_total`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -152,11 +188,25 @@ CREATE TABLE `marks` (
 --
 
 INSERT INTO `marks` (`mark_id`, `student_id`, `academic_year`, `rollno`, `class`, `term1_subject_1`, `term1_subject_1_periodic_test`, `term1_subject_1_subject_enrichment`, `term1_subject_1_multiple_assessment`, `term1_subject_1_portfolio`, `term1_subject_2`, `term1_subject_2_periodic_test`, `term1_subject_2_subject_enrichment`, `term1_subject_2_multiple_assessment`, `term1_subject_2_portfolio`, `term1_subject_3`, `term1_subject_3_periodic_test`, `term1_subject_3_subject_enrichment`, `term1_subject_3_multiple_assessment`, `term1_subject_3_portfolio`, `term1_subject_4`, `term1_subject_4_periodic_test`, `term1_subject_4_subject_enrichment`, `term1_subject_4_multiple_assessment`, `term1_subject_4_portfolio`, `term1_subject_5`, `term1_subject_5_periodic_test`, `term1_subject_5_subject_enrichment`, `term1_subject_5_multiple_assessment`, `term1_subject_5_portfolio`, `term1_subject_6`, `term1_subject_6_periodic_test`, `term1_subject_6_subject_enrichment`, `term1_subject_6_multiple_assessment`, `term1_subject_6_portfolio`, `term1_subject_7`, `term1_subject_7_periodic_test`, `term1_subject_7_subject_enrichment`, `term1_subject_7_multiple_assessment`, `term1_subject_7_portfolio`, `term2_subject_1`, `term2_subject_1_periodic_test`, `term2_subject_1_subject_enrichment`, `term2_subject_1_multiple_assessment`, `term2_subject_1_portfolio`, `term2_subject_2`, `term2_subject_2_periodic_test`, `term2_subject_2_subject_enrichment`, `term2_subject_2_multiple_assessment`, `term2_subject_2_portfolio`, `term2_subject_3`, `term2_subject_3_periodic_test`, `term2_subject_3_subject_enrichment`, `term2_subject_3_multiple_assessment`, `term2_subject_3_portfolio`, `term2_subject_4`, `term2_subject_4_periodic_test`, `term2_subject_4_subject_enrichment`, `term2_subject_4_multiple_assessment`, `term2_subject_4_portfolio`, `term2_subject_5`, `term2_subject_5_periodic_test`, `term2_subject_5_subject_enrichment`, `term2_subject_5_multiple_assessment`, `term2_subject_5_portfolio`, `term2_subject_6`, `term2_subject_6_periodic_test`, `term2_subject_6_subject_enrichment`, `term2_subject_6_multiple_assessment`, `term2_subject_6_portfolio`, `term2_subject_7`, `term2_subject_7_periodic_test`, `term2_subject_7_subject_enrichment`, `term2_subject_7_multiple_assessment`, `term2_subject_7_portfolio`) VALUES
-(1, 1, '2024', 'A504', '4', 55, 5, 4, 5, 4, 85, 4, 4, 2, 2, 56, 5, 2, 4, 5, 57, 5, 4, 1, 2, 58, 5, 4, 2, 1, 80, 5, 4, 1, 2, 70, 4, 5, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(7, 1, '2024', 'A504', '4', 59, 5, 4, 3, 2, 69, 3, 2, 1, 5, 59, 1, 2, 3, 4, 71, 5, 4, 3, 2, 65, 2, 3, 4, 1, 73, 2, 2, 3, 5, 80, 5, 5, 5, 5, 85, 5, 4, 3, 2, 56, 5, 4, 3, 2, 65, 2, 2, 3, 5, 69, 5, 5, 4, 1, 72, 5, 3, 4, 2, 73, 2, 2, 1, 5, 40, 3, 3, 3, 3),
+(8, 2, '2024-2025', 'a510', '4', 70, 2, 3, 4, 5, 70, 5, 4, 1, 2, 74, 1, 2, 3, 4, 65, 4, 2, 1, 3, 65, 2, 4, 3, 4, 74, 5, 2, 4, 3, 78, 5, 4, 5, 4, 80, 1, 2, 3, 4, 52, 2, 2, 2, 2, 50, 0, 2, 2, 2, 58, 2, 2, 2, 2, 58, 5, 5, 5, 5, 75, 2, 2, 2, 2, 80, 5, 5, 5, 5),
+(9, 3, '2023', '104', '4', 76, 4, 4, 4, 4, 75, 5, 4, 4, 3, 65, 5, 4, 4, 4, 65, 3, 5, 5, 4, 76, 4, 5, 4, 5, 78, 5, 5, 5, 4, 74, 4, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 --
 -- Triggers `marks`
 --
+DELIMITER $$
+CREATE TRIGGER `after_marks_delete_trigger` AFTER DELETE ON `marks` FOR EACH ROW BEGIN
+    -- Handle NULL values with proper operators
+    IF OLD.student_id IS NOT NULL AND OLD.academic_year IS NOT NULL THEN
+        -- Delete the academic year record associated with the deleted mark entry
+        DELETE FROM `academic_years`
+        WHERE `student_id` = OLD.student_id
+        AND `academic_year` = OLD.academic_year;
+    END IF;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `after_marks_insert` AFTER INSERT ON `marks` FOR EACH ROW BEGIN
   DECLARE term1_percent DECIMAL(5, 2);
@@ -170,19 +220,25 @@ CREATE TRIGGER `after_marks_insert` AFTER INSERT ON `marks` FOR EACH ROW BEGIN
 
   -- Determine grades based on percentages
   SET term1_grade = CASE
-    WHEN term1_percent >= 90 THEN 'A'
-    WHEN term1_percent >= 80 THEN 'B'
-    WHEN term1_percent >= 70 THEN 'C'
-    WHEN term1_percent >= 60 THEN 'D'
-    ELSE 'F'
+    WHEN term1_percent >= 91 THEN 'A1'
+    WHEN term1_percent >= 81 THEN 'A2'
+    WHEN term1_percent >= 71 THEN 'B1'
+    WHEN term1_percent >= 61 THEN 'B2'
+    WHEN term1_percent >= 51 THEN 'C1'
+    WHEN term1_percent >= 41 THEN 'C2'
+    WHEN term1_percent >= 33 THEN 'D'
+    ELSE 'E'
   END;
 
   SET term2_grade = CASE
-    WHEN term2_percent >= 90 THEN 'A'
-    WHEN term2_percent >= 80 THEN 'B'
-    WHEN term2_percent >= 70 THEN 'C'
-    WHEN term2_percent >= 60 THEN 'D'
-    ELSE 'F'
+    WHEN term2_percent >= 91 THEN 'A1'
+    WHEN term2_percent >= 81 THEN 'A2'
+    WHEN term2_percent >= 71 THEN 'B1'
+    WHEN term2_percent >= 61 THEN 'B2'
+    WHEN term1_percent >= 51 THEN 'C1'
+    WHEN term1_percent >= 41 THEN 'C2'
+    WHEN term1_percent >= 33 THEN 'D'
+    ELSE 'E'
   END;
 
   -- Insert into results table
@@ -204,19 +260,25 @@ CREATE TRIGGER `after_marks_update` AFTER UPDATE ON `marks` FOR EACH ROW BEGIN
 
   -- Determine grades based on percentages
   SET term1_grade = CASE
-    WHEN term1_percent >= 90 THEN 'A'
-    WHEN term1_percent >= 80 THEN 'B'
-    WHEN term1_percent >= 70 THEN 'C'
-    WHEN term1_percent >= 60 THEN 'D'
-    ELSE 'F'
+    WHEN term1_percent >= 91 THEN 'A1'
+    WHEN term1_percent >= 81 THEN 'A2'
+    WHEN term1_percent >= 71 THEN 'B1'
+    WHEN term1_percent >= 61 THEN 'B2'
+    WHEN term1_percent >= 51 THEN 'C1'
+    WHEN term1_percent >= 41 THEN 'C2'
+    WHEN term1_percent >= 33 THEN 'D'
+    ELSE 'E'
   END;
 
   SET term2_grade = CASE
-    WHEN term2_percent >= 90 THEN 'A'
-    WHEN term2_percent >= 80 THEN 'B'
-    WHEN term2_percent >= 70 THEN 'C'
-    WHEN term2_percent >= 60 THEN 'D'
-    ELSE 'F'
+    WHEN term2_percent >= 91 THEN 'A1'
+    WHEN term2_percent >= 81 THEN 'A2'
+    WHEN term2_percent >= 71 THEN 'B1'
+    WHEN term2_percent >= 61 THEN 'B2'
+    WHEN term2_percent >= 51 THEN 'C1'
+    WHEN term2_percent >= 41 THEN 'C2'
+    WHEN term2_percent >= 33 THEN 'D'
+    ELSE 'E'
   END;
 
   -- Update the results table
@@ -229,6 +291,58 @@ CREATE TRIGGER `after_marks_update` AFTER UPDATE ON `marks` FOR EACH ROW BEGIN
       term2_grade = term2_grade
   WHERE student_id = NEW.student_id
     AND academic_year = NEW.academic_year;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_marks_update_trigger` AFTER UPDATE ON `marks` FOR EACH ROW BEGIN
+    -- Handle NULL values with proper operators
+    IF OLD.student_id IS NOT NULL AND OLD.academic_year IS NOT NULL THEN
+        -- Delete the old academic year record if it exists
+        DELETE FROM `academic_years` 
+        WHERE `student_id` = OLD.student_id 
+        AND `academic_year` = OLD.academic_year;
+    END IF;
+
+    IF NEW.student_id IS NOT NULL AND NEW.academic_year IS NOT NULL THEN
+        -- Insert the new academic year record if it doesn't exist
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM `academic_years`
+            WHERE `student_id` = NEW.student_id
+            AND `academic_year` = NEW.academic_year
+        ) THEN
+            INSERT INTO `academic_years` (`academic_year`, `student_id`)
+            VALUES (NEW.academic_year, NEW.student_id);
+        END IF;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `delete_results` AFTER DELETE ON `marks` FOR EACH ROW BEGIN
+  -- Delete the corresponding record in the results table
+  DELETE FROM results
+  WHERE student_id = OLD.student_id
+    AND academic_year = OLD.academic_year;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insert_academic_years` BEFORE INSERT ON `marks` FOR EACH ROW BEGIN
+    -- Check if student_id and academic_year are not NULL
+    IF NEW.student_id IS NOT NULL AND NEW.academic_year IS NOT NULL THEN
+        -- Check if the academic year for the student already exists
+        IF NOT EXISTS (
+            SELECT 1 FROM academic_years
+            WHERE student_id = NEW.student_id
+            AND academic_year = NEW.academic_year
+        ) THEN
+            -- If not, insert the academic year into the academic_years table
+            INSERT INTO academic_years (academic_year, student_id)
+            VALUES (NEW.academic_year, NEW.student_id);
+        END IF;
+    END IF;
 END
 $$
 DELIMITER ;
@@ -256,7 +370,9 @@ CREATE TABLE `results` (
 --
 
 INSERT INTO `results` (`result_id`, `student_id`, `academic_year`, `term1_total_marks`, `term1_percentage`, `term1_grade`, `term2_total_marks`, `term2_percentage`, `term2_grade`) VALUES
-(1, 1, '2024', 555, 79.29, 'C', 0, 0.00, 'F');
+(6, 1, '2024', 567, 81.00, 'A2', 551, 78.71, 'B1'),
+(7, 2, '2024-2025', 587, 83.86, 'A2', 533, 76.14, 'B1'),
+(8, 3, '2023', 629, 89.86, 'A2', 0, 0.00, 'C1');
 
 -- --------------------------------------------------------
 
@@ -266,19 +382,21 @@ INSERT INTO `results` (`result_id`, `student_id`, `academic_year`, `term1_total_
 
 CREATE TABLE `students` (
   `student_id` int(11) NOT NULL,
+  `Admission_no` varchar(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `section` varchar(50) NOT NULL,
   `mother_name` varchar(255) NOT NULL,
-  `admission_year` year(4) NOT NULL,
-  `pass_year` year(4) DEFAULT NULL
+  `section` varchar(50) NOT NULL,
+  `admission_year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `name`, `section`, `mother_name`, `admission_year`, `pass_year`) VALUES
-(1, 'riya', 'a', 'k', '2020', '0000');
+INSERT INTO `students` (`student_id`, `Admission_no`, `name`, `mother_name`, `section`, `admission_year`) VALUES
+(1, '12456/07', 'riya', 'k', 'a', '2020'),
+(2, '12345/04', 'asim', 'D', 'A', '2022'),
+(3, '12345/10', 'Zeeshan', 'D', 'A', '2022');
 
 -- --------------------------------------------------------
 
@@ -311,6 +429,13 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `name`, `created`) VALUES
 ALTER TABLE `academic_years`
   ADD PRIMARY KEY (`year_id`),
   ADD UNIQUE KEY `student_id` (`student_id`);
+
+--
+-- Indexes for table `excellence`
+--
+ALTER TABLE `excellence`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `marks`
@@ -347,25 +472,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `academic_years`
 --
 ALTER TABLE `academic_years`
-  MODIFY `year_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `year_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `excellence`
+--
+ALTER TABLE `excellence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -376,6 +507,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `excellence`
+--
+ALTER TABLE `excellence`
+  ADD CONSTRAINT `excellence_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
 
 --
 -- Constraints for table `results`

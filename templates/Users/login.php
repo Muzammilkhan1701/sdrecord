@@ -40,8 +40,8 @@
         <?= $this->Form->end() ?>
 
         <!-- Add User Link -->
-        <div class="text-center mt-3">
+        <!-- <div class="text-center mt-3">
             <?= $this->Html->link("Create New Account", ['action' => 'add'], ['class' => 'text-decoration-none']) ?>
-        </div>
+        </div> -->
     </div>
 </div>

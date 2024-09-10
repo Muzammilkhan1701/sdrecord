@@ -11,6 +11,14 @@ namespace App\Controller;
  */
 class ExcellenceController extends AppController
 {
+
+     
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+{
+    parent::beforeFilter($event);
+    $this->viewBuilder()->setLayout('uhome');
+
+}
     /**
      * Index method
      *

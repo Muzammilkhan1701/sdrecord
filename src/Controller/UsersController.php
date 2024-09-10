@@ -14,24 +14,31 @@ class UsersController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
 {
     parent::beforeFilter($event);
-    $this->viewBuilder()->setLayout('home');
+    $this->viewBuilder()->setLayout('uhome');
 
     // Configure the login action to not require authentication, preventing
     // the infinite redirect loop issue
     $this->Authentication->addUnauthenticatedActions(['login']);
     // Add to the beforeFilter method of UsersController
-$this->Authentication->addUnauthenticatedActions(['login', 'add']);
+$this->Authentication->addUnauthenticatedActions(['login', ]);
+}
+public function dashboard()
+{
+
+    $this->viewBuilder()->setLayout('uhome');
 }
 public function login()
 {
+    $this->viewBuilder()->setLayout('home');
+
     $this->request->allowMethod(['get', 'post']);
     $result = $this->Authentication->getResult();
     // regardless of POST or GET, redirect if user is logged in
     if ($result && $result->isValid()) {
         // redirect to /articles after login success
         $redirect = $this->request->getQuery('redirect', [
-            'controller' => 'students',
-            'action' => 'index',
+            'controller' => 'users',
+            'action' => 'dashboard',
         ]);
 
         return $this->redirect($redirect);
@@ -49,6 +56,8 @@ public function logout()
     if ($result && $result->isValid()) {
         $this->Authentication->logout();
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        $this->viewBuilder()->setLayout('home');
+
     }
 }
     /**

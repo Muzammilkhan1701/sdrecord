@@ -40,6 +40,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= $this->Url->build(['controller'=>'excellence','action'=>'index']);?>">
+                                <i class="fas fa-book text-white"></i> Co-Scholastic Areas 
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="<?= $this->Url->build(['controller'=>'results','action'=>'index']);?>">
                                 <i class="fas fa-chart-bar text-white"></i> Result
                             </a>

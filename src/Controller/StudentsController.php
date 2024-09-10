@@ -11,23 +11,20 @@ namespace App\Controller;
  */
 class StudentsController extends AppController
 {
-
     public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        
-        parent::beforeFilter($event);
-        $this->viewBuilder()->setLayout('uhome');
+{
+    parent::beforeFilter($event);
+    $this->viewBuilder()->setLayout('uhome');
 
-        // Configure the login action to not require authentication, preventing
-        // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login', 'marksheet', 'rform']);
-    }
+    // Add to the beforeFilter method of UsersController
+// $this->Authentication->addUnauthenticatedActions(['login',]);
+}
+
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-
     public function index()
     {
         $students = $this->paginate($this->Students);

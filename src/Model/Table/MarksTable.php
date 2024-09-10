@@ -56,6 +56,9 @@ $this->hasOne('Results', [
     'bindingKey' => 'student_id', // Match the key in Marks table
     'joinType' => 'INNER', // Or 'LEFT' if results may not exist
 ]);
+$this->hasOne('Excellence', [
+    'foreignKey' => 'student_id', // or marks_id if applicable
+]);
 
 
     }

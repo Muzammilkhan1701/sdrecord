@@ -30,9 +30,9 @@
               Academics
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'Results','action'=>'rform']);?>">1st -4th std final Result</a></li>
-              <li><a class="dropdown-item" href="#">5th std final Result</a></li>
-              <li><a class="dropdown-item" href="#">6th -8th std final Result</a></li>
+              <li><a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'Results','action'=>'rform']);?>"> Result</a></li>
+              <!-- <li><a class="dropdown-item" href="#">5th std final Result</a></li> -->
+              <!-- <li><a class="dropdown-item" href="#">6th -8th std final Result</a></li> -->
             </ul>
           </li>
         <li class="nav-item">

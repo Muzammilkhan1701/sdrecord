@@ -19,24 +19,24 @@
             <h3><?= h($student->name) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($student->name) ?></td>
+                    <th><?= __('Admission No') ?></th>
+                    <td><?= h($student->Admission_no) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Section') ?></th>
-                    <td><?= h($student->section) ?></td>
+                    <th><?= __('Name') ?></th>
+                    <td><?= h($student->name) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mother Name') ?></th>
                     <td><?= h($student->mother_name) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Admission Year') ?></th>
-                    <td><?= h($student->admission_year) ?></td>
+                    <th><?= __('Section') ?></th>
+                    <td><?= h($student->section) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pass Year') ?></th>
-                    <td><?= h($student->pass_year) ?></td>
+                    <th><?= __('Admission Year') ?></th>
+                    <td><?= h($student->admission_year) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Student Id') ?></th>

@@ -9,11 +9,11 @@ use Cake\ORM\Entity;
  * Student Entity
  *
  * @property int $student_id
+ * @property string $Admission_no
  * @property string $name
- * @property string $section
  * @property string $mother_name
+ * @property string $section
  * @property string $admission_year
- * @property string|null $pass_year
  */
 class Student extends Entity
 {
@@ -27,10 +27,10 @@ class Student extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
+        'Admission_no' => true,
         'name' => true,
-        'section' => true,
         'mother_name' => true,
+        'section' => true,
         'admission_year' => true,
-        'pass_year' => true,
     ];
 }
