@@ -5,6 +5,9 @@
         <p class="lead" style="color: #6c757d;">Excellence in Education</p>
     </div>
 
+    <!-- Flash Message Display -->
+    <?= $this->Flash->render() ?>
+
     <!-- Form Start -->
     <?= $this->Form->create(null, ['url' => ['controller' => 'Results', 'action' => 'marksheet'], 'type' => 'post', 'class' => 'p-4']) ?>
 
@@ -17,7 +20,8 @@
                     'options' => ['2021' => '2021', '2022' => '2022', '2023' => '2023', '2024' => '2024'], 
                     'empty' => 'Select Year', 
                     'label' => false,
-                    'class' => 'form-select'
+                    'class' => 'form-select',
+                    'required' => true
                 ]); ?>
             </div>
         </div>
@@ -31,7 +35,8 @@
                     'options' => ['Term1' => 'Term1', 'Term2' => 'Term2', 'Term1+Term2' => 'Term1+Term2'], 
                     'empty' => 'Select Term', 
                     'label' => false,
-                    'class' => 'form-select'
+                    'class' => 'form-select',
+                    'required' => true
                 ]); ?>
             </div>
         </div>
@@ -44,7 +49,8 @@
                     'type' => 'text', 
                     'placeholder' => 'Enter Roll No', 
                     'label' => false, 
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ]); ?>
             </div>
         </div>
@@ -57,7 +63,8 @@
                     'type' => 'text', 
                     'placeholder' => "Enter Mother's Name", 
                     'label' => false, 
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required' => true
                 ]); ?>
             </div>
         </div>
@@ -68,7 +75,7 @@
                 'type' => 'submit', 
                 'class' => 'btn btn-primary px-5 py-2 fw-bold'
             ]); ?>
-            
+
             <a href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>" class="btn btn-outline-secondary px-5 py-2 fw-bold ms-3">Back to Home</a>
         </div>
 

@@ -75,6 +75,7 @@ class ResultsController extends AppController
     ->first();
 
                 if ($student) {
+                    
                     // Set the data for the view
                     $this->set('marks', $student); // Set marks
                     $this->set('student', $student->student); // Set student data
@@ -93,12 +94,15 @@ class ResultsController extends AppController
 
                 } else {
                     $this->Flash->error(__('Marks not found for the given Roll No.'));
+                    $this->render('rform');
                 }
             } else {
                 $this->Flash->error(__('Roll No is required.'));
+                $this->render('rform');
             }
         } else {
             $this->Flash->error(__('Invalid request method.'));
+            $this->render('rform');
         }
     }
 
