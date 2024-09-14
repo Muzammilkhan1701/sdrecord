@@ -17,7 +17,7 @@
                 <h5 class="card-title">Select Year:</h5>
                 <?= $this->Form->control('year', [
                     'type' => 'select', 
-                    'options' => ['2021' => '2021', '2022' => '2022', '2023' => '2023', '2024' => '2024'], 
+                    'options' => $academicYears, 
                     'empty' => 'Select Year', 
                     'label' => false,
                     'class' => 'form-select',
@@ -76,7 +76,7 @@
                 'class' => 'btn btn-primary px-5 py-2 fw-bold'
             ]); ?>
 
-            <a href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>" class="btn btn-outline-secondary px-5 py-2 fw-bold ms-3">Back to Home</a>
+            <a href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'landing']) ?>" class="btn btn-outline-secondary px-5 py-2 fw-bold ms-3">Back to Home</a>
         </div>
 
     <?= $this->Form->end() ?>

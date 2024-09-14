@@ -1,82 +1,44 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\Mark> $marks
- */
-?>
 <div class="marks index content">
-    <?= $this->Html->link(__('New Mark'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Marks') ?></h3>
+    <?= $this->Html->link(('New Mark'), ['action' => 'add'], ['class' => 'button float-right btn btn-primary']) ?>
+    <h3 class="text-center"><?= __('Marks List') ?></h3>
     <div class="table-responsive">
-        <table>
-            <thead>
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <th><?= $this->Paginator->sort('mark_id') ?></th>
-                    <th><?= $this->Paginator->sort('student_id') ?></th>
-                    <th><?= $this->Paginator->sort('academic_year') ?></th>
-                    <th><?= $this->Paginator->sort('rollno') ?></th>
-                    <th><?= $this->Paginator->sort('class') ?></th>
-                    <!-- Term-1 -->
-                    <!-- subject-1 -->
-                    
-                    <th><?= $this->Paginator->sort('English total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-2 -->
-                    
-                    <th><?= $this->Paginator->sort('Hindi total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-3 -->
-                    
-                    <th><?= $this->Paginator->sort('Marathi total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-4 -->
-                    
-                    <th><?= $this->Paginator->sort('Mathematics total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-5 -->
-                    
-                    <th><?= $this->Paginator->sort('Science total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-6 -->
-                    
-                    <th><?= $this->Paginator->sort('Social total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-7 -->
-                    
-                    <th><?= $this->Paginator->sort('Computer total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <th><?= $this->Paginator->sort('term1_total') ?></th>
-                    <!-- Term-2 -->
-                     <!-- subject-1 -->
-                    
-                    <th><?= $this->Paginator->sort('English total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-2 -->
-                   
-                    <th><?= $this->Paginator->sort('Hindi total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-3 -->
-                    
-                    <th><?= $this->Paginator->sort('Marathi total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-4 -->
-                    
-                    <th><?= $this->Paginator->sort('Mathematics total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-5 -->
-                    
-                    <th><?= $this->Paginator->sort('Science total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-6 -->
-                    
-                    <th><?= $this->Paginator->sort('Social total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <!-- subject-7 -->
-                    
-                    <th><?= $this->Paginator->sort('Computer total') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('Grade') ?></th> -->
-                    <th><?= $this->Paginator->sort('term2_total') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('mark_id', 'Mark ID') ?></th>
+                    <th><?= $this->Paginator->sort('student_id', 'Student Name') ?></th>
+                    <th><?= $this->Paginator->sort('academic_year', 'Academic Year') ?></th>
+                    <th><?= $this->Paginator->sort('rollno', 'Roll No') ?></th>
+                    <th><?= $this->Paginator->sort('class', 'Class') ?></th>
+                    <!-- Term-1 Columns -->
+                    <th colspan="7" class="text-center">Term 1 Results</th>
+                    <!-- Term-2 Columns -->
+                    <th colspan="7" class="text-center">Term 2 Results</th>
+                    <th><?= $this->Paginator->sort('term1_total', 'Term 1 Total') ?></th>
+                    <th><?= $this->Paginator->sort('term2_total', 'Term 2 Total') ?></th>
+                    <th class="text-center"><?= __('Actions') ?></th>
+                </tr>
+                <tr>
+                    <!-- Empty space for merged columns -->
+                    <th colspan="5"></th>
+                    <th>English</th>
+                    <th>Hindi</th>
+                    <th>Marathi</th>
+                    <th>Mathematics</th>
+                    <th>Science</th>
+                    <th>Social</th>
+                    <th>Computer</th>
+                    <!-- Term 2 Subjects -->
+                    <th>English</th>
+                    <th>Hindi</th>
+                    <th>Marathi</th>
+                    <th>Mathematics</th>
+                    <th>Science</th>
+                    <th>Social</th>
+                    <th>Computer</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -87,124 +49,42 @@
                     <td><?= h($mark->academic_year) ?></td>
                     <td><?= h($mark->rollno) ?></td>
                     <td><?= h($mark->class) ?></td>
-                    <!-- <td><?= $mark->term1_subject_1 === null ? '' : $this->Number->format($mark->term1_subject_1) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_1_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_1_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_1_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_1_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_1_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_1_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_1_portfolio === null ? '' : $this->Number->format($mark->term1_subject_1_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_1_total === null ? '' : $this->Number->format($mark->term1_subject_1_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_1_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_2 === null ? '' : $this->Number->format($mark->term1_subject_2) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_2_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_2_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_2_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_2_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_2_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_2_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_2_portfolio === null ? '' : $this->Number->format($mark->term1_subject_2_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_2_total === null ? '' : $this->Number->format($mark->term1_subject_2_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_2_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_3 === null ? '' : $this->Number->format($mark->term1_subject_3) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_3_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_3_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_3_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_3_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_3_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_3_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_3_portfolio === null ? '' : $this->Number->format($mark->term1_subject_3_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_3_total === null ? '' : $this->Number->format($mark->term1_subject_3_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_3_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_4 === null ? '' : $this->Number->format($mark->term1_subject_4) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_4_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_4_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_4_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_4_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_4_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_4_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_4_portfolio === null ? '' : $this->Number->format($mark->term1_subject_4_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_4_total === null ? '' : $this->Number->format($mark->term1_subject_4_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_4_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_5 === null ? '' : $this->Number->format($mark->term1_subject_5) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_5_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_5_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_5_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_5_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_5_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_5_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_5_portfolio === null ? '' : $this->Number->format($mark->term1_subject_5_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_5_total === null ? '' : $this->Number->format($mark->term1_subject_5_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_5_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_6 === null ? '' : $this->Number->format($mark->term1_subject_6) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_6_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_6_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_6_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_6_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_6_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_6_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_6_portfolio === null ? '' : $this->Number->format($mark->term1_subject_6_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_6_total === null ? '' : $this->Number->format($mark->term1_subject_6_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_6_grade) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_7 === null ? '' : $this->Number->format($mark->term1_subject_7) ?></td> -->
-                    <!-- <td><?= $mark->term1_subject_7_periodic_test === null ? '' : $this->Number->format($mark->term1_subject_7_periodic_test) ?></td>
-                    <td><?= $mark->term1_subject_7_subject_enrichment === null ? '' : $this->Number->format($mark->term1_subject_7_subject_enrichment) ?></td>
-                    <td><?= $mark->term1_subject_7_multiple_assessment === null ? '' : $this->Number->format($mark->term1_subject_7_multiple_assessment) ?></td>
-                    <td><?= $mark->term1_subject_7_portfolio === null ? '' : $this->Number->format($mark->term1_subject_7_portfolio) ?></td> -->
-                    <td><?= $mark->term1_subject_7_total === null ? '' : $this->Number->format($mark->term1_subject_7_total) ?></td>
-                    <!-- <td><?= h($mark->term1_subject_7_grade) ?></td> -->
-                    <td><?= $mark->term1_total === null ? '' : $this->Number->format($mark->term1_total) ?></td>
-                    <!-- <td><?= $mark->term2_subject_1 === null ? '' : $this->Number->format($mark->term2_subject_1) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_1_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_1_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_1_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_1_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_1_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_1_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_1_portfolio === null ? '' : $this->Number->format($mark->term2_subject_1_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_1_total === null ? '' : $this->Number->format($mark->term2_subject_1_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_1_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_2 === null ? '' : $this->Number->format($mark->term2_subject_2) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_2_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_2_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_2_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_2_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_2_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_2_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_2_portfolio === null ? '' : $this->Number->format($mark->term2_subject_2_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_2_total === null ? '' : $this->Number->format($mark->term2_subject_2_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_2_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_3 === null ? '' : $this->Number->format($mark->term2_subject_3) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_3_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_3_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_3_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_3_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_3_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_3_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_3_portfolio === null ? '' : $this->Number->format($mark->term2_subject_3_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_3_total === null ? '' : $this->Number->format($mark->term2_subject_3_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_3_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_4 === null ? '' : $this->Number->format($mark->term2_subject_4) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_4_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_4_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_4_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_4_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_4_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_4_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_4_portfolio === null ? '' : $this->Number->format($mark->term2_subject_4_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_4_total === null ? '' : $this->Number->format($mark->term2_subject_4_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_4_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_5 === null ? '' : $this->Number->format($mark->term2_subject_5) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_5_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_5_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_5_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_5_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_5_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_5_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_5_portfolio === null ? '' : $this->Number->format($mark->term2_subject_5_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_5_total === null ? '' : $this->Number->format($mark->term2_subject_5_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_5_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_6 === null ? '' : $this->Number->format($mark->term2_subject_6) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_6_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_6_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_6_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_6_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_6_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_6_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_6_portfolio === null ? '' : $this->Number->format($mark->term2_subject_6_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_6_total === null ? '' : $this->Number->format($mark->term2_subject_6_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_6_grade) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_7 === null ? '' : $this->Number->format($mark->term2_subject_7) ?></td> -->
-                    <!-- <td><?= $mark->term2_subject_7_periodic_test === null ? '' : $this->Number->format($mark->term2_subject_7_periodic_test) ?></td>
-                    <td><?= $mark->term2_subject_7_subject_enrichment === null ? '' : $this->Number->format($mark->term2_subject_7_subject_enrichment) ?></td>
-                    <td><?= $mark->term2_subject_7_multiple_assessment === null ? '' : $this->Number->format($mark->term2_subject_7_multiple_assessment) ?></td>
-                    <td><?= $mark->term2_subject_7_portfolio === null ? '' : $this->Number->format($mark->term2_subject_7_portfolio) ?></td> -->
-                    <td><?= $mark->term2_subject_7_total === null ? '' : $this->Number->format($mark->term2_subject_7_total) ?></td>
-                    <!-- <td><?= h($mark->term2_subject_7_grade) ?></td> -->
-                    <td><?= $mark->term2_total === null ? '' : $this->Number->format($mark->term2_total) ?></td>
+                    <!-- Term 1 -->
+                    <td><?= $this->Number->format($mark->term1_subject_1_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_2_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_3_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_4_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_5_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_6_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_subject_7_total) ?></td>
+                    <!-- Term 2 -->
+                    <td><?= $this->Number->format($mark->term2_subject_1_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_2_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_3_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_4_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_5_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_6_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_subject_7_total) ?></td>
+                    <td><?= $this->Number->format($mark->term1_total) ?></td>
+                    <td><?= $this->Number->format($mark->term2_total) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $mark->mark_id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $mark->mark_id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $mark->mark_id], ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id)]) ?>
+                        <?= $this->Html->link(('View'), ['action' => 'view', $mark->mark_id], ['class' => 'btn btn-info btn-sm']) ?>
+                        <?= $this->Html->link(('Edit'), ['action' => 'edit', $mark->mark_id], ['class' => 'btn btn-warning btn-sm']) ?>
+                        <?= $this->Form->postLink(('Delete'), ['action' => 'delete', $mark->mark_id], ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id), 'class' => 'btn btn-danger btn-sm']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <div class="paginator">
+            <ul class="pagination">
+                <?= $this->Paginator->first('<< ' . __('first')) ?>
+                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                <?= $this->Paginator->numbers() ?>
+                <?= $this->Paginator->next(('next') . ' >') ?>
+                <?= $this->Paginator->last(('last') . ' >>') ?>
+            </ul>
+            <p><?= $this->Paginator->counter(('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        </div>
     </div>
 </div>

@@ -26,6 +26,24 @@ public function dashboard()
 {
 
     $this->viewBuilder()->setLayout('uhome');
+
+    // Load the Students model if not already loaded
+    $this->loadModel('Students');
+
+    // Get the count of students
+    $studentCount = $this->Students->find()->count();
+
+    // Set the count to the view
+    $this->set('studentCount', $studentCount);
+
+    $this->loadModel('Results');
+
+    // Get the count of results
+    $resultCount = $this->Results->find()->count();
+
+    // Set the count to the view
+    $this->set('resultCount', $resultCount);
+
 }
 public function login()
 {
