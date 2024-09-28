@@ -63,6 +63,138 @@ $this->hasOne('Excellence', [
 
     }
 
+    public function addMarks($data) {
+        // Extract data
+        $student_id = $data['student_id'];
+        $academic_year = $data['academic_year'];
+        $term1_total = $data['term1_total'];
+        $term2_total = $data['term2_total'];
+    
+        // Calculate percentages
+        $term1_percent = ($term1_total / 700) * 100;
+        $term2_percent = ($term2_total / 700) * 100;
+    
+        // Determine grades
+        $term1_grade = $this->calculateGrade($term1_percent);
+        $term2_grade = $this->calculateGrade($term2_percent);
+    
+        // Check if the academic year exists for the student
+        $academicYearExists = $this->AcademicYears->find()
+            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
+            ->first();
+    
+        if (!$academicYearExists) {
+            // Insert the academic year if it doesn't exist
+            $newAcademicYear = $this->AcademicYears->newEntity([
+                'academic_year' => $academic_year,
+                'student_id' => $student_id
+            ]);
+            $this->AcademicYears->save($newAcademicYear);
+        }
+    
+        // Insert into marks table
+        $marksEntry = $this->Marks->newEntity([
+            'student_id' => $student_id,
+            'academic_year' => $academic_year,
+            'term1_total' => $term1_total,
+            'term2_total' => $term2_total,
+            'term1_percentage' => $term1_percent,
+            'term1_grade' => $term1_grade,
+            'term2_percentage' => $term2_percent,
+            'term2_grade' => $term2_grade,
+        ]);
+        $this->Marks->save($marksEntry);
+    
+        // Insert into results table
+        $resultsEntry = $this->Results->newEntity([
+            'student_id' => $student_id,
+            'academic_year' => $academic_year,
+            'term1_total_marks' => $term1_total,
+            'term1_percentage' => $term1_percent,
+            'term1_grade' => $term1_grade,
+            'term2_total_marks' => $term2_total,
+            'term2_percentage' => $term2_percent,
+            'term2_grade' => $term2_grade,
+        ]);
+        $this->Results->save($resultsEntry);
+    }
+    
+    public function updateMarks($data) {
+        // Extract data
+        $student_id = $data['student_id'];
+        $academic_year = $data['academic_year'];
+        $term1_total = $data['term1_total'];
+        $term2_total = $data['term2_total'];
+    
+        // Calculate percentages and grades
+        $term1_percent = ($term1_total / 700) * 100;
+        $term2_percent = ($term2_total / 700) * 100;
+        $term1_grade = $this->calculateGrade($term1_percent);
+        $term2_grade = $this->calculateGrade($term2_percent);
+    
+        // Update marks table
+        $marksEntry = $this->Marks->find()
+            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
+            ->first();
+    
+        if ($marksEntry) {
+            $marksEntry->term1_total = $term1_total;
+            $marksEntry->term1_percentage = $term1_percent;
+            $marksEntry->term1_grade = $term1_grade;
+            $marksEntry->term2_total = $term2_total;
+            $marksEntry->term2_percentage = $term2_percent;
+            $marksEntry->term2_grade = $term2_grade;
+            $this->Marks->save($marksEntry);
+        }
+    
+        // Update results table
+        $resultsEntry = $this->Results->find()
+            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
+            ->first();
+    
+        if ($resultsEntry) {
+            $resultsEntry->term1_total_marks = $term1_total;
+            $resultsEntry->term1_percentage = $term1_percent;
+            $resultsEntry->term1_grade = $term1_grade;
+            $resultsEntry->term2_total_marks = $term2_total;
+            $resultsEntry->term2_percentage = $term2_percent;
+            $resultsEntry->term2_grade = $term2_grade;
+            $this->Results->save($resultsEntry);
+        }
+    }
+
+    public function deleteMarks($student_id, $academic_year) {
+        // Delete from marks table
+        $marksEntry = $this->Marks->find()
+            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
+            ->first();
+    
+        if ($marksEntry) {
+            $this->Marks->delete($marksEntry);
+    
+            // Delete from results table
+            $resultsEntry = $this->Results->find()
+                ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
+                ->first();
+    
+            if ($resultsEntry) {
+                $this->Results->delete($resultsEntry);
+            }
+        }
+    }
+    
+    private function calculateGrade($percentage) {
+        if ($percentage >= 91) return 'A1';
+        if ($percentage >= 81) return 'A2';
+        if ($percentage >= 71) return 'B1';
+        if ($percentage >= 61) return 'B2';
+        if ($percentage >= 51) return 'C1';
+        if ($percentage >= 41) return 'C2';
+        if ($percentage >= 33) return 'D';
+        return 'E';
+    }
+    
+
     /**
      * Default validation rules.
      *
