@@ -78,66 +78,103 @@ class MarksController extends AppController
     // // }
     
     public function add()
-{
-    $mark = $this->Marks->newEmptyEntity();
-    if ($this->request->is('post')) {
-        $mark = $this->Marks->patchEntity($mark, $this->request->getData());
+    {
+        ob_start(); // Start output buffering
+        $mark = $this->Marks->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $mark = $this->Marks->patchEntity($mark, $this->request->getData());
+    
+            // Calculate Term 1 Total for each subject
+        for ($i = 1; $i <= 7; $i++) {
+            $subjectKey = "term1_subject_$i";
+            $periodicTestKey = "term1_subject_{$i}_periodic_test";
+            $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
+            $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
+            $portfolioKey = "term1_subject_{$i}_portfolio";
 
-        
-        // Compute total for term 1
-        $term1Total = 0;
-        for ($i = 1; $i <= 7; $i++) {  // Assuming you have 7 subjects
-            $subjectKey = "term1_subject_{$i}_total";
-            if (isset($mark->$subjectKey)) {
-                $term1Total += $mark->$subjectKey;
+            if (isset($mark->$subjectKey) && isset($mark->$periodicTestKey) && 
+                isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) && 
+                isset($mark->$portfolioKey)) {
+                
+                $totalKey = "term1_subject_{$i}_total"; // Define the total key
+                $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                                   $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                                   $mark->$portfolioKey; // Calculate total
             }
         }
+
+        // Calculate Term 1 Total
+        $term1Total = 0;
+        for ($i = 1; $i <= 7; $i++) {
+            $totalKey = "term1_subject_{$i}_total"; // Get the total key
+            if (isset($mark->$totalKey)) {
+                $term1Total += $mark->$totalKey; // Add to total
+            }
+        }
+        $mark->term1_total = $term1Total;
+
+        // Calculate Term 2 Total for each subject
+        for ($i = 1; $i <= 7; $i++) {
+            $subjectKey = "term2_subject_$i";
+            $periodicTestKey = "term2_subject_{$i}_periodic_test";
+            $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
+            $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
+            $portfolioKey = "term2_subject_{$i}_portfolio";
+
+            if (isset($mark->$subjectKey) && isset($mark->$periodicTestKey) && 
+                isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) && 
+                isset($mark->$portfolioKey)) {
+                
+                $totalKey = "term2_subject_{$i}_total"; // Define the total key
+                $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                                   $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                                   $mark->$portfolioKey; // Calculate total
+            }
+        }
+
         // Calculate Term 2 Total
         $term2Total = 0;
         for ($i = 1; $i <= 7; $i++) {
-            $subjectKey = "term2_subject_{$i}_total"; // Change to term2_subject
-            if (isset($mark->$subjectKey)) {
-                $term2Total += $mark->$subjectKey;
+            $totalKey = "term2_subject_{$i}_total"; // Get the total key
+            if (isset($mark->$totalKey)) {
+                $term2Total += $mark->$totalKey; // Add to total
             }
         }
-        // Set the term1_total in the mark entity
-        $mark->term1_total = $term1Total;
-        $mark->term2_total = $term2Total; // Assign the total to term2_total
+        $mark->term2_total = $term2Total;
 
-
-        if ($this->Marks->save($mark)) {
-            // Ensure term1_total is passed to results
-            if (isset($mark->term1_total) && isset($mark->term2_total)) {
-                $this->handleAcademicYearAndResults($mark);
-            } else {
-                $this->Flash->error(__('Term total marks are missing.'));
+            if ($this->Marks->save($mark)) {
+                if (isset($mark->term1_total) && isset($mark->term2_total)) {
+                    $this->handleAcademicYearAndResults($mark);
+                } else {
+                    $this->Flash->error(__('Term totals are missing.'));
+                }
+    
+                $this->Flash->success(__('The mark has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
-
-            $this->Flash->success(__('The mark has been saved.'));
-            return $this->redirect(['action' => 'index']);
+            $this->Flash->error(__('The mark could not be saved. Please, try again.'));
         }
-        $this->Flash->error(__('The mark could not be saved. Please, try again.'));
+        $students = $this->Marks->Students->find('list', ['limit' => 200])->all();
+        $this->set(compact('mark', 'students'));
+    
+        ob_end_flush(); // Flush the output buffer and turn it off
     }
-    $students = $this->Marks->Students->find('list', ['limit' => 200])->all();
-    $this->set(compact('mark', 'students'));
-}
-
-
-    // Private method to handle academic year and results
+    
     private function handleAcademicYearAndResults($mark)
     {
         $studentId = $mark->student_id;
         $academicYear = $mark->academic_year;
-        // Ensure that term1_total is set before using it
-    $term1Total = $mark->term1_total; // Use the computed total
-    $term2Total = $mark->term2_total;
-    if (!isset($term1Total) || !is_numeric($term1Total)||
-    !isset($term2Total) || !is_numeric($term2Total)) {
-        $this->Flash->error(__('Term total marks are missing or invalid.'));
-        return;
-    }
-
-        // Insert into academic_years table if it doesn't exist
+    
+        // Compute totals
+        $term1Total = $mark->term1_total; // Use the computed total for Term 1
+        $term2Total = $mark->term2_total; // Use the computed total for Term 2
+    
+        if (!isset($term1Total) || !is_numeric($term1Total) || 
+            !isset($term2Total) || !is_numeric($term2Total)) {
+            $this->Flash->error(__('Term totals are missing or invalid.'));
+            return;
+        }
+    
         $this->loadModel('AcademicYears');
         if (!$this->AcademicYears->exists(['student_id' => $studentId, 'academic_year' => $academicYear])) {
             $academicYearEntity = $this->AcademicYears->newEntity([
@@ -146,37 +183,27 @@ class MarksController extends AppController
             ]);
             $this->AcademicYears->save($academicYearEntity);
         }
-
+    
         // Insert into results table
         $this->loadModel('Results');
-        $term1Total = $mark->term1_total;
-        $term2Total = $mark->term2_total;
-
-        $term1Percent = ($term1Total / 700) * 100; // Adjust denominator as needed
-        $term2Percent = ($term2Total / 700) * 100;
-
-        // Determine grades based on percentages
-        $term1Grade = $this->determineGrade($term1Percent);
-        $term2Grade = $this->determineGrade($term2Percent);
-
+    
         $resultEntity = $this->Results->newEntity([
             'student_id' => $studentId,
             'academic_year' => $academicYear,
-            'term1_total_marks' => $term1Total,
-            'term1_percentage' => $term1Percent,
-            'term1_grade' => $term1Grade,
-            'term2_total_marks' => $term2Total,
-            'term2_percentage' => $term2Percent,
-            'term2_grade' => $term2Grade,
+            'term1_total_marks' => $term1Total, // Total for Term 1
+            'term2_total_marks' => $term2Total, // Total for Term 2
+            'term1_percentage' => ($term1Total / 700) * 100, // Adjust denominator as needed
+            'term2_percentage' => ($term2Total / 700) * 100, // Adjust denominator as needed
+            'term1_grade' => $this->determineGrade(($term1Total / 700) * 100),
+            'term2_grade' => $this->determineGrade(($term2Total / 700) * 100),
         ]);
-
-    // Check for successful save
-    if (!$this->Results->save($resultEntity)) {
-        // Debugging save failure
-        debug($resultEntity->getErrors());
-        $this->Flash->error(__('The result could not be saved. Please, try again.'));
+    
+        if (!$this->Results->save($resultEntity)) {
+            debug($resultEntity->getErrors()); // Debugging save errors
+            $this->Flash->error(__('The result could not be saved. Please, try again.'));
+        }
     }
-    }
+    
 
     // Private method to determine grades
     private function determineGrade($percent)
@@ -210,92 +237,119 @@ class MarksController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
-    {
-        $mark = $this->Marks->get($id, [
-            'contain' => [],
-        ]);
-    
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $mark = $this->Marks->patchEntity($mark, $this->request->getData());
-    
-            // Calculate Term 1 Total
-            $term1Total = 0;
-            for ($i = 1; $i <= 7; $i++) {
-                $subjectKey = "term1_subject_{$i}_total";
-                if (isset($mark->$subjectKey)) {
-                    $term1Total += $mark->$subjectKey;
-                }
-            }
-            $mark->term1_total = $term1Total;
-    
-            // Calculate Term 2 Total
-            $term2Total = 0;
-            for ($i = 1; $i <= 7; $i++) {
-                $subjectKey = "term2_subject_{$i}_total";
-                if (isset($mark->$subjectKey)) {
-                    $term2Total += $mark->$subjectKey;
-                }
-            }
-            $mark->term2_total = $term2Total;
-    
-            if ($this->Marks->save($mark)) {
-                // Update academic year and results
-                $this->updateAcademicYearAndResults($mark, $term1Total, $term2Total);
-                $this->Flash->success(__('The mark has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-    
-            $this->Flash->error(__('The mark could not be saved. Please, try again.'));
+{
+    ob_start(); // Start output buffering
+    $mark = $this->Marks->get($id, [
+        'contain' => [],
+    ]);
+    if ($this->request->is(['patch', 'post', 'put'])) {
+        $mark = $this->Marks->patchEntity($mark, $this->request->getData());
+
+       // Calculate Term 1 Total for each subject
+       for ($i = 1; $i <= 7; $i++) {
+        $subjectKey = "term1_subject_$i";
+        $periodicTestKey = "term1_subject_{$i}_periodic_test";
+        $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
+        $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
+        $portfolioKey = "term1_subject_{$i}_portfolio";
+
+        if (isset($mark->$subjectKey) && isset($mark->$periodicTestKey) && 
+            isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) && 
+            isset($mark->$portfolioKey)) {
+            
+            $totalKey = "term1_subject_{$i}_total"; // Define the total key
+            $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                               $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                               $mark->$portfolioKey; // Calculate total
         }
-    
-        $students = $this->Marks->Students->find('list', ['limit' => 200])->all();
-        $this->set(compact('mark', 'students'));
     }
-    // Private method to update academic year and results
-private function updateAcademicYearAndResults($mark, $term1Total, $term2Total)
+
+    // Calculate Term 1 Total
+    $term1Total = 0;
+    for ($i = 1; $i <= 7; $i++) {
+        $totalKey = "term1_subject_{$i}_total"; // Get the total key
+        if (isset($mark->$totalKey)) {
+            $term1Total += $mark->$totalKey; // Add to total
+        }
+    }
+    $mark->term1_total = $term1Total;
+
+    // Calculate Term 2 Total for each subject
+    for ($i = 1; $i <= 7; $i++) {
+        $subjectKey = "term2_subject_$i";
+        $periodicTestKey = "term2_subject_{$i}_periodic_test";
+        $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
+        $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
+        $portfolioKey = "term2_subject_{$i}_portfolio";
+
+        if (isset($mark->$subjectKey) && isset($mark->$periodicTestKey) && 
+            isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) && 
+            isset($mark->$portfolioKey)) {
+            
+            $totalKey = "term2_subject_{$i}_total"; // Define the total key
+            $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                               $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                               $mark->$portfolioKey; // Calculate total
+        }
+    }
+
+    // Calculate Term 2 Total
+    $term2Total = 0;
+    for ($i = 1; $i <= 7; $i++) {
+        $totalKey = "term2_subject_{$i}_total"; // Get the total key
+        if (isset($mark->$totalKey)) {
+            $term2Total += $mark->$totalKey; // Add to total
+        }
+    }
+    $mark->term2_total = $term2Total;
+
+        if ($this->Marks->save($mark)) {
+            $this->updateResultsTable($mark, $term1Total, $term2Total);
+
+            $this->Flash->success(__('The mark has been updated.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('The mark could not be updated. Please, try again.'));
+    }
+    $students = $this->Marks->Students->find('list', ['limit' => 200])->all();
+    $this->set(compact('mark', 'students'));
+
+    ob_end_flush(); // Flush the output buffer and turn it off
+}
+private function updateResultsTable($mark, $term1Total, $term2Total)
 {
     $studentId = $mark->student_id;
     $academicYear = $mark->academic_year;
 
-    // Update the academic years table if needed
-    $this->loadModel('AcademicYears');
-    if (!$this->AcademicYears->exists(['student_id' => $studentId, 'academic_year' => $academicYear])) {
-        $academicYearEntity = $this->AcademicYears->newEntity([
-            'student_id' => $studentId,
-            'academic_year' => $academicYear,
-        ]);
-        $this->AcademicYears->save($academicYearEntity);
-    }
-
-    // Update results table
     $this->loadModel('Results');
 
-    // Calculate percentages and grades
-    $term1Percent = ($term1Total / 700) * 100; // Adjust denominator as needed
-    $term2Percent = ($term2Total / 700) * 100; // Adjust denominator as needed
+    // Check if a result already exists for this student and academic year
+    $result = $this->Results->find('all', [
+        'conditions' => [
+            'student_id' => $studentId,
+            'academic_year' => $academicYear
+        ]
+    ])->first();
 
-    $term1Grade = $this->determineGrade($term1Percent);
-    $term2Grade = $this->determineGrade($term2Percent);
-
-    // Update or create the result entry
-    $result = $this->Results->find('all')->where(['student_id' => $studentId, 'academic_year' => $academicYear])->first();
     if ($result) {
         // Update existing result
-        $result->term1_total_marks = $term1Total;
-        $result->term1_percentage = $term1Percent;
-        $result->term1_grade = $term1Grade;
-        $result->term2_total_marks = $term2Total;
-        $result->term2_percentage = $term2Percent;
-        $result->term2_grade = $term2Grade;
+        $result->term1_total_marks = $term1Total; 
+        $result->term2_total_marks = $term2Total; 
+        $result->term1_percentage = ($term1Total / 700) * 100; // Adjust denominator as needed
+        $result->term2_percentage = ($term2Total / 700) * 100; // Adjust denominator as needed
+        $result->term1_grade = $this->determineGrade(($term1Total / 700) * 100);
+        $result->term2_grade = $this->determineGrade(($term2Total / 700) * 100);
 
         if (!$this->Results->save($result)) {
+            debug($result->getErrors()); // Debugging save errors
             $this->Flash->error(__('The result could not be updated. Please, try again.'));
         }
     } else {
-        // If no result found, handle as new entry
-        $this->handleAcademicYearAndResults($mark, $term1Total, $term2Total);
+        // Optionally handle the case where no result exists
+        $this->Flash->error(__('No result found to update.'));
     }
 }
+
 
 
     /**
