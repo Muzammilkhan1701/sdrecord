@@ -150,7 +150,7 @@ class MarksController extends AppController
                 }
     
                 $this->Flash->success(__('The mark has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'excellence','action' => 'add']);
             }
             $this->Flash->error(__('The mark could not be saved. Please, try again.'));
         }

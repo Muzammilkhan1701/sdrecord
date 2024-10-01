@@ -40,7 +40,7 @@ class ResultsController extends AppController
        
 
         // Fetch academic years from the academic_years table
-        $academicYears = $this->AcademicYears->find('list', [
+        $academicYears = $this->Marks->find('list', [
             'keyField' => 'academic_year',
             'valueField' => 'academic_year'
         ])->toArray();
