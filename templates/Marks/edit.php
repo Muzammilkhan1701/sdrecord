@@ -297,7 +297,7 @@
                     <!-- Repeat similar collapsible sections for other subjects like Hindi, Science, etc. -->
                 </div>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Edit Co-Scholastic Grade')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

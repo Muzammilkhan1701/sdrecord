@@ -288,7 +288,7 @@
                 <!-- Accordion End -->
             </fieldset>
 
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Add Co-Scholastic Grade')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -27,6 +27,8 @@ class ExcellenceFixture extends TestFixture
             [
                 'id' => 1,
                 'student_id' => 1,
+                'academic_year' => 'Lorem ipsum dolor sit amet',
+                'class' => 'Lorem ipsum dolor sit amet',
                 'term1_work_education' => 'Lo',
                 'term1_art_education' => 'Lo',
                 'term1_physical_education' => 'Lo',
@@ -35,8 +37,8 @@ class ExcellenceFixture extends TestFixture
                 'term2_art_education' => 'Lo',
                 'term2_physical_education' => 'Lo',
                 'term2_discipline' => 'Lo',
-                'created' => '2024-09-09 09:41:14',
-                'modified' => '2024-09-09 09:41:14',
+                'created' => '2024-10-01 15:45:17',
+                'modified' => '2024-10-01 15:45:17',
             ],
         ];
         parent::init();

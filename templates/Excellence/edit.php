@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Excellence $excellence
@@ -22,14 +23,16 @@
             <?= $this->Form->create($excellence) ?>
             <fieldset>
                 <legend><?= __('Edit Excellence') ?></legend>
-                <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
-                
+                <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]); ?>
+                <?= $this->Form->control('academic_year', ['label' => 'Academic Year', 'options' => $academicYears, 'value' => $excellence->academic_year]); ?>
+                <?= $this->Form->control('class', ['label' => 'Class', 'options' => $classes, 'value' => $excellence->class]); ?>
+
                 <!-- Term Selection Dropdown -->
                 <div class="mb-5 fs-4">
                     <?= $this->Form->control('term', [
-                        'type' => 'select', 
-                        'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'], 
-                        'empty' => 'Select Term', 
+                        'type' => 'select',
+                        'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'],
+                        'empty' => 'Select Term',
                         'id' => 'term-select'
                     ]) ?>
                 </div>
@@ -53,7 +56,7 @@
                                     <?= $this->Form->control('term1_physical_education', ['label' => 'Physical Education (Term 1)']) ?>
                                     <?= $this->Form->control('term1_discipline', ['label' => 'Discipline (Term 1)']) ?>
                                 </div>
-                                
+
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields ">
                                     <?= $this->Form->control('term2_work_education', ['label' => 'Work Education (Term 2)']) ?>
@@ -65,7 +68,20 @@
                         </div>
                     </div>
                 </div>
-                <!-- Accordion End -->
+
+                <?php
+                //         echo $this->Form->control('student_id', ['options' => $students, 'empty' => true]);
+                //         echo $this->Form->control('academic_year', ['label' => 'Academic Year', 'options' => $academicYears, 'value' => $excellence->academic_year]);
+                //         echo $this->Form->control('class', ['label' => 'Class', 'options' => $classes, 'value' => $excellence->class]);
+                //         echo $this->Form->control('term1_work_education');
+                //         echo $this->Form->control('term1_art_education');
+                //         echo $this->Form->control('term1_physical_education');
+                //         echo $this->Form->control('term1_discipline');
+                //         echo $this->Form->control('term2_work_education');
+                //         echo $this->Form->control('term2_art_education');
+                //         echo $this->Form->control('term2_physical_education');
+                //         echo $this->Form->control('term2_discipline');
+                ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
@@ -98,4 +114,3 @@
         $('.term2-fields').hide();
     });
 </script>
-

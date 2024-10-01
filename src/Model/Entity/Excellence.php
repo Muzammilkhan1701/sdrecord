@@ -10,6 +10,8 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int|null $student_id
+ * @property string|null $academic_year
+ * @property string|null $class
  * @property string|null $term1_work_education
  * @property string|null $term1_art_education
  * @property string|null $term1_physical_education
@@ -36,6 +38,8 @@ class Excellence extends Entity
      */
     protected $_accessible = [
         'student_id' => true,
+        'academic_year' => true,
+        'class' => true,
         'term1_work_education' => true,
         'term1_art_education' => true,
         'term1_physical_education' => true,

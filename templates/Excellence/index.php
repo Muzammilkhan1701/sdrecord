@@ -13,6 +13,8 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('student_id') ?></th>
+                    <th><?= $this->Paginator->sort('academic_year') ?></th>
+                    <th><?= $this->Paginator->sort('class') ?></th>
                     <th><?= $this->Paginator->sort('term1_work_education') ?></th>
                     <th><?= $this->Paginator->sort('term1_art_education') ?></th>
                     <th><?= $this->Paginator->sort('term1_physical_education') ?></th>
@@ -31,6 +33,8 @@
                 <tr>
                     <td><?= $this->Number->format($excellence->id) ?></td>
                     <td><?= $excellence->has('student') ? $this->Html->link($excellence->student->name, ['controller' => 'Students', 'action' => 'view', $excellence->student->student_id]) : '' ?></td>
+                    <td><?= h($excellence->academic_year) ?></td>
+                    <td><?= h($excellence->class) ?></td>
                     <td><?= h($excellence->term1_work_education) ?></td>
                     <td><?= h($excellence->term1_art_education) ?></td>
                     <td><?= h($excellence->term1_physical_education) ?></td>

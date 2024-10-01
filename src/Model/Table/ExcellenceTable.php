@@ -49,9 +49,7 @@ class ExcellenceTable extends Table
 
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
-            'joinType' => 'INNER',
         ]);
-        
     }
 
     /**
@@ -65,6 +63,15 @@ class ExcellenceTable extends Table
         $validator
             ->integer('student_id')
             ->allowEmptyString('student_id');
+
+        $validator
+            ->scalar('academic_year')
+            ->allowEmptyString('academic_year');
+
+        $validator
+            ->scalar('class')
+            ->maxLength('class', 50)
+            ->allowEmptyString('class');
 
         $validator
             ->scalar('term1_work_education')
