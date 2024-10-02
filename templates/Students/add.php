@@ -17,11 +17,11 @@
             <fieldset>
                 <legend><?= __('Add Student') ?></legend>
                 <?php
-                    echo $this->Form->control('Admission_no');
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('mother_name');
-                    echo $this->Form->control('section');
-                    echo $this->Form->control('admission_year');
+                    echo $this->Form->control('Admission_no',['required' => true,]);
+                    echo $this->Form->control('name', ['required' => true,]);
+                    echo $this->Form->control('mother_name', ['required' => true,]);
+                    echo $this->Form->control('section', ['required' => true,]);
+                    echo $this->Form->control('admission_year', ['required' => true,]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
