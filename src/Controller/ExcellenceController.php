@@ -129,7 +129,16 @@ public function add()
             'class' => $selectedClass
         ]);
 
+        // Check if the entry already exists in the Excellence table (to prevent duplicates)
+        $excellenceExists = $this->Excellence->exists([
+            'student_id' => $studentId,
+            'academic_year' => $selectedAcademicYear,
+            'class' => $selectedClass
+        ]);
+
         if ($marksExists) {
+            if (!$excellenceExists) {
+
             // Patch the excellence entity with form data
             $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
             $excellence->academic_year = $selectedAcademicYear;
@@ -142,6 +151,9 @@ public function add()
             } else {
                 $this->Flash->error(__('Unable to save excellence record. Please try again.'));
             }
+        } else {
+            $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
+        }
         } else {
             // Flash message if the combination of academic year, class, and student_id doesn't exist
             $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));
@@ -190,7 +202,16 @@ public function edit($id = null)
             'class' => $selectedClass
         ]);
 
+        // Check for duplicate in Excellence table
+        $excellenceExists = $this->Excellence->exists([
+            'student_id' => $studentId,
+            'academic_year' => $selectedAcademicYear,
+            'class' => $selectedClass,
+            'id !=' => $id // Exclude current record
+        ]);
+
         if ($marksExists) {
+            if (!$excellenceExists) {
             // Patch the excellence entity with form data
             $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
             $excellence->academic_year = $selectedAcademicYear;
@@ -203,6 +224,10 @@ public function edit($id = null)
             } else {
                 $this->Flash->error(__('Unable to update excellence record. Please try again.'));
             }
+
+        } else {
+            $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
+        }
         } else {
             // Flash message if the combination of academic year, class, and student_id doesn't exist
             $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));

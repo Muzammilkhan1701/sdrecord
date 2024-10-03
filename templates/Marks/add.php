@@ -25,7 +25,8 @@
                         'type' => 'select', 
                         'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'], 
                         'empty' => 'Select Term', 
-                        'id' => 'term-select'
+                        'id' => 'term-select',
+                        'required' => true,
                     ]) ?>
                 </div>
 

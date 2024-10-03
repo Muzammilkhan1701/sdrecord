@@ -33,7 +33,8 @@
                         'type' => 'select',
                         'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'],
                         'empty' => 'Select Term',
-                        'id' => 'term-select'
+                        'id' => 'term-select',
+                        'required' => true,
                     ]) ?>
                 </div>
 
@@ -51,18 +52,18 @@
                             <div class="card-body">
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
-                                    <?= $this->Form->control('term1_work_education', ['label' => 'Work Education (Term 1)','required' => true,]) ?>
-                                    <?= $this->Form->control('term1_art_education', ['label' => 'Art Education (Term 1)','required' => true,]) ?>
-                                    <?= $this->Form->control('term1_physical_education', ['label' => 'Physical Education (Term 1)','required' => true,]) ?>
-                                    <?= $this->Form->control('term1_discipline', ['label' => 'Discipline (Term 1)','required' => true,]) ?>
+                                    <?= $this->Form->control('term1_work_education', ['label' => 'Work Education (Term 1)']) ?>
+                                    <?= $this->Form->control('term1_art_education', ['label' => 'Art Education (Term 1)']) ?>
+                                    <?= $this->Form->control('term1_physical_education', ['label' => 'Physical Education (Term 1)']) ?>
+                                    <?= $this->Form->control('term1_discipline', ['label' => 'Discipline (Term 1)']) ?>
                                 </div>
 
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields ">
-                                    <?= $this->Form->control('term2_work_education', ['label' => 'Work Education (Term 2)','required' => true,]) ?>
-                                    <?= $this->Form->control('term2_art_education', ['label' => 'Art Education (Term 2)','required' => true,]) ?>
-                                    <?= $this->Form->control('term2_physical_education', ['label' => 'Physical Education (Term 2)','required' => true,]) ?>
-                                    <?= $this->Form->control('term2_discipline', ['label' => 'Discipline (Term 2)','required' => true,]) ?>
+                                    <?= $this->Form->control('term2_work_education', ['label' => 'Work Education (Term 2)']) ?>
+                                    <?= $this->Form->control('term2_art_education', ['label' => 'Art Education (Term 2)']) ?>
+                                    <?= $this->Form->control('term2_physical_education', ['label' => 'Physical Education (Term 2)']) ?>
+                                    <?= $this->Form->control('term2_discipline', ['label' => 'Discipline (Term 2)']) ?>
                                 </div>
                             </div>
                         </div>

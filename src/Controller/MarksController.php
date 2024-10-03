@@ -82,7 +82,25 @@ class MarksController extends AppController
         ob_start(); // Start output buffering
         $mark = $this->Marks->newEmptyEntity();
         if ($this->request->is('post')) {
-            $mark = $this->Marks->patchEntity($mark, $this->request->getData());
+            $data = $this->request->getData(); // Retrieve request data
+
+            // Check if the record already exists
+            $existingMark = $this->Marks->find('all', [
+                'conditions' => [
+                    'student_id' => $data['student_id'],
+                    'academic_year' => $data['academic_year'],
+                    'class' => $data['class'], // Add class or other relevant fields here if needed
+                ]
+            ])->first();
+    
+            if ($existingMark) {
+                // If record exists, show flash message
+                $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
+                return $this->redirect(['action' => 'add']);
+            }
+    
+
+            $mark = $this->Marks->patchEntity($mark, $data);
     
             // Calculate Term 1 Total for each subject
         for ($i = 1; $i <= 7; $i++) {
@@ -243,7 +261,24 @@ class MarksController extends AppController
         'contain' => [],
     ]);
     if ($this->request->is(['patch', 'post', 'put'])) {
-        $mark = $this->Marks->patchEntity($mark, $this->request->getData());
+
+        $data = $this->request->getData();
+        // Check if a duplicate entry exists (excluding the current record being edited)
+        $existingMark = $this->Marks->find('all', [
+            'conditions' => [
+                'student_id' => $data['student_id'],
+                'academic_year' => $data['academic_year'],
+                'class' => $data['class'], // Add other relevant fields here
+                'id !=' => $id, // Exclude current record from the check
+            ]
+        ])->first();
+
+        if ($existingMark) {
+            $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
+            return $this->redirect(['action' => 'edit', $id]);
+        }
+
+        $mark = $this->Marks->patchEntity($mark, $data);
 
        // Calculate Term 1 Total for each subject
        for ($i = 1; $i <= 7; $i++) {
