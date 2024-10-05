@@ -31,7 +31,7 @@ class Result extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'student_id' => true,
         'academic_year' => true,
         'term1_total_marks' => true,

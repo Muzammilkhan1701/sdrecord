@@ -184,7 +184,7 @@ return [
      *   your application that still emit deprecations.
      */
     'Error' => [
-        'errorLevel' => E_ALL,
+        'errorLevel' => E_ALL & ~E_USER_DEPRECATED,
         'skipLog' => [],
         'log' => true,
         'trace' => true,
@@ -358,7 +358,7 @@ return [
             'path' => LOGS,
             'file' => 'debug',
             'url' => env('LOG_DEBUG_URL', null),
-            'scopes' => false,
+            'scopes' => null,
             'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [

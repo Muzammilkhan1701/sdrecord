@@ -25,7 +25,7 @@ class AcademicYear extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'academic_year' => true,
         'student_id' => true,
         'student' => true,

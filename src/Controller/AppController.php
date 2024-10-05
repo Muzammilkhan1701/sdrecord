@@ -48,7 +48,7 @@ class AppController extends Controller
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler');
+        // $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         // Add this line to check authentication result and lock your site
     $this->loadComponent('Authentication.Authentication');
