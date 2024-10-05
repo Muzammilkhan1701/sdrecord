@@ -15,11 +15,11 @@ class ResultsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadModel('Students');
-        $this->loadModel('Marks');
-        $this->loadModel('Results');
-        $this->loadModel('AcademicYears');
-        $this->loadModel('Excellence');
+    $this->Marks = $this->fetchTable('Marks');
+    $this->Students = $this->fetchTable('Students');
+    $this->Results = $this->fetchTable('Results');
+    $this->AcademicYears = $this->fetchTable('AcademicYears');
+    $this->Excellence = $this->fetchTable('Excellence');
         // Load other models if needed
     }
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -34,10 +34,7 @@ class ResultsController extends AppController
     }
     public function rform()
     {
-
-        // $this->viewBuilder()->setLayout('home');
         $this->viewBuilder()->setLayout('home');
-       
 
         // Fetch academic years from the academic_years table
         $academicYears = $this->Marks->find('list', [
@@ -58,8 +55,6 @@ class ResultsController extends AppController
     {
         $this->viewBuilder()->setLayout('home');
         
-
-
     }
 
     public function marksheet()
@@ -69,7 +64,6 @@ class ResultsController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             
-
             // Get form data
             $rollNo = isset($data['rollno']) ? $data['rollno'] : null;
             $term = isset($data['term']) ? $data['term'] : 'Term1';
@@ -148,15 +142,16 @@ class ResultsController extends AppController
 
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Students'],
-        ];
-        $results = $this->paginate($this->Results);
+         // Create a query with the desired options
+    $query = $this->Results->find()
+    ->contain(['Students']); // Adjust this if you have other associations
+
+// Paginate the query
+$results = $this->paginate($query);
+
 
         $this->set(compact('results'));
     }
-
-
 
     /**
      * View method
@@ -167,9 +162,7 @@ class ResultsController extends AppController
      */
     public function view($id = null)
     {
-        $result = $this->Results->get($id, [
-            'contain' => ['Students'],
-        ]);
+        $result = $this->Results->get($id, contain: ['Students']);
 
         $this->set(compact('result'));
     }
@@ -204,9 +197,7 @@ class ResultsController extends AppController
      */
     public function edit($id = null)
     {
-        $result = $this->Results->get($id, [
-            'contain' => [],
-        ]);
+        $result = $this->Results->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $result = $this->Results->patchEntity($result, $this->request->getData());
             if ($this->Results->save($result)) {

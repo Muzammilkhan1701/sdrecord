@@ -11,6 +11,12 @@ namespace App\Controller;
  */
 class AcademicYearsController extends AppController
 {
+    
+public function initialize(): void
+{
+    parent::initialize();
+    $this->fetchTable('Students'); // This loads the StudentsComponent
+}
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         
@@ -28,11 +34,12 @@ class AcademicYearsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Students'],
-        ];
-        $academicYears = $this->paginate($this->AcademicYears);
 
+        $query = $this->AcademicYears->find()
+        ->contain(['Students']); // Adjust this if you have other associations
+
+    // Paginate the query
+    $academicYears = $this->paginate($query);
         $this->set(compact('academicYears'));
     }
 
@@ -45,9 +52,7 @@ class AcademicYearsController extends AppController
      */
     public function view($id = null)
     {
-        $academicYear = $this->AcademicYears->get($id, [
-            'contain' => ['Students'],
-        ]);
+        $academicYear = $this->AcademicYears->get($id, contain: ['Students']);
 
         $this->set(compact('academicYear'));
     }
@@ -82,9 +87,7 @@ class AcademicYearsController extends AppController
      */
     public function edit($id = null)
     {
-        $academicYear = $this->AcademicYears->get($id, [
-            'contain' => [],
-        ]);
+        $academicYear = $this->AcademicYears->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $academicYear = $this->AcademicYears->patchEntity($academicYear, $this->request->getData());
             if ($this->AcademicYears->save($academicYear)) {

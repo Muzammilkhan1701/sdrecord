@@ -11,11 +11,19 @@ namespace App\Controller;
  */
 class ExcellenceController extends AppController
 {
+    
+public function initialize(): void
+{
+    parent::initialize();
+    $this->fetchTable('Students'); // This loads the StudentsComponent
+    $this->Excellence = $this->fetchTable('Excellence');
+
+}
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
         $this->viewBuilder()->setLayout('uhome');
-    
+
         // Add to the beforeFilter method of UsersController
     // $this->Authentication->addUnauthenticatedActions(['login',]);
     }
@@ -27,10 +35,9 @@ class ExcellenceController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Students'],
-        ];
-        $excellence = $this->paginate($this->Excellence);
+        $query = $this->Excellence->find()
+            ->contain( ['Students']);
+        $excellence = $this->paginate($query);
 
         $this->set(compact('excellence'));
     }
@@ -44,9 +51,7 @@ class ExcellenceController extends AppController
      */
     public function view($id = null)
     {
-        $excellence = $this->Excellence->get($id, [
-            'contain' => ['Students'],
-        ]);
+        $excellence = $this->Excellence->get($id, contain: ['Students']);
 
         $this->set(compact('excellence'));
     }
@@ -56,56 +61,14 @@ class ExcellenceController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    // public function add()
-    // {
-    //     $excellence = $this->Excellence->newEmptyEntity();
-    //     if ($this->request->is('post')) {
-    //         $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
-    //         if ($this->Excellence->save($excellence)) {
-    //             $this->Flash->success(__('The excellence has been saved.'));
-
-    //             return $this->redirect(['action' => 'index']);
-    //         }
-    //         $this->Flash->error(__('The excellence could not be saved. Please, try again.'));
-    //     }
-    //     $students = $this->Excellence->Students->find('list', ['limit' => 200])->all();
-    //     $this->set(compact('excellence', 'students'));
-    // }
-
-    // /**
-    //  * Edit method
-    //  *
-    //  * @param string|null $id Excellence id.
-    //  * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-    //  * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-    //  */
-    // public function edit($id = null)
-    // {
-    //     $excellence = $this->Excellence->get($id, [
-    //         'contain' => [],
-    //     ]);
-    //     if ($this->request->is(['patch', 'post', 'put'])) {
-    //         $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
-    //         if ($this->Excellence->save($excellence)) {
-    //             $this->Flash->success(__('The excellence has been saved.'));
-
-    //             return $this->redirect(['action' => 'index']);
-    //         }
-    //         $this->Flash->error(__('The excellence could not be saved. Please, try again.'));
-    //     }
-    //     $students = $this->Excellence->Students->find('list', ['limit' => 200])->all();
-    //     $this->set(compact('excellence', 'students'));
-    // }
-
-
- // src/Controller/ExcellenceController.php
+   
 // src/Controller/ExcellenceController.php
 
 public function add()
 {
     // Load the 'Marks' and 'Students' models
-    $marksTable = $this->loadModel('Marks');
-    $studentsTable = $this->loadModel('Students');
+    $marksTable = $this->fetchTable('Marks');
+    $studentsTable = $this->fetchTable('Students');
 
     // Create a new Excellence entity
     $excellence = $this->Excellence->newEmptyEntity();
@@ -147,7 +110,7 @@ public function add()
             // Save the excellence entry
             if ($this->Excellence->save($excellence)) {
                 $this->Flash->success(__('Excellence record has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Marks','action' => 'index']);
             } else {
                 $this->Flash->error(__('Unable to save excellence record. Please try again.'));
             }
@@ -177,8 +140,8 @@ public function add()
 public function edit($id = null)
 {
     // Load the 'Marks' and 'Students' models
-    $marksTable = $this->loadModel('Marks');
-    $studentsTable = $this->loadModel('Students');
+    $marksTable = $this->fetchTable('Marks');
+    $studentsTable = $this->fetchTable('Students');
 
     // Fetch the excellence entry by ID
     $excellence = $this->Excellence->get($id);
@@ -220,7 +183,7 @@ public function edit($id = null)
             // Save the excellence entry
             if ($this->Excellence->save($excellence)) {
                 $this->Flash->success(__('Excellence record has been updated.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Marks','action' => 'index']);
             } else {
                 $this->Flash->error(__('Unable to update excellence record. Please try again.'));
             }

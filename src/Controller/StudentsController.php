@@ -20,6 +20,12 @@ class StudentsController extends AppController
 // $this->Authentication->addUnauthenticatedActions(['login',]);
 }
 
+public function initialize(): void
+    {
+        parent::initialize();
+        $this->fetchTable('Students'); // This loads the StudentsComponent
+    }
+
     /**
      * Index method
      *
@@ -41,9 +47,7 @@ class StudentsController extends AppController
      */
     public function view($id = null)
     {
-        $student = $this->Students->get($id, [
-            'contain' => [],
-        ]);
+        $student = $this->Students->get($id, contain: []);
 
         $this->set(compact('student'));
     }
@@ -77,9 +81,7 @@ class StudentsController extends AppController
      */
     public function edit($id = null)
     {
-        $student = $this->Students->get($id, [
-            'contain' => [],
-        ]);
+        $student = $this->Students->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $student = $this->Students->patchEntity($student, $this->request->getData());
             if ($this->Students->save($student)) {
