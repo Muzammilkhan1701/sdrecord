@@ -23,8 +23,10 @@
             <fieldset>
                 <legend><?= __('Edit Academic Year') ?></legend>
                 <?php
-                    echo $this->Form->control('academic_year');
-                    echo $this->Form->control('student_id', ['options' => $students]);
+                    echo $this->Form->control('academic_year',[
+                        'required' => true,]);
+                    echo $this->Form->control('student_id', ['options' => $students,
+                        'required' => true,]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

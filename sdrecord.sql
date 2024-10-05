@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2024 at 02:05 PM
+-- Generation Time: Sep 27, 2024 at 07:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,10 @@ CREATE TABLE `academic_years` (
 --
 
 INSERT INTO `academic_years` (`year_id`, `academic_year`, `student_id`) VALUES
-(1, '2023', 3);
+(1, '2023', 3),
+(5, '2023', 2),
+(7, '2025', 1),
+(9, '2024', 4);
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,8 @@ CREATE TABLE `excellence` (
 
 INSERT INTO `excellence` (`id`, `student_id`, `term1_work_education`, `term1_art_education`, `term1_physical_education`, `term1_discipline`, `term2_work_education`, `term2_art_education`, `term2_physical_education`, `term2_discipline`, `created`, `modified`) VALUES
 (4, 1, 'A1', 'A1', 'B1', 'B2', 'A2', 'C1', 'C2', 'B1', '2024-09-10 09:56:09', '2024-09-10 09:56:09'),
-(5, 2, 'A1', 'A2', 'B1', 'B2', 'A2', 'C1', 'C2', 'B1', '2024-09-10 07:30:34', '2024-09-10 07:34:32');
+(5, 2, 'A1', 'A2', 'B1', 'B2', 'A2', 'C1', 'C2', 'B1', '2024-09-10 07:30:34', '2024-09-10 07:34:32'),
+(6, 4, 'a1', 'a2', 'a1', 'a2', '', '', '', '', '2024-09-25 10:41:34', '2024-09-25 10:41:34');
 
 -- --------------------------------------------------------
 
@@ -189,163 +193,11 @@ CREATE TABLE `marks` (
 
 INSERT INTO `marks` (`mark_id`, `student_id`, `academic_year`, `rollno`, `class`, `term1_subject_1`, `term1_subject_1_periodic_test`, `term1_subject_1_subject_enrichment`, `term1_subject_1_multiple_assessment`, `term1_subject_1_portfolio`, `term1_subject_2`, `term1_subject_2_periodic_test`, `term1_subject_2_subject_enrichment`, `term1_subject_2_multiple_assessment`, `term1_subject_2_portfolio`, `term1_subject_3`, `term1_subject_3_periodic_test`, `term1_subject_3_subject_enrichment`, `term1_subject_3_multiple_assessment`, `term1_subject_3_portfolio`, `term1_subject_4`, `term1_subject_4_periodic_test`, `term1_subject_4_subject_enrichment`, `term1_subject_4_multiple_assessment`, `term1_subject_4_portfolio`, `term1_subject_5`, `term1_subject_5_periodic_test`, `term1_subject_5_subject_enrichment`, `term1_subject_5_multiple_assessment`, `term1_subject_5_portfolio`, `term1_subject_6`, `term1_subject_6_periodic_test`, `term1_subject_6_subject_enrichment`, `term1_subject_6_multiple_assessment`, `term1_subject_6_portfolio`, `term1_subject_7`, `term1_subject_7_periodic_test`, `term1_subject_7_subject_enrichment`, `term1_subject_7_multiple_assessment`, `term1_subject_7_portfolio`, `term2_subject_1`, `term2_subject_1_periodic_test`, `term2_subject_1_subject_enrichment`, `term2_subject_1_multiple_assessment`, `term2_subject_1_portfolio`, `term2_subject_2`, `term2_subject_2_periodic_test`, `term2_subject_2_subject_enrichment`, `term2_subject_2_multiple_assessment`, `term2_subject_2_portfolio`, `term2_subject_3`, `term2_subject_3_periodic_test`, `term2_subject_3_subject_enrichment`, `term2_subject_3_multiple_assessment`, `term2_subject_3_portfolio`, `term2_subject_4`, `term2_subject_4_periodic_test`, `term2_subject_4_subject_enrichment`, `term2_subject_4_multiple_assessment`, `term2_subject_4_portfolio`, `term2_subject_5`, `term2_subject_5_periodic_test`, `term2_subject_5_subject_enrichment`, `term2_subject_5_multiple_assessment`, `term2_subject_5_portfolio`, `term2_subject_6`, `term2_subject_6_periodic_test`, `term2_subject_6_subject_enrichment`, `term2_subject_6_multiple_assessment`, `term2_subject_6_portfolio`, `term2_subject_7`, `term2_subject_7_periodic_test`, `term2_subject_7_subject_enrichment`, `term2_subject_7_multiple_assessment`, `term2_subject_7_portfolio`) VALUES
 (7, 1, '2024', 'A504', '4', 59, 5, 4, 3, 2, 69, 3, 2, 1, 5, 59, 1, 2, 3, 4, 71, 5, 4, 3, 2, 65, 2, 3, 4, 1, 73, 2, 2, 3, 5, 80, 5, 5, 5, 5, 85, 5, 4, 3, 2, 56, 5, 4, 3, 2, 65, 2, 2, 3, 5, 69, 5, 5, 4, 1, 72, 5, 3, 4, 2, 73, 2, 2, 1, 5, 40, 3, 3, 3, 3),
-(8, 2, '2024-2025', 'a510', '4', 70, 2, 3, 4, 5, 70, 5, 4, 1, 2, 74, 1, 2, 3, 4, 65, 4, 2, 1, 3, 65, 2, 4, 3, 4, 74, 5, 2, 4, 3, 78, 5, 4, 5, 4, 80, 1, 2, 3, 4, 52, 2, 2, 2, 2, 50, 0, 2, 2, 2, 58, 2, 2, 2, 2, 58, 5, 5, 5, 5, 75, 2, 2, 2, 2, 80, 5, 5, 5, 5),
-(9, 3, '2023', '104', '4', 76, 4, 4, 4, 4, 75, 5, 4, 4, 3, 65, 5, 4, 4, 4, 65, 3, 5, 5, 4, 76, 4, 5, 4, 5, 78, 5, 5, 5, 4, 74, 4, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
---
--- Triggers `marks`
---
-DELIMITER $$
-CREATE TRIGGER `after_marks_delete_trigger` AFTER DELETE ON `marks` FOR EACH ROW BEGIN
-    -- Handle NULL values with proper operators
-    IF OLD.student_id IS NOT NULL AND OLD.academic_year IS NOT NULL THEN
-        -- Delete the academic year record associated with the deleted mark entry
-        DELETE FROM `academic_years`
-        WHERE `student_id` = OLD.student_id
-        AND `academic_year` = OLD.academic_year;
-    END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_marks_insert` AFTER INSERT ON `marks` FOR EACH ROW BEGIN
-  DECLARE term1_percent DECIMAL(5, 2);
-  DECLARE term2_percent DECIMAL(5, 2);
-  DECLARE term1_grade CHAR(2);
-  DECLARE term2_grade CHAR(2);
-
-  -- Calculate percentages
-  SET term1_percent = (NEW.term1_total / 700) * 100;
-  SET term2_percent = (NEW.term2_total / 700) * 100;
-
-  -- Determine grades based on percentages
-  SET term1_grade = CASE
-    WHEN term1_percent >= 91 THEN 'A1'
-    WHEN term1_percent >= 81 THEN 'A2'
-    WHEN term1_percent >= 71 THEN 'B1'
-    WHEN term1_percent >= 61 THEN 'B2'
-    WHEN term1_percent >= 51 THEN 'C1'
-    WHEN term1_percent >= 41 THEN 'C2'
-    WHEN term1_percent >= 33 THEN 'D'
-    ELSE 'E'
-  END;
-
-  SET term2_grade = CASE
-    WHEN term2_percent >= 91 THEN 'A1'
-    WHEN term2_percent >= 81 THEN 'A2'
-    WHEN term2_percent >= 71 THEN 'B1'
-    WHEN term2_percent >= 61 THEN 'B2'
-    WHEN term1_percent >= 51 THEN 'C1'
-    WHEN term1_percent >= 41 THEN 'C2'
-    WHEN term1_percent >= 33 THEN 'D'
-    ELSE 'E'
-  END;
-
-  -- Insert into results table
-  INSERT INTO results (student_id, academic_year, term1_total_marks, term1_percentage, term1_grade, term2_total_marks, term2_percentage, term2_grade)
-  VALUES (NEW.student_id, NEW.academic_year, NEW.term1_total, term1_percent, term1_grade, NEW.term2_total, term2_percent, term2_grade);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_marks_update` AFTER UPDATE ON `marks` FOR EACH ROW BEGIN
-  DECLARE term1_percent DECIMAL(5, 2);
-  DECLARE term2_percent DECIMAL(5, 2);
-  DECLARE term1_grade CHAR(2);
-  DECLARE term2_grade CHAR(2);
-
-  -- Calculate percentages
-  SET term1_percent = (NEW.term1_total / 700) * 100;
-  SET term2_percent = (NEW.term2_total / 700) * 100;
-
-  -- Determine grades based on percentages
-  SET term1_grade = CASE
-    WHEN term1_percent >= 91 THEN 'A1'
-    WHEN term1_percent >= 81 THEN 'A2'
-    WHEN term1_percent >= 71 THEN 'B1'
-    WHEN term1_percent >= 61 THEN 'B2'
-    WHEN term1_percent >= 51 THEN 'C1'
-    WHEN term1_percent >= 41 THEN 'C2'
-    WHEN term1_percent >= 33 THEN 'D'
-    ELSE 'E'
-  END;
-
-  SET term2_grade = CASE
-    WHEN term2_percent >= 91 THEN 'A1'
-    WHEN term2_percent >= 81 THEN 'A2'
-    WHEN term2_percent >= 71 THEN 'B1'
-    WHEN term2_percent >= 61 THEN 'B2'
-    WHEN term2_percent >= 51 THEN 'C1'
-    WHEN term2_percent >= 41 THEN 'C2'
-    WHEN term2_percent >= 33 THEN 'D'
-    ELSE 'E'
-  END;
-
-  -- Update the results table
-  UPDATE results
-  SET term1_total_marks = NEW.term1_total,
-      term1_percentage = term1_percent,
-      term1_grade = term1_grade,
-      term2_total_marks = NEW.term2_total,
-      term2_percentage = term2_percent,
-      term2_grade = term2_grade
-  WHERE student_id = NEW.student_id
-    AND academic_year = NEW.academic_year;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_marks_update_trigger` AFTER UPDATE ON `marks` FOR EACH ROW BEGIN
-    -- Handle NULL values with proper operators
-    IF OLD.student_id IS NOT NULL AND OLD.academic_year IS NOT NULL THEN
-        -- Delete the old academic year record if it exists
-        DELETE FROM `academic_years` 
-        WHERE `student_id` = OLD.student_id 
-        AND `academic_year` = OLD.academic_year;
-    END IF;
-
-    IF NEW.student_id IS NOT NULL AND NEW.academic_year IS NOT NULL THEN
-        -- Insert the new academic year record if it doesn't exist
-        IF NOT EXISTS (
-            SELECT 1 
-            FROM `academic_years`
-            WHERE `student_id` = NEW.student_id
-            AND `academic_year` = NEW.academic_year
-        ) THEN
-            INSERT INTO `academic_years` (`academic_year`, `student_id`)
-            VALUES (NEW.academic_year, NEW.student_id);
-        END IF;
-    END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `delete_results` AFTER DELETE ON `marks` FOR EACH ROW BEGIN
-  -- Delete the corresponding record in the results table
-  DELETE FROM results
-  WHERE student_id = OLD.student_id
-    AND academic_year = OLD.academic_year;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `insert_academic_years` BEFORE INSERT ON `marks` FOR EACH ROW BEGIN
-    -- Check if student_id and academic_year are not NULL
-    IF NEW.student_id IS NOT NULL AND NEW.academic_year IS NOT NULL THEN
-        -- Check if the academic year for the student already exists
-        IF NOT EXISTS (
-            SELECT 1 FROM academic_years
-            WHERE student_id = NEW.student_id
-            AND academic_year = NEW.academic_year
-        ) THEN
-            -- If not, insert the academic year into the academic_years table
-            INSERT INTO academic_years (academic_year, student_id)
-            VALUES (NEW.academic_year, NEW.student_id);
-        END IF;
-    END IF;
-END
-$$
-DELIMITER ;
+(9, 3, '2023', '104', '4', 76, 4, 4, 4, 4, 75, 5, 4, 4, 3, 65, 5, 4, 4, 4, 65, 3, 5, 5, 4, 76, 4, 5, 4, 5, 78, 5, 5, 5, 4, 74, 4, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(12, 2, '2023', 'a547', '5th', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(13, 1, '2025', 'a604', '6th', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(14, 4, '2024', '205', '12', 25, 2, 2, 2, 2, 58, 0, 2, 5, 5, 52, 5, 2, 2, 2, 25, 2, 0, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52, 2, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(15, 5, '2025', 'c505', '5th', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -370,9 +222,10 @@ CREATE TABLE `results` (
 --
 
 INSERT INTO `results` (`result_id`, `student_id`, `academic_year`, `term1_total_marks`, `term1_percentage`, `term1_grade`, `term2_total_marks`, `term2_percentage`, `term2_grade`) VALUES
-(6, 1, '2024', 567, 81.00, 'A2', 551, 78.71, 'B1'),
-(7, 2, '2024-2025', 587, 83.86, 'A2', 533, 76.14, 'B1'),
-(8, 3, '2023', 629, 89.86, 'A2', 0, 0.00, 'C1');
+(8, 3, '2023', 629, 89.86, 'A2', 0, 0.00, 'C1'),
+(11, 2, '2023', 0, 0.00, 'E', 0, 0.00, 'E'),
+(12, 1, '2025', 0, 0.00, 'E', 0, 0.00, 'E'),
+(13, 4, '2024', 271, 38.71, 'D', 0, 0.00, 'D');
 
 -- --------------------------------------------------------
 
@@ -396,7 +249,9 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`student_id`, `Admission_no`, `name`, `mother_name`, `section`, `admission_year`) VALUES
 (1, '12456/07', 'riya', 'k', 'a', '2020'),
 (2, '12345/04', 'asim', 'D', 'A', '2022'),
-(3, '12345/10', 'Zeeshan', 'D', 'A', '2022');
+(3, '12345/10', 'Zeeshan', 'D', 'A', '2022'),
+(4, '2654/25', 'm', 'm', 'm', '2020'),
+(5, '123145/054', 'rk', 'kk', 'c', '2024');
 
 -- --------------------------------------------------------
 
@@ -417,7 +272,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `name`, `created`) VALUES
-(1, 'rk@gmail.com', '$2y$10$xleNV9/6D3XVBtSucu8uluepw0DXNF3Zp3EPxc0vwiSnsUOeFjG7q', 'rk', '2024-08-12 10:30:28');
+(1, 'rk@gmail.com', '$2y$10$xleNV9/6D3XVBtSucu8uluepw0DXNF3Zp3EPxc0vwiSnsUOeFjG7q', 'rk', '2024-08-12 10:30:28'),
+(2, 'admin@gmail.com', '$2y$10$8xxOr.bHBN//75Jz3nEmS.NN97X9vdv8i0lkIS.kn2vPPPyQeE41W', 'admin', '2024-09-25 10:45:55');
 
 --
 -- Indexes for dumped tables
@@ -472,37 +328,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `academic_years`
 --
 ALTER TABLE `academic_years`
-  MODIFY `year_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `year_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `excellence`
 --
 ALTER TABLE `excellence`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

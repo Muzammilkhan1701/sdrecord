@@ -11,6 +11,14 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {   
+    
+public function initialize(): void
+{
+    parent::initialize();
+     // Load the Students and Results models
+     $this->Students = $this->fetchTable('Students');
+     $this->Results = $this->fetchTable('Results');
+}
     public function beforeFilter(\Cake\Event\EventInterface $event)
 {
     parent::beforeFilter($event);
@@ -26,19 +34,12 @@ public function dashboard()
 {
 
     $this->viewBuilder()->setLayout('uhome');
-
-    // Load the Students model if not already loaded
-    $this->loadModel('Students');
-
     // Get the count of students
     $studentCount = $this->Students->find()->count();
 
     // Set the count to the view
     $this->set('studentCount', $studentCount);
-
-    $this->loadModel('Results');
-
-    // Get the count of results
+  // Get the count of results
     $resultCount = $this->Results->find()->count();
 
     // Set the count to the view
@@ -99,9 +100,7 @@ public function logout()
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $user = $this->Users->get($id, contain: []);
 
         $this->set(compact('user'));
     }
@@ -135,9 +134,7 @@ public function logout()
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $user = $this->Users->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {

@@ -26,7 +26,7 @@ class Student extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'Admission_no' => true,
         'name' => true,
         'mother_name' => true,

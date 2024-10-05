@@ -114,8 +114,11 @@
                     <td>---</td>
                     <td>Grade</td>
                 </tr>
+
                 <tr>
                 <?php if (isset($excellence) && isset($term)): ?>
+
+                    <?php foreach ($excellence as $excellence): ?>
 
                     <td>Work Education (or Pre-Vocational Education)</td>
                     <td><?= h($term == 'Term1' ? $excellence->term1_work_education : $excellence->term2_work_education) ?></td>
@@ -133,6 +136,8 @@
                 <td><?= h($term == 'Term1' ? $excellence->term1_discipline : $excellence->term2_discipline) ?></td>
                 </tr>
             </tbody>
+            <?php endforeach; ?>
+
             <?php else : ?>
             <tr>
                 <td colspan="2">No grades found for the selected term.</td>

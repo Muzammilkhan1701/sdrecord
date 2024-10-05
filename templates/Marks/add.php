@@ -25,7 +25,8 @@
                         'type' => 'select', 
                         'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'], 
                         'empty' => 'Select Term', 
-                        'id' => 'term-select'
+                        'id' => 'term-select',
+                        'required' => true,
                     ]) ?>
                 </div>
 
@@ -260,24 +261,24 @@
                             <div class="card-body">
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
-                                    <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                    <?= $this->Form->control('term1_subject_7_periodic_test', ['label' => 'Periodic Test (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_7_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term1_subject_7_total', ['label' => 'Total (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_7_grade', ['label' => 'Grade (Term 1)','max' => 5]) ?> -->
+                                    <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)','max' => 80, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_periodic_test', ['label' => 'Periodic Test (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <!-- <?= $this->Form->control('term1_subject_7_total', ['label' => 'Total (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_grade', ['label' => 'Grade (Term 1)','max' => 5, 'required' => true,]) ?> -->
                                 </div>
                                 
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
-                                    <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                    <?= $this->Form->control('term2_subject_7_periodic_test', ['label' => 'Periodic Test (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_7_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term2_subject_7_total', ['label' => 'Total (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_7_grade', ['label' => 'Grade (Term 2)','max' => 5]) ?> -->
+                                    <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)','max' => 80, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_periodic_test', ['label' => 'Periodic Test (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <!-- <?= $this->Form->control('term2_subject_7_total', ['label' => 'Total (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_grade', ['label' => 'Grade (Term 2)','max' => 5, 'required' => true,]) ?> -->
                                 </div>
                             </div>
                         </div>
@@ -288,7 +289,7 @@
                 <!-- Accordion End -->
             </fieldset>
 
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Add Co-Scholastic Grade')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

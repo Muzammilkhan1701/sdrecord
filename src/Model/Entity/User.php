@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property string $password
  * @property string $name
- * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\DateTime|null $created
  */
 class User extends Entity
 {
@@ -36,7 +36,7 @@ class User extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'email' => true,
         'password' => true,
         'name' => true,
@@ -48,7 +48,7 @@ class User extends Entity
      *
      * @var array<string>
      */
-    protected $_hidden = [
+    protected array $_hidden = [
         'password',
     ];
 }
