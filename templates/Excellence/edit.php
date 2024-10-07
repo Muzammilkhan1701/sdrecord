@@ -15,14 +15,14 @@
                 ['action' => 'delete', $excellence->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $excellence->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Excellence'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Co-Scholastic'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="excellence form content">
             <?= $this->Form->create($excellence) ?>
             <fieldset>
-                <legend><?= __('Edit Excellence') ?></legend>
+                <legend><?= __('Edit Co-Scholastic') ?></legend>
                 <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true, 'required' => true,]); ?>
                 <?= $this->Form->control('academic_year', ['label' => 'Academic Year', 'options' => $academicYears, 'value' => $excellence->academic_year, 'required' => true,]); ?>
                 <?= $this->Form->control('class', ['label' => 'Class', 'options' => $classes, 'value' => $excellence->class, 'required' => true,]); ?>
