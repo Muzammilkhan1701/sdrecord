@@ -398,7 +398,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- <script>
+ <script>
     $(document).ready(function() {
         // Handle term selection
         $('#term-select').change(function() {
@@ -418,44 +418,6 @@
         $('.term2-fields').hide();
     });
 </script>
-<script>
-    document.getElementById('term1_subject_5_ptcal').addEventListener('input', function() {
-        // Get the value of ptcal
-        var ptcalValue = parseFloat(this.value);
-
-        // Get the selected class
-        var classValue = document.getElementById('class').value;
-
-        // Initialize a variable to hold the calculation factor
-        var factor = 0;
-
-        // Determine the factor based on the class
-        if (classValue === '1st' || classValue === '2nd') {
-            factor = 0;  // No calculation for 1st and 2nd classes
-        } else if (classValue === '3rd' || classValue === '4th') {
-            factor = 0.2;  // Calculate 20% for 3rd and 4th classes
-        } else if (parseInt(classValue) >= 5 && parseInt(classValue) <= 10) {
-            factor = 0.125;  // Calculate 12.5% for 5th to 10th classes
-        }
-
-        // Calculate periodic test marks only if factor is greater than 0
-        if (!isNaN(ptcalValue) && factor > 0) {
-            var periodicTestValue = Math.round(ptcalValue * factor);  // Round to the nearest integer
-
-            // Update the periodic_test field
-            document.getElementById('term1_subject_5_periodic_test').value = periodicTestValue;
-        } else {
-            // If factor is 0 or ptcalValue is invalid, set periodic_test to an empty value
-            document.getElementById('term1_subject_5_periodic_test').value = factor === 0 ? 'No calculation' : '';
-        }
-    });
-
-    // Ensure the class field has an id for JavaScript to work
-    document.getElementById('class').addEventListener('change', function() {
-        // Trigger the input event manually when class changes
-        document.getElementById('term1_subject_5_ptcal').dispatchEvent(new Event('input'));
-    });
-</script> -->
 
 <script>
     // Function to calculate periodic test marks based on ptcal value
