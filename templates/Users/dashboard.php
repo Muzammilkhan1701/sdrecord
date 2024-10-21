@@ -17,7 +17,7 @@
                         <a href="<?= $this->Url->build(['controller' => 'students', 'action' => 'index']); ?>" class="text-white text-decoration-none">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo h($studentCount); ?></h5>
-                                <p class="card-text">Reg'd Users</p>
+                                <p class="card-text">Students</p>
                                 <i class="fas fa-users fa-3x"></i>
                                 <!-- <i class="bi bi-people-fill"></i> -->
 
@@ -32,6 +32,20 @@
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo h($resultCount); ?></h5>
                                 <p class="card-text">Results Declared</p>
+                                <i class="fas fa-chart-line fa-3x"></i>
+                                <!-- <i class="bi bi-graph-up-arrow"></i> -->
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-success text-white">
+                        <a href=" <?= $this->Url->build(['controller' => 'excellence', 'action' => 'index']); ?>" class="text-white text-decoration-none">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo h($excellenceCount); ?></h5>
+                                <p class="card-text">Grades Declared</p>
                                 <i class="fas fa-chart-line fa-3x"></i>
                                 <!-- <i class="bi bi-graph-up-arrow"></i> -->
 

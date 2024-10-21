@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" id="reportCardContainer">
     <!-- Student Information Section -->
     <div class="card bg-light border-0 shadow-sm p-4 mb-5">
         <h5 class="text-center text-primary mb-4">Student Information</h5>
@@ -274,3 +274,20 @@
         </div>
     </div>
 </div>
+<div class="text-center mb-5">
+    <a href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'landing']) ?>" class="btn btn-primary px-5">Home</a>
+    <button class="btn btn-success px-5" onclick="printReportCard()">Print Report Card</button>
+</div>
+
+<script>
+    function printReportCard() {
+        var printContent = document.getElementById('reportCardContainer').innerHTML;
+        var originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = printContent;
+        window.print();
+
+        // Restore original content after printing
+        document.body.innerHTML = originalContent;
+    }
+</script>
