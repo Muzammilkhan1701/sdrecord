@@ -50,11 +50,7 @@
                             </a>
                         </li>
 
-                        <li class="nav-item p-3">
-                            <a class="nav-link text-white" href="<?= $this->Url->build(['controller'=>'academicYears','action'=>'index']);?>">
-                                <i class="fas fa-chart-bar text-white"></i> Academic Years
-                            </a>
-                        </li>
+                        
                         
                         <li class="nav-item">
                            

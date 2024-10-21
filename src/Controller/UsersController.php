@@ -18,6 +18,7 @@ public function initialize(): void
      // Load the Students and Results models
      $this->Students = $this->fetchTable('Students');
      $this->Results = $this->fetchTable('Results');
+     $this->Excellence = $this->fetchTable('Excellence');
 }
     public function beforeFilter(\Cake\Event\EventInterface $event)
 {
@@ -44,6 +45,11 @@ public function dashboard()
 
     // Set the count to the view
     $this->set('resultCount', $resultCount);
+    $excellenceCount = $this->Excellence->find()->count();
+
+    // Set the count to the view
+    $this->set('excellenceCount', $excellenceCount);
+    
 
 }
 public function login()
