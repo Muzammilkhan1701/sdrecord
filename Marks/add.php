@@ -7,7 +7,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="marks form content">
-            <?= $this->Form->create($mark, ['url' => ['action' => 'add']]) ?>
+            <?= $this->Form->create($mark) ?>
             <fieldset>
                 <legend><?= __('Add Mark') ?></legend>
 
@@ -16,7 +16,7 @@
                     <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
                     <?= $this->Form->control('academic_year') ?>
                     <?= $this->Form->control('rollno') ?>
-                    <?= $this->Form->control('class', ['id' => 'class']) ?>
+                    <?= $this->Form->control('class') ?>
                 </div>
                 
                 <!-- Dropdown to select Term 1 or Term 2 -->
@@ -26,14 +26,14 @@
                         'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'], 
                         'empty' => 'Select Term', 
                         'id' => 'term-select',
-                          'required' => true,
+                        'required' => true,
                     ]) ?>
                 </div>
 
                 <!-- Accordion Start -->
                 <div class="accordion" id="subjectsAccordion">
                     <!-- Subject 1 - English -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
                                 <button class="btn btn-link fs-3 collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -83,7 +83,7 @@
                     </div>
                     
                     <!-- Subject 2 - Hindi -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingTwo">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -133,7 +133,7 @@
                     </div>
                     
                     <!-- Subject 3 - Marathi/Sanskrit -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingThree">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -183,7 +183,7 @@
                     </div>
 
                     <!-- Subject 4 - Maths -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingFour">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -233,7 +233,7 @@
                     </div>
 
                     <!-- Subject 5 - Science -->
-                    <div class="card mb-5 class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingFive">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -283,7 +283,7 @@
                     </div>
 
                     <!-- Subject 6 - Social Science -->
-                    <div class="card mb-5 class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingSix">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -333,7 +333,7 @@
                     </div>
 
                     <!-- Subject 7 - Computers -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingSeven">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
@@ -345,7 +345,7 @@
                             <div class="card-body">
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
-                                    <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)','max' => 80,]) ?>
+                                    <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)','max' => 80, 'required' => true,]) ?>
                                     <?= $this->Form->control('term1_subject_7_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_7_ptcal', 'type' => 'number', 'max' => 25]) ?>
 
                                 <?= $this->Form->control('term1_subject_7_periodic_test', [
@@ -354,17 +354,17 @@
                                     'max' => 5,
                                     'readonly' => true,  // Make this field read-only to prevent manual changes
                                 ]) ?>
-                                    <?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term1_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term1_subject_7_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5,   ]) ?>
-                                    <!-- <?= $this->Form->control('term1_subject_7_total', ['label' => 'Total (Term 1)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term1_subject_7_grade', ['label' => 'Grade (Term 1)','max' => 5,   ]) ?> -->
+                                    <?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <!-- <?= $this->Form->control('term1_subject_7_total', ['label' => 'Total (Term 1)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term1_subject_7_grade', ['label' => 'Grade (Term 1)','max' => 5, 'required' => true,]) ?> -->
                                 </div>
                                 
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
-                                    <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)','max' => 80,   ]) ?>
-                                    <?= $this->Form->control('term2_subject_7_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_7_ptcal', 'type' => 'number', ]) ?>
+                                    <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)','max' => 80, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_7_ptcal', 'type' => 'number', 'max' => 25]) ?>
 
                                 <?= $this->Form->control('term2_subject_7_periodic_test', [
                                     'label' => 'Periodic Test (Term 2)',
@@ -372,111 +372,11 @@
                                     'max' => 5,
                                     'readonly' => true,  // Make this field read-only to prevent manual changes
                                 ]) ?>
-                                    <?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term2_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term2_subject_7_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5,   ]) ?>
-                                    <!-- <?= $this->Form->control('term2_subject_7_total', ['label' => 'Total (Term 2)','max' => 5,   ]) ?>
-                                    <?= $this->Form->control('term2_subject_7_grade', ['label' => 'Grade (Term 2)','max' => 5,   ]) ?> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Subject 8 - Social Science -->
-                    <div class="card mb-5 class-1-4-subjects">
-                        <div class="card-header" id="headingEight">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                    EVS
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#subjectsAccordion">
-                            <div class="card-body">
-                                <!-- Fields for Term 1 -->
-                                <div class="term1-fields">
-                                    <?= $this->Form->control('term1_subject_8', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                    <?= $this->Form->control('term1_subject_8_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_8_ptcal', 'type' => 'number',]) ?>
-
-                                <?= $this->Form->control('term1_subject_8_periodic_test', [
-                                    'label' => 'Periodic Test (Term 1)',
-                                    'id' => 'term1_subject_8_periodic_test',
-                                    'max' => 5,
-                                    'readonly' => true,  // Make this field read-only to prevent manual changes
-                                ]) ?>
-                                    <?= $this->Form->control('term1_subject_8_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_8_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_8_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term1_subject_8_total', ['label' => 'Total (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_8_grade', ['label' => 'Grade (Term 1)','max' => 5]) ?> -->
-                                </div>
-                                
-                                <!-- Fields for Term 2 -->
-                                <div class="term2-fields">
-                                    <?= $this->Form->control('term2_subject_8', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                    <?= $this->Form->control('term2_subject_8_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_8_ptcal', 'type' => 'number',]) ?>
-
-                                <?= $this->Form->control('term2_subject_8_periodic_test', [
-                                    'label' => 'Periodic Test (Term 2)',
-                                    'id' => 'term2_subject_8_periodic_test',
-                                    'max' => 5,
-                                    'readonly' => true,  // Make this field read-only to prevent manual changes
-                                ]) ?>
-                                    <?= $this->Form->control('term2_subject_8_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_8_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_8_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term2_subject_8_total', ['label' => 'Total (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_8_grade', ['label' => 'Grade (Term 2)','max' => 5]) ?> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Subject 9 - Social Science -->
-                    <div class="card mb-5 class-1-4-subjects">
-                        <div class="card-header" id="headingNine">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                    GK
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#subjectsAccordion">
-                            <div class="card-body">
-                                <!-- Fields for Term 1 -->
-                                <div class="term1-fields">
-                                    <?= $this->Form->control('term1_subject_9', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                    <?= $this->Form->control('term1_subject_9_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_9_ptcal', 'type' => 'number', ]) ?>
-
-                                <?= $this->Form->control('term1_subject_9_periodic_test', [
-                                    'label' => 'Periodic Test (Term 1)',
-                                    'id' => 'term1_subject_9_periodic_test',
-                                    'max' => 5,
-                                    'readonly' => true,  // Make this field read-only to prevent manual change9
-                                ]) ?>
-                                    <?= $this->Form->control('term1_subject_9_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_9_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_9_portfolio', ['label' => 'Portfolio (Term 1)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term1_subject_9_total', ['label' => 'Total (Term 1)','max' => 5]) ?>
-                                    <?= $this->Form->control('term1_subject_9_grade', ['label' => 'Grade (Term 1)','max' => 5]) ?> -->
-                                </div>
-                                
-                                <!-- Fields for Term 2 -->
-                                <div class="term2-fields">
-                                    <?= $this->Form->control('term2_subject_9', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                    <?= $this->Form->control('term2_subject_9_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_9_ptcal', 'type' => 'number', 'max' => 25]) ?>
-
-                                <?= $this->Form->control('term2_subject_9_periodic_test', [
-                                    'label' => 'Periodic Test (Term 2)',
-                                    'id' => 'term2_subject_9_periodic_test',
-                                    'max' => 5,
-                                    'readonly' => true,  // Make this field read-only to prevent manual changes
-                                ]) ?>
-                                    <?= $this->Form->control('term2_subject_9_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_9_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_9_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5]) ?>
-                                    <!-- <?= $this->Form->control('term2_subject_9_total', ['label' => 'Total (Term 2)','max' => 5]) ?>
-                                    <?= $this->Form->control('term2_subject_9_grade', ['label' => 'Grade (Term 2)','max' => 5]) ?> -->
+                                    <?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_portfolio', ['label' => 'Portfolio (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <!-- <?= $this->Form->control('term2_subject_7_total', ['label' => 'Total (Term 2)','max' => 5, 'required' => true,]) ?>
+                                    <?= $this->Form->control('term2_subject_7_grade', ['label' => 'Grade (Term 2)','max' => 5, 'required' => true,]) ?> -->
                                 </div>
                             </div>
                         </div>
@@ -498,66 +398,132 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
-        // Initially hide all subject fields
-        $('.class-1-4-subjects, .class-5-10-subjects').hide();
-
-        // Handle class selection
-        $('#class').change(function() {
-            var classValue = $(this).val();
-
-            // Show appropriate subjects based on the selected class
-            if (classValue >= 1 && classValue <= 4) {
-                $('.class-1-4-subjects').show();
-                $('.class-5-10-subjects').hide();
-            } else if (classValue >= 5 && classValue <= 10) {
-                $('.class-5-10-subjects').show();
-                $('.class-1-4-subjects').hide();
+        // Handle term selection
+        $('#term-select').change(function() {
+            var selectedTerm = $(this).val();
+            if (selectedTerm === 'Term 1') {
+                $('.term1-fields').show();
+                $('.term2-fields').hide();
+            } else if (selectedTerm === 'Term 2') {
+                $('.term1-fields').hide();
+                $('.term2-fields').show();
             } else {
-                $('.class-1-4-subjects, .class-5-10-subjects').hide();
+                $('.term1-fields, .term2-fields').hide();
             }
         });
 
-        // Attach event listeners for periodic test calculations
-        function calculatePeriodicTest(ptcalId, periodicTestId) {
-            var ptcalValue = parseFloat(document.getElementById(ptcalId).value);
-            var classValue = document.getElementById('class').value;
-            var factor = 0;
-
-            if (classValue >= 1 && classValue <= 2) {
-                factor = 0;  // No calculation for 1st and 2nd classes
-            } else if (classValue >= 3 && classValue <= 4) {
-                factor = 0.2;  // 20% for 3rd and 4th classes
-            } else if (classValue >= 5 && classValue <= 10) {
-                factor = 0.125;  // 12.5% for 5th to 10th classes
-            }
-
-            if (!isNaN(ptcalValue) && factor > 0) {
-                var periodicTestValue = Math.round(ptcalValue * factor);
-                document.getElementById(periodicTestId).value = periodicTestValue;
-            } else {
-                document.getElementById(periodicTestId).value = factor === 0 ? 'No calculation' : '';
-            }
-        }
-
-        // Attach listeners for each subject's periodic test
-        function attachListeners() {
-            for (var i = 1; i <= 9; i++) {
-                (function(i) {
-                    var ptcalId1 = 'term1_subject_' + i + '_ptcal';
-                    var periodicTestId1 = 'term1_subject_' + i + '_periodic_test';
-
-                    document.getElementById(ptcalId1).addEventListener('input', function() {
-                        calculatePeriodicTest(ptcalId1, periodicTestId1);
-                    });
-                })(i);
-            }
-        }
-
-        // Initialize periodic test listeners
-        attachListeners();
+        // Initially hide Term 2 fields
+        $('.term2-fields').hide();
     });
+</script>
+<script>
+    document.getElementById('term1_subject_5_ptcal').addEventListener('input', function() {
+        // Get the value of ptcal
+        var ptcalValue = parseFloat(this.value);
+
+        // Get the selected class
+        var classValue = document.getElementById('class').value;
+
+        // Initialize a variable to hold the calculation factor
+        var factor = 0;
+
+        // Determine the factor based on the class
+        if (classValue === '1st' || classValue === '2nd') {
+            factor = 0;  // No calculation for 1st and 2nd classes
+        } else if (classValue === '3rd' || classValue === '4th') {
+            factor = 0.2;  // Calculate 20% for 3rd and 4th classes
+        } else if (parseInt(classValue) >= 5 && parseInt(classValue) <= 10) {
+            factor = 0.125;  // Calculate 12.5% for 5th to 10th classes
+        }
+
+        // Calculate periodic test marks only if factor is greater than 0
+        if (!isNaN(ptcalValue) && factor > 0) {
+            var periodicTestValue = Math.round(ptcalValue * factor);  // Round to the nearest integer
+
+            // Update the periodic_test field
+            document.getElementById('term1_subject_5_periodic_test').value = periodicTestValue;
+        } else {
+            // If factor is 0 or ptcalValue is invalid, set periodic_test to an empty value
+            document.getElementById('term1_subject_5_periodic_test').value = factor === 0 ? 'No calculation' : '';
+        }
+    });
+
+    // Ensure the class field has an id for JavaScript to work
+    document.getElementById('class').addEventListener('change', function() {
+        // Trigger the input event manually when class changes
+        document.getElementById('term1_subject_5_ptcal').dispatchEvent(new Event('input'));
+    });
+</script> -->
+
+<script>
+    // Function to calculate periodic test marks based on ptcal value
+    function calculatePeriodicTest(ptcalId, periodicTestId) {
+        // Get the value of ptcal
+        var ptcalValue = parseFloat(document.getElementById(ptcalId).value);
+
+        // Get the selected class
+        var classValue = document.getElementById('class').value;
+
+        // Initialize a variable to hold the calculation factor
+        var factor = 0;
+
+        // Determine the factor based on the class
+        if (classValue === '1st' || classValue === '2nd') {
+            factor = 0;  // No calculation for 1st and 2nd classes
+        } else if (classValue === '3rd' || classValue === '4th') {
+            factor = 0.2;  // Calculate 20% for 3rd and 4th classes
+        } else if (parseInt(classValue) >= 5 && parseInt(classValue) <= 10) {
+            factor = 0.125;  // Calculate 12.5% for 5th to 10th classes
+        }
+
+        // Calculate periodic test marks only if factor is greater than 0
+        if (!isNaN(ptcalValue) && factor > 0) {
+            var periodicTestValue = Math.round(ptcalValue * factor);  // Round to the nearest integer
+
+            // Update the periodic_test field
+            document.getElementById(periodicTestId).value = periodicTestValue;
+        } else {
+            // If factor is 0 or ptcalValue is invalid, set periodic_test to an empty value
+            document.getElementById(periodicTestId).value = factor === 0 ? 'No calculation' : '';
+        }
+    }
+
+    // Function to attach event listeners to all subject fields
+    function attachListeners() {
+        for (var i = 1; i <= 7; i++) {
+            // Attach listener for Term 1 subjects
+            (function(i) {
+                var ptcalId = 'term1_subject_' + i + '_ptcal';
+                var periodicTestId = 'term1_subject_' + i + '_periodic_test';
+                document.getElementById(ptcalId).addEventListener('input', function() {
+                    calculatePeriodicTest(ptcalId, periodicTestId);
+                });
+            })(i);
+
+            // Attach listener for Term 2 subjects
+            (function(i) {
+                var ptcalId = 'term2_subject_' + i + '_ptcal';
+                var periodicTestId = 'term2_subject_' + i + '_periodic_test';
+                document.getElementById(ptcalId).addEventListener('input', function() {
+                    calculatePeriodicTest(ptcalId, periodicTestId);
+                });
+            })(i);
+        }
+    }
+
+    // Ensure the class field has an id for JavaScript to work
+    document.getElementById('class').addEventListener('change', function() {
+        // Trigger the input event manually when class changes for all subjects
+        for (var i = 1; i <= 7; i++) {
+            document.getElementById('term1_subject_' + i + '_ptcal').dispatchEvent(new Event('input'));
+            document.getElementById('term2_subject_' + i + '_ptcal').dispatchEvent(new Event('input'));
+        }
+    });
+
+    // Attach event listeners when the page loads
+    attachListeners();
 </script>
 
 

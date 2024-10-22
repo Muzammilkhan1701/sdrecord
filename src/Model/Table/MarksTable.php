@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\EventInterface;
-
 
 /**
  * Marks Model
@@ -17,24 +15,24 @@ use Cake\Event\EventInterface;
  *
  * @method \App\Model\Entity\Mark newEmptyEntity()
  * @method \App\Model\Entity\Mark newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Mark[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Mark get($primaryKey, $options = [])
- * @method \App\Model\Entity\Mark findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method array<\App\Model\Entity\Mark> newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Mark get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \App\Model\Entity\Mark findOrCreate($search, ?callable $callback = null, array $options = [])
  * @method \App\Model\Entity\Mark patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Mark[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Mark|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Mark saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Mark[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Mark[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Mark[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Mark[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method array<\App\Model\Entity\Mark> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Mark|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \App\Model\Entity\Mark saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method iterable<\App\Model\Entity\Mark>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Mark>|false saveMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Mark>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Mark> saveManyOrFail(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Mark>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Mark>|false deleteMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Mark>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Mark> deleteManyOrFail(iterable $entities, array $options = [])
  */
 class MarksTable extends Table
 {
     /**
      * Initialize method
      *
-     * @param array $config The configuration for the Table.
+     * @param array<string, mixed> $config The configuration for the Table.
      * @return void
      */
     public function initialize(array $config): void
@@ -45,157 +43,10 @@ class MarksTable extends Table
         $this->setDisplayField('academic_year');
         $this->setPrimaryKey('mark_id');
 
-        // src/Model/Table/MarksTable.php
-$this->belongsTo('Students', [
-    'foreignKey' => 'student_id',
-    'joinType' => 'INNER',
-]);
-
-// In MarksTable.php
-// In MarksTable.php
-$this->hasOne('Results', [
-    'foreignKey' => 'student_id', // Adjust to the correct foreign key in Results table
-    'bindingKey' => 'student_id', // Match the key in Marks table
-    'joinType' => 'INNER', // Or 'LEFT' if results may not exist
-]);
-$this->hasOne('Excellence', [
-    'foreignKey' => 'student_id', // or marks_id if applicable
-]);
-
-
-    }
-
-    public function addMarks($data) {
-        // Extract data
-        $student_id = $data['student_id'];
-        $academic_year = $data['academic_year'];
-        $term1_total = $data['term1_total'];
-        $term2_total = $data['term2_total'];
-    
-        // Calculate percentages
-        $term1_percent = ($term1_total / 700) * 100;
-        $term2_percent = ($term2_total / 700) * 100;
-    
-        // Determine grades
-        $term1_grade = $this->calculateGrade($term1_percent);
-        $term2_grade = $this->calculateGrade($term2_percent);
-    
-        // Check if the academic year exists for the student
-        $academicYearExists = $this->AcademicYears->find()
-            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
-            ->first();
-    
-        if (!$academicYearExists) {
-            // Insert the academic year if it doesn't exist
-            $newAcademicYear = $this->AcademicYears->newEntity([
-                'academic_year' => $academic_year,
-                'student_id' => $student_id
-            ]);
-            $this->AcademicYears->save($newAcademicYear);
-        }
-    
-        // Insert into marks table
-        $marksEntry = $this->Marks->newEntity([
-            'student_id' => $student_id,
-            'academic_year' => $academic_year,
-            'term1_total' => $term1_total,
-            'term2_total' => $term2_total,
-            'term1_percentage' => $term1_percent,
-            'term1_grade' => $term1_grade,
-            'term2_percentage' => $term2_percent,
-            'term2_grade' => $term2_grade,
+        $this->belongsTo('Students', [
+            'foreignKey' => 'student_id',
         ]);
-        $this->Marks->save($marksEntry);
-    
-        // Insert into results table
-        $resultsEntry = $this->Results->newEntity([
-            'student_id' => $student_id,
-            'academic_year' => $academic_year,
-            'term1_total_marks' => $term1_total,
-            'term1_percentage' => $term1_percent,
-            'term1_grade' => $term1_grade,
-            'term2_total_marks' => $term2_total,
-            'term2_percentage' => $term2_percent,
-            'term2_grade' => $term2_grade,
-        ]);
-        $this->Results->save($resultsEntry);
     }
-    
-    public function updateMarks($data) {
-        // Extract data
-        $student_id = $data['student_id'];
-        $academic_year = $data['academic_year'];
-        $term1_total = $data['term1_total'];
-        $term2_total = $data['term2_total'];
-    
-        // Calculate percentages and grades
-        $term1_percent = ($term1_total / 700) * 100;
-        $term2_percent = ($term2_total / 700) * 100;
-        $term1_grade = $this->calculateGrade($term1_percent);
-        $term2_grade = $this->calculateGrade($term2_percent);
-    
-        // Update marks table
-        $marksEntry = $this->Marks->find()
-            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
-            ->first();
-    
-        if ($marksEntry) {
-            $marksEntry->term1_total = $term1_total;
-            $marksEntry->term1_percentage = $term1_percent;
-            $marksEntry->term1_grade = $term1_grade;
-            $marksEntry->term2_total = $term2_total;
-            $marksEntry->term2_percentage = $term2_percent;
-            $marksEntry->term2_grade = $term2_grade;
-            $this->Marks->save($marksEntry);
-        }
-    
-        // Update results table
-        $resultsEntry = $this->Results->find()
-            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
-            ->first();
-    
-        if ($resultsEntry) {
-            $resultsEntry->term1_total_marks = $term1_total;
-            $resultsEntry->term1_percentage = $term1_percent;
-            $resultsEntry->term1_grade = $term1_grade;
-            $resultsEntry->term2_total_marks = $term2_total;
-            $resultsEntry->term2_percentage = $term2_percent;
-            $resultsEntry->term2_grade = $term2_grade;
-            $this->Results->save($resultsEntry);
-        }
-    }
-
-    public function deleteMarks($student_id, $academic_year) {
-        // Delete from marks table
-        $marksEntry = $this->Marks->find()
-            ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
-            ->first();
-    
-        if ($marksEntry) {
-            $this->Marks->delete($marksEntry);
-    
-            // Delete from results table
-            $resultsEntry = $this->Results->find()
-                ->where(['student_id' => $student_id, 'academic_year' => $academic_year])
-                ->first();
-    
-            if ($resultsEntry) {
-                $this->Results->delete($resultsEntry);
-            }
-        }
-    }
-    
-    private function calculateGrade($percentage) {
-        if ($percentage >= 91) return 'A1';
-        if ($percentage >= 81) return 'A2';
-        if ($percentage >= 71) return 'B1';
-        if ($percentage >= 61) return 'B2';
-        if ($percentage >= 51) return 'C1';
-        if ($percentage >= 41) return 'C2';
-        if ($percentage >= 33) return 'D';
-        return 'E';
-    }
-    
 
     /**
      * Default validation rules.
@@ -638,6 +489,138 @@ $this->hasOne('Excellence', [
             ->allowEmptyString('term2_subject_7_grade');
 
         $validator
+            ->integer('term1_subject_8')
+            ->requirePresence('term1_subject_8', 'create')
+            ->allowEmptyString('term1_subject_8');
+
+        $validator
+            ->integer('term1_subject_8_periodic_test')
+            ->requirePresence('term1_subject_8_periodic_test', 'create')
+            ->allowEmptyString('term1_subject_8_periodic_test');
+
+        $validator
+            ->integer('term1_subject_8_subject_enrichment')
+            ->requirePresence('term1_subject_8_subject_enrichment', 'create')
+            ->allowEmptyString('term1_subject_8_subject_enrichment');
+
+        $validator
+            ->integer('term1_subject_8_multiple_assessment')
+            ->requirePresence('term1_subject_8_multiple_assessment', 'create')
+            ->allowEmptyString('term1_subject_8_multiple_assessment');
+
+        $validator
+            ->integer('term1_subject_8_portfolio')
+            ->requirePresence('term1_subject_8_portfolio', 'create')
+            ->allowEmptyString('term1_subject_8_portfolio');
+
+        $validator
+            ->integer('term1_subject_8_total')
+            ->allowEmptyString('term1_subject_8_total');
+
+        $validator
+            ->integer('term1_subject_8_grade')
+            ->allowEmptyString('term1_subject_8_grade');
+
+        $validator
+            ->integer('term2_subject_8')
+            ->requirePresence('term2_subject_8', 'create')
+            ->allowEmptyString('term2_subject_8');
+
+        $validator
+            ->integer('term2_subject_8_periodic_test')
+            ->requirePresence('term2_subject_8_periodic_test', 'create')
+            ->allowEmptyString('term2_subject_8_periodic_test');
+
+        $validator
+            ->integer('term2_subject_8_subject_enrichment')
+            ->requirePresence('term2_subject_8_subject_enrichment', 'create')
+            ->allowEmptyString('term2_subject_8_subject_enrichment');
+
+        $validator
+            ->integer('term2_subject_8_multiple_assessment')
+            ->requirePresence('term2_subject_8_multiple_assessment', 'create')
+            ->allowEmptyString('term2_subject_8_multiple_assessment');
+
+        $validator
+            ->integer('term2_subject_8_portfolio')
+            ->requirePresence('term2_subject_8_portfolio', 'create')
+            ->allowEmptyString('term2_subject_8_portfolio');
+
+        $validator
+            ->integer('term2_subject_8_total')
+            ->allowEmptyString('term2_subject_8_total');
+
+        $validator
+            ->integer('term2_subject_8_grade')
+            ->allowEmptyString('term2_subject_8_grade');
+
+        $validator
+            ->integer('term1_subject_9')
+            ->requirePresence('term1_subject_9', 'create')
+            ->allowEmptyString('term1_subject_9');
+
+        $validator
+            ->integer('term1_subject_9_periodic_test')
+            ->requirePresence('term1_subject_9_periodic_test', 'create')
+            ->allowEmptyString('term1_subject_9_periodic_test');
+
+        $validator
+            ->integer('term1_subject_9_subject_enrichment')
+            ->requirePresence('term1_subject_9_subject_enrichment', 'create')
+            ->allowEmptyString('term1_subject_9_subject_enrichment');
+
+        $validator
+            ->integer('term1_subject_9_multiple_assessment')
+            ->requirePresence('term1_subject_9_multiple_assessment', 'create')
+            ->allowEmptyString('term1_subject_9_multiple_assessment');
+
+        $validator
+            ->integer('term1_subject_9_portfolio')
+            ->requirePresence('term1_subject_9_portfolio', 'create')
+            ->allowEmptyString('term1_subject_9_portfolio');
+
+        $validator
+            ->integer('term1_subject_9_total')
+            ->allowEmptyString('term1_subject_9_total');
+
+        $validator
+            ->integer('term1_subject_9_grade')
+            ->allowEmptyString('term1_subject_9_grade');
+
+        $validator
+            ->integer('term2_subject_9')
+            ->requirePresence('term2_subject_9', 'create')
+            ->allowEmptyString('term2_subject_9');
+
+        $validator
+            ->integer('term2_subject_9_periodic_test')
+            ->requirePresence('term2_subject_9_periodic_test', 'create')
+            ->allowEmptyString('term2_subject_9_periodic_test');
+
+        $validator
+            ->integer('term2_subject_9_subject_enrichment')
+            ->requirePresence('term2_subject_9_subject_enrichment', 'create')
+            ->allowEmptyString('term2_subject_9_subject_enrichment');
+
+        $validator
+            ->integer('term2_subject_9_multiple_assessment')
+            ->requirePresence('term2_subject_9_multiple_assessment', 'create')
+            ->allowEmptyString('term2_subject_9_multiple_assessment');
+
+        $validator
+            ->integer('term2_subject_9_portfolio')
+            ->requirePresence('term2_subject_9_portfolio', 'create')
+            ->allowEmptyString('term2_subject_9_portfolio');
+
+        $validator
+            ->integer('term2_subject_9_total')
+            ->allowEmptyString('term2_subject_9_total');
+
+        $validator
+            ->integer('term2_subject_9_grade')
+            ->allowEmptyString('term2_subject_9_grade');
+
+        $validator
             ->integer('term2_total')
             ->allowEmptyString('term2_total');
 
@@ -653,7 +636,8 @@ $this->hasOne('Excellence', [
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('student_id', 'Students'), ['errorField' => 'student_id']);
+        $rules->add($rules->isUnique(['student_id', 'academic_year', 'class', 'rollno'], ['allowMultipleNulls' => true]), ['errorField' => 'student_id']);
+        $rules->add($rules->existsIn(['student_id'], 'Students'), ['errorField' => 'student_id']);
 
         return $rules;
     }
