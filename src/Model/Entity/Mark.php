@@ -112,9 +112,39 @@ use Cake\ORM\Entity;
  * @property int|null $term2_subject_7_portfolio
  * @property int|null $term2_subject_7_total
  * @property string|null $term2_subject_7_grade
+ * @property int $term1_subject_8
+ * @property int $term1_subject_8_periodic_test
+ * @property int $term1_subject_8_subject_enrichment
+ * @property int $term1_subject_8_multiple_assessment
+ * @property int $term1_subject_8_portfolio
+ * @property int|null $term1_subject_8_total
+ * @property int|null $term1_subject_8_grade
+ * @property int $term2_subject_8
+ * @property int $term2_subject_8_periodic_test
+ * @property int $term2_subject_8_subject_enrichment
+ * @property int $term2_subject_8_multiple_assessment
+ * @property int $term2_subject_8_portfolio
+ * @property int|null $term2_subject_8_total
+ * @property int|null $term2_subject_8_grade
+ * @property int $term1_subject_9
+ * @property int $term1_subject_9_periodic_test
+ * @property int $term1_subject_9_subject_enrichment
+ * @property int $term1_subject_9_multiple_assessment
+ * @property int $term1_subject_9_portfolio
+ * @property int|null $term1_subject_9_total
+ * @property int|null $term1_subject_9_grade
+ * @property int $term2_subject_9
+ * @property int $term2_subject_9_periodic_test
+ * @property int $term2_subject_9_subject_enrichment
+ * @property int $term2_subject_9_multiple_assessment
+ * @property int $term2_subject_9_portfolio
+ * @property int|null $term2_subject_9_total
+ * @property int|null $term2_subject_9_grade
  * @property int|null $term2_total
  *
  * @property \App\Model\Entity\Student $student
+ * @property \App\Model\Entity\Result $result
+ * @property \App\Model\Entity\Excellence $excellence
  */
 class Mark extends Entity
 {
@@ -231,7 +261,37 @@ class Mark extends Entity
         'term2_subject_7_portfolio' => true,
         'term2_subject_7_total' => true,
         'term2_subject_7_grade' => true,
+        'term1_subject_8' => true,
+        'term1_subject_8_periodic_test' => true,
+        'term1_subject_8_subject_enrichment' => true,
+        'term1_subject_8_multiple_assessment' => true,
+        'term1_subject_8_portfolio' => true,
+        'term1_subject_8_total' => true,
+        'term1_subject_8_grade' => true,
+        'term2_subject_8' => true,
+        'term2_subject_8_periodic_test' => true,
+        'term2_subject_8_subject_enrichment' => true,
+        'term2_subject_8_multiple_assessment' => true,
+        'term2_subject_8_portfolio' => true,
+        'term2_subject_8_total' => true,
+        'term2_subject_8_grade' => true,
+        'term1_subject_9' => true,
+        'term1_subject_9_periodic_test' => true,
+        'term1_subject_9_subject_enrichment' => true,
+        'term1_subject_9_multiple_assessment' => true,
+        'term1_subject_9_portfolio' => true,
+        'term1_subject_9_total' => true,
+        'term1_subject_9_grade' => true,
+        'term2_subject_9' => true,
+        'term2_subject_9_periodic_test' => true,
+        'term2_subject_9_subject_enrichment' => true,
+        'term2_subject_9_multiple_assessment' => true,
+        'term2_subject_9_portfolio' => true,
+        'term2_subject_9_total' => true,
+        'term2_subject_9_grade' => true,
         'term2_total' => true,
         'student' => true,
+        'result' => true,
+        'excellence' => true,
     ];
 }
