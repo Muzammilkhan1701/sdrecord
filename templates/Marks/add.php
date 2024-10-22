@@ -33,7 +33,7 @@
                 <!-- Accordion Start -->
                 <div class="accordion" id="subjectsAccordion">
                     <!-- Subject 1 - English -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
                                 <button class="btn btn-link fs-3 collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -83,7 +83,7 @@
                     </div>
                     
                     <!-- Subject 2 - Hindi -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingTwo">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -133,7 +133,7 @@
                     </div>
                     
                     <!-- Subject 3 - Marathi/Sanskrit -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingThree">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -183,7 +183,7 @@
                     </div>
 
                     <!-- Subject 4 - Maths -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingFour">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -333,7 +333,7 @@
                     </div>
 
                     <!-- Subject 7 - Computers -->
-                    <div class="card mb-5 class-1-4-subjects class-5-10-subjects">
+                    <div class="card mb-5">
                         <div class="card-header" id="headingSeven">
                             <h2 class="mb-0">
                                 <button class="btn btn-link collapsed fs-3 text-dark" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
