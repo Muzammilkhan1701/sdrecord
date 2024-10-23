@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Datasource\Exception\RecordNotFoundException;
+use Authorization\Exception\ForbiddenException;
 
 /**
  * Marks Controller
@@ -39,6 +41,8 @@ class MarksController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
         $query = $this->Marks->find()
             ->contain(['Students']);
         $marks = $this->paginate($query);
@@ -55,6 +59,8 @@ class MarksController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $mark = $this->Marks->get($id, contain: ['Students']);
 
         $this->set(compact('mark'));
@@ -71,6 +77,8 @@ class MarksController extends AppController
 {
     ob_start(); // Start output buffering
     $mark = $this->Marks->newEmptyEntity();
+    $this->Authorization->authorize($mark);
+
     if ($this->request->is('post')) {
         $data = $this->request->getData(); // Retrieve request data
 
@@ -203,10 +211,10 @@ class MarksController extends AppController
             'academic_year' => $academicYear,
             'term1_total_marks' => $term1Total, // Total for Term 1
             'term2_total_marks' => $term2Total, // Total for Term 2
-            'term1_percentage' => ($term1Total / 900) * 100, // Adjust denominator as needed
-            'term2_percentage' => ($term2Total / 900) * 100, // Adjust denominator as needed
-            'term1_grade' => $this->determineGrade(($term1Total / 900) * 100),
-            'term2_grade' => $this->determineGrade(($term2Total / 900) * 100),
+            'term1_percentage' => ($term1Total / 700) * 100, // Adjust denominator as needed
+            'term2_percentage' => ($term2Total / 700) * 100, // Adjust denominator as needed
+            'term1_grade' => $this->determineGrade(($term1Total / 700) * 100),
+            'term2_grade' => $this->determineGrade(($term2Total / 700) * 100),
         ]);
 
         if (!$this->Results->save($resultEntity)) {
@@ -251,6 +259,8 @@ class MarksController extends AppController
     {
         ob_start(); // Start output buffering
         $mark = $this->Marks->get($mark_id, contain: []);
+        $this->Authorization->authorize($mark);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $data = $this->request->getData();
@@ -383,10 +393,10 @@ class MarksController extends AppController
             // Update existing result
             $result->term1_total_marks = $term1Total;
             $result->term2_total_marks = $term2Total;
-            $result->term1_percentage = ($term1Total / 900) * 100; // Adjust denominator as needed
-            $result->term2_percentage = ($term2Total / 900) * 100; // Adjust denominator as needed
-            $result->term1_grade = $this->determineGrade(($term1Total / 900) * 100);
-            $result->term2_grade = $this->determineGrade(($term2Total / 900) * 100);
+            $result->term1_percentage = ($term1Total / 700) * 100; // Adjust denominator as needed
+            $result->term2_percentage = ($term2Total / 700) * 100; // Adjust denominator as needed
+            $result->term1_grade = $this->determineGrade(($term1Total / 700) * 100);
+            $result->term2_grade = $this->determineGrade(($term2Total / 700) * 100);
 
             if (!$this->Results->save($result)) {
                 debug($result->getErrors()); // Debugging save errors
@@ -408,20 +418,32 @@ class MarksController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $mark = $this->Marks->get($id);
+    {    
+try{
+    $this->request->allowMethod(['post', 'delete']);
+    $mark = $this->Marks->get($id);
+    $this->Authorization->authorize($mark);
 
-        // Delete associated results and academic years
-        $this->deleteAssociatedData($mark);
+    // Delete associated results and academic years
+    $this->deleteAssociatedData($mark);
+    
 
-        if ($this->Marks->delete($mark)) {
-            $this->Flash->success(__('The mark has been deleted.'));
-        } else {
-            $this->Flash->error(__('The mark could not be deleted. Please, try again.'));
-        }
+    if ($this->Marks->delete($mark)) {
+        $this->Flash->success(__('The mark has been deleted.'));
+    } else {
+        $this->Flash->error(__('The mark could not be deleted. Please, try again.'));
+    }
 
-        return $this->redirect(['action' => 'index']);
+    return $this->redirect(['action' => 'index']);
+
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
+
     }
 
 

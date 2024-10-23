@@ -34,6 +34,8 @@ public function initialize(): void
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
 
         $query = $this->AcademicYears->find()
         ->contain(['Students']); // Adjust this if you have other associations
@@ -52,6 +54,8 @@ public function initialize(): void
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $academicYear = $this->AcademicYears->get($id, contain: ['Students']);
 
         $this->set(compact('academicYear'));
@@ -65,6 +69,8 @@ public function initialize(): void
     public function add()
     {
         $academicYear = $this->AcademicYears->newEmptyEntity();
+        $this->Authorization->authorize($academicYear);
+
         if ($this->request->is('post')) {
             $academicYear = $this->AcademicYears->patchEntity($academicYear, $this->request->getData());
             if ($this->AcademicYears->save($academicYear)) {
@@ -88,6 +94,8 @@ public function initialize(): void
     public function edit($id = null)
     {
         $academicYear = $this->AcademicYears->get($id, contain: []);
+        $this->Authorization->authorize($academicYear);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $academicYear = $this->AcademicYears->patchEntity($academicYear, $this->request->getData());
             if ($this->AcademicYears->save($academicYear)) {
@@ -112,6 +120,8 @@ public function initialize(): void
     {
         $this->request->allowMethod(['post', 'delete']);
         $academicYear = $this->AcademicYears->get($id);
+        $this->Authorization->authorize($academicYear);
+
         if ($this->AcademicYears->delete($academicYear)) {
             $this->Flash->success(__('The academic year has been deleted.'));
         } else {

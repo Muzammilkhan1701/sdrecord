@@ -500,6 +500,27 @@
 
 <script>
     $(document).ready(function() {
+        // Handle term selection
+        $('#term-select').change(function() {
+            var selectedTerm = $(this).val();
+            if (selectedTerm === 'Term 1') {
+                $('.term1-fields').show();
+                $('.term2-fields').hide();
+            } else if (selectedTerm === 'Term 2') {
+                $('.term1-fields').hide();
+                $('.term2-fields').show();
+            } else {
+                $('.term1-fields, .term2-fields').hide();
+            }
+        });
+
+        // Initially hide Term 2 fields
+        $('.term2-fields').hide();
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
         // Initially hide all subject fields
         $('.class-1-4-subjects, .class-5-10-subjects').hide();
 
@@ -526,7 +547,7 @@
             var factor = 0;
 
             if (classValue >= 1 && classValue <= 2) {
-                factor = 0;  // No calculation for 1st and 2nd classes
+                factor = 1;  // No calculation for 1st and 2nd classes
             } else if (classValue >= 3 && classValue <= 4) {
                 factor = 0.2;  // 20% for 3rd and 4th classes
             } else if (classValue >= 5 && classValue <= 10) {

@@ -57,7 +57,7 @@
                         </li>
 
                         <li class="nav-item p-3 pb-0">
-                            <a class="nav-link text-white" href="<?= $this->Url->build(['controller'=>'users','action'=>'add']);?>">
+                            <a class="nav-link text-white" href="<?= $this->Url->build(['controller'=>'users','action'=>'index']);?>">
                                 <i class="fas fa-chart-bar text-white"></i> Add Users
                             </a>
                         </li>

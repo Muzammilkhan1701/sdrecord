@@ -14,13 +14,17 @@
             <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column column-80">
         <div class="users view content">
             <h3><?= h($user->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= h($user->email) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Role') ?></th>
+                    <td><?= h($user->role) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Name') ?></th>

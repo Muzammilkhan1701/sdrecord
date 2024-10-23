@@ -13,6 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
+                    <th><?= $this->Paginator->sort('role') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -23,6 +24,7 @@
                 <tr>
                     <td><?= $this->Number->format($user->user_id) ?></td>
                     <td><?= h($user->email) ?></td>
+                    <td><?= h($user->role) ?></td>
                     <td><?= h($user->name) ?></td>
                     <td><?= h($user->created) ?></td>
                     <td class="actions">

@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Datasource\Exception\RecordNotFoundException;
+use Authorization\Exception\ForbiddenException;
 
 /**
  * Excellence Controller
@@ -35,6 +37,8 @@ public function initialize(): void
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
         $query = $this->Excellence->find()
             ->contain( ['Students']);
         $excellence = $this->paginate($query);
@@ -51,6 +55,8 @@ public function initialize(): void
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $excellence = $this->Excellence->get($id, contain: ['Students']);
 
         $this->set(compact('excellence'));
@@ -65,66 +71,78 @@ public function initialize(): void
 // src/Controller/ExcellenceController.php
 
 public function add()
-{
-    // Load the 'Marks' and 'Students' models
-    $marksTable = $this->fetchTable('Marks');
-    $studentsTable = $this->fetchTable('Students');
-
-    // Create a new Excellence entity
-    $excellence = $this->Excellence->newEmptyEntity();
-
-    // Fetch all students to display in a dropdown
-    $students = $this->Excellence->Students->find('list', ['keyField' => 'student_id', 'valueField' => 'name'])->toArray();
-
-    // Fetch all possible academic years and classes
-    $academicYears = $marksTable->find('list', ['keyField' => 'academic_year', 'valueField' => 'academic_year'])->group('academic_year')->toArray();
-    $classes = $marksTable->find('list', ['keyField' => 'class', 'valueField' => 'class'])->group('class')->toArray();
-
-    if ($this->request->is('post')) {
-        $studentId = $this->request->getData('student_id');
-        $selectedAcademicYear = $this->request->getData('academic_year'); // Fetch selected academic year
-        $selectedClass = $this->request->getData('class'); // Fetch selected class
-
-        // Check if the combination of student_id, academic_year, and class exists in the Marks table
-        $marksExists = $marksTable->exists([
-            'student_id' => $studentId,
-            'academic_year' => $selectedAcademicYear,
-            'class' => $selectedClass
-        ]);
-
-        // Check if the entry already exists in the Excellence table (to prevent duplicates)
-        $excellenceExists = $this->Excellence->exists([
-            'student_id' => $studentId,
-            'academic_year' => $selectedAcademicYear,
-            'class' => $selectedClass
-        ]);
-
-        if ($marksExists) {
-            if (!$excellenceExists) {
-
-            // Patch the excellence entity with form data
-            $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
-            $excellence->academic_year = $selectedAcademicYear;
-            $excellence->class = $selectedClass;
-
-            // Save the excellence entry
-            if ($this->Excellence->save($excellence)) {
-                $this->Flash->success(__('Excellence record has been saved.'));
-                return $this->redirect(['controller' => 'Marks','action' => 'index']);
+{  
+try{
+        // Load the 'Marks' and 'Students' models
+        $marksTable = $this->fetchTable('Marks');
+        $studentsTable = $this->fetchTable('Students');
+    
+        // Create a new Excellence entity
+        $excellence = $this->Excellence->newEmptyEntity();
+        $this->Authorization->authorize($excellence);
+    
+    
+        // Fetch all students to display in a dropdown
+        $students = $this->Excellence->Students->find('list', ['keyField' => 'student_id', 'valueField' => 'name'])->toArray();
+    
+        // Fetch all possible academic years and classes
+        $academicYears = $marksTable->find('list', ['keyField' => 'academic_year', 'valueField' => 'academic_year'])->group('academic_year')->toArray();
+        $classes = $marksTable->find('list', ['keyField' => 'class', 'valueField' => 'class'])->group('class')->toArray();
+    
+        if ($this->request->is('post')) {
+            $studentId = $this->request->getData('student_id');
+            $selectedAcademicYear = $this->request->getData('academic_year'); // Fetch selected academic year
+            $selectedClass = $this->request->getData('class'); // Fetch selected class
+    
+            // Check if the combination of student_id, academic_year, and class exists in the Marks table
+            $marksExists = $marksTable->exists([
+                'student_id' => $studentId,
+                'academic_year' => $selectedAcademicYear,
+                'class' => $selectedClass
+            ]);
+    
+            // Check if the entry already exists in the Excellence table (to prevent duplicates)
+            $excellenceExists = $this->Excellence->exists([
+                'student_id' => $studentId,
+                'academic_year' => $selectedAcademicYear,
+                'class' => $selectedClass
+            ]);
+    
+            if ($marksExists) {
+                if (!$excellenceExists) {
+    
+                // Patch the excellence entity with form data
+                $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
+                $excellence->academic_year = $selectedAcademicYear;
+                $excellence->class = $selectedClass;
+    
+                // Save the excellence entry
+                if ($this->Excellence->save($excellence)) {
+                    $this->Flash->success(__('Excellence record has been saved.'));
+                    return $this->redirect(['controller' => 'Marks','action' => 'index']);
+                } else {
+                    $this->Flash->error(__('Unable to save excellence record. Please try again.'));
+                }
             } else {
-                $this->Flash->error(__('Unable to save excellence record. Please try again.'));
+                $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
             }
-        } else {
-            $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
+            } else {
+                // Flash message if the combination of academic year, class, and student_id doesn't exist
+                $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));
+            }
         }
-        } else {
-            // Flash message if the combination of academic year, class, and student_id doesn't exist
-            $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));
-        }
-    }
+    
+        // Pass the excellence, students, academicYears, and classes variables to the view
+        $this->set(compact('excellence', 'students', 'academicYears', 'classes'));
+    
 
-    // Pass the excellence, students, academicYears, and classes variables to the view
-    $this->set(compact('excellence', 'students', 'academicYears', 'classes'));
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
 }
 
 
@@ -139,66 +157,77 @@ public function add()
 
 public function edit($id = null)
 {
-    // Load the 'Marks' and 'Students' models
-    $marksTable = $this->fetchTable('Marks');
-    $studentsTable = $this->fetchTable('Students');
+try{
+// Load the 'Marks' and 'Students' models
+$marksTable = $this->fetchTable('Marks');
+$studentsTable = $this->fetchTable('Students');
 
-    // Fetch the excellence entry by ID
-    $excellence = $this->Excellence->get($id);
+// Fetch the excellence entry by ID
+$excellence = $this->Excellence->get($id);
+$this->Authorization->authorize($excellence);
 
-    // Fetch all students to display in a dropdown
-    $students = $this->Excellence->Students->find('list', ['keyField' => 'student_id', 'valueField' => 'name'])->toArray();
 
-    // Fetch all possible academic years and classes from the marks table
-    $academicYears = $marksTable->find('list', ['keyField' => 'academic_year', 'valueField' => 'academic_year'])->group('academic_year')->toArray();
-    $classes = $marksTable->find('list', ['keyField' => 'class', 'valueField' => 'class'])->group('class')->toArray();
+// Fetch all students to display in a dropdown
+$students = $this->Excellence->Students->find('list', ['keyField' => 'student_id', 'valueField' => 'name'])->toArray();
 
-    if ($this->request->is(['patch', 'post', 'put'])) {
-        $studentId = $this->request->getData('student_id');
-        $selectedAcademicYear = $this->request->getData('academic_year');
-        $selectedClass = $this->request->getData('class');
+// Fetch all possible academic years and classes from the marks table
+$academicYears = $marksTable->find('list', ['keyField' => 'academic_year', 'valueField' => 'academic_year'])->group('academic_year')->toArray();
+$classes = $marksTable->find('list', ['keyField' => 'class', 'valueField' => 'class'])->group('class')->toArray();
 
-        // Check if the combination of student_id, academic_year, and class exists in the Marks table
-        $marksExists = $marksTable->exists([
-            'student_id' => $studentId,
-            'academic_year' => $selectedAcademicYear,
-            'class' => $selectedClass
-        ]);
+if ($this->request->is(['patch', 'post', 'put'])) {
+    $studentId = $this->request->getData('student_id');
+    $selectedAcademicYear = $this->request->getData('academic_year');
+    $selectedClass = $this->request->getData('class');
 
-        // Check for duplicate in Excellence table
-        $excellenceExists = $this->Excellence->exists([
-            'student_id' => $studentId,
-            'academic_year' => $selectedAcademicYear,
-            'class' => $selectedClass,
-            'id !=' => $id // Exclude current record
-        ]);
+    // Check if the combination of student_id, academic_year, and class exists in the Marks table
+    $marksExists = $marksTable->exists([
+        'student_id' => $studentId,
+        'academic_year' => $selectedAcademicYear,
+        'class' => $selectedClass
+    ]);
 
-        if ($marksExists) {
-            if (!$excellenceExists) {
-            // Patch the excellence entity with form data
-            $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
-            $excellence->academic_year = $selectedAcademicYear;
-            $excellence->class = $selectedClass;
+    // Check for duplicate in Excellence table
+    $excellenceExists = $this->Excellence->exists([
+        'student_id' => $studentId,
+        'academic_year' => $selectedAcademicYear,
+        'class' => $selectedClass,
+        'id !=' => $id // Exclude current record
+    ]);
 
-            // Save the excellence entry
-            if ($this->Excellence->save($excellence)) {
-                $this->Flash->success(__('Excellence record has been updated.'));
-                return $this->redirect(['controller' => 'Marks','action' => 'index']);
-            } else {
-                $this->Flash->error(__('Unable to update excellence record. Please try again.'));
-            }
+    if ($marksExists) {
+        if (!$excellenceExists) {
+        // Patch the excellence entity with form data
+        $excellence = $this->Excellence->patchEntity($excellence, $this->request->getData());
+        $excellence->academic_year = $selectedAcademicYear;
+        $excellence->class = $selectedClass;
 
+        // Save the excellence entry
+        if ($this->Excellence->save($excellence)) {
+            $this->Flash->success(__('Excellence record has been updated.'));
+            return $this->redirect(['controller' => 'Marks','action' => 'index']);
         } else {
-            $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
+            $this->Flash->error(__('Unable to update excellence record. Please try again.'));
         }
-        } else {
-            // Flash message if the combination of academic year, class, and student_id doesn't exist
-            $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));
-        }
+
+    } else {
+        $this->Flash->error(__('Duplicate entry. An excellence record for this student, academic year, and class already exists.'));
     }
+    } else {
+        // Flash message if the combination of academic year, class, and student_id doesn't exist
+        $this->Flash->error(__('No marks found for the selected student, academic year, and class.'));
+    }
+}
 
-    // Pass the excellence, students, academicYears, and classes variables to the view
-    $this->set(compact('excellence', 'students', 'academicYears', 'classes'));
+// Pass the excellence, students, academicYears, and classes variables to the view
+$this->set(compact('excellence', 'students', 'academicYears', 'classes'));
+
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
 }
 
 
@@ -212,14 +241,26 @@ public function edit($id = null)
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $excellence = $this->Excellence->get($id);
-        if ($this->Excellence->delete($excellence)) {
-            $this->Flash->success(__('The excellence has been deleted.'));
-        } else {
-            $this->Flash->error(__('The excellence could not be deleted. Please, try again.'));
-        }
+        
+try{
+    $this->request->allowMethod(['post', 'delete']);
+    $excellence = $this->Excellence->get($id);
+    $this->Authorization->authorize($excellence);
 
-        return $this->redirect(['action' => 'index']);
+    if ($this->Excellence->delete($excellence)) {
+        $this->Flash->success(__('The excellence has been deleted.'));
+    } else {
+        $this->Flash->error(__('The excellence could not be deleted. Please, try again.'));
+    }
+
+    return $this->redirect(['action' => 'index']);
+
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
     }
 }

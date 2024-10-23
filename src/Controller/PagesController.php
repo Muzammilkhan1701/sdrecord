@@ -74,6 +74,8 @@ class PagesController extends AppController
 {
     parent::beforeFilter($event);
     $this->viewBuilder()->setLayout('home');
+    $this->Authorization->skipAuthorization();
+
 
     // for all controllers in our application, make index and view
     // actions public, skipping the authentication check
