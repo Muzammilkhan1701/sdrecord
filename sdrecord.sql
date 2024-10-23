@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2024 at 12:12 PM
+-- Generation Time: Oct 23, 2024 at 03:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -96,11 +96,12 @@ CREATE TABLE `marks` (
   `rollno` varchar(20) NOT NULL,
   `class` varchar(50) NOT NULL,
   `term1_subject_1` int(11) DEFAULT 0,
+  `term1_subject_1_ct` int(11) DEFAULT NULL,
   `term1_subject_1_periodic_test` int(11) DEFAULT 0,
   `term1_subject_1_subject_enrichment` int(11) DEFAULT 0,
   `term1_subject_1_multiple_assessment` int(11) DEFAULT 0,
   `term1_subject_1_portfolio` int(11) DEFAULT 0,
-  `term1_subject_1_total` int(11) GENERATED ALWAYS AS (`term1_subject_1` + `term1_subject_1_periodic_test` + `term1_subject_1_subject_enrichment` + `term1_subject_1_multiple_assessment` + `term1_subject_1_portfolio`) STORED,
+  `term1_subject_1_total` int(11) GENERATED ALWAYS AS (`term1_subject_1` + `term1_subject_1_periodic_test` + `term1_subject_1_subject_enrichment` + `term1_subject_1_multiple_assessment` + `term1_subject_1_portfolio` + 'term1_subject_1_ct') STORED,
   `term1_subject_1_grade` varchar(5) GENERATED ALWAYS AS (case when `term1_subject_1_total` >= 91 then 'A1' when `term1_subject_1_total` >= 81 then 'A2' when `term1_subject_1_total` >= 71 then 'B1' when `term1_subject_1_total` >= 61 then 'B2' when `term1_subject_1_total` >= 51 then 'C1' when `term1_subject_1_total` >= 41 then 'C2' when `term1_subject_1_total` >= 33 then 'D' else 'E' end) STORED,
   `term1_subject_2` int(11) DEFAULT 0,
   `term1_subject_2_periodic_test` int(11) DEFAULT 0,
@@ -222,25 +223,55 @@ CREATE TABLE `marks` (
   `term2_subject_9_portfolio` int(11) NOT NULL,
   `term2_subject_9_total` int(11) GENERATED ALWAYS AS (`term2_subject_9` + `term2_subject_9_periodic_test` + `term2_subject_9_subject_enrichment` + `term2_subject_9_multiple_assessment` + `term2_subject_9_portfolio`) STORED,
   `term2_subject_9_grade` int(11) GENERATED ALWAYS AS (case when `term2_subject_9_total` >= 91 then 'A1' when `term2_subject_9_total` >= 81 then 'A2' when `term2_subject_9_total` >= 71 then 'B1' when `term1_subject_7_total` >= 61 then 'B2' when `term2_subject_9_total` >= 51 then 'C1' when `term2_subject_9_total` >= 41 then 'C2' when `term2_subject_9_total` >= 33 then 'D' else 'E' end) STORED,
-  `term2_total` int(11) GENERATED ALWAYS AS (`term2_subject_1_total` + `term2_subject_2_total` + `term2_subject_3_total` + `term2_subject_4_total` + `term2_subject_5_total` + `term2_subject_6_total` + `term2_subject_7_total` + `term2_subject_8_total` + `term2_subject_9_total`) STORED
+  `term2_total` int(11) GENERATED ALWAYS AS (`term2_subject_1_total` + `term2_subject_2_total` + `term2_subject_3_total` + `term2_subject_4_total` + `term2_subject_5_total` + `term2_subject_6_total` + `term2_subject_7_total` + `term2_subject_8_total` + `term2_subject_9_total`) STORED,
+  `term1_subject_2_ct` int(11) DEFAULT NULL,
+  `term1_subject_3_ct` int(11) DEFAULT NULL,
+  `term1_subject_4_ct` int(11) DEFAULT NULL,
+  `term1_subject_5_ct` int(11) DEFAULT NULL,
+  `term1_subject_6_ct` int(11) DEFAULT NULL,
+  `term1_subject_7_ct` int(11) DEFAULT NULL,
+  `term1_subject_8_ct` int(11) DEFAULT NULL,
+  `term1_subject_9_ct` int(11) DEFAULT NULL,
+  `term2_subject_1_ct` int(11) DEFAULT NULL,
+  `term2_subject_2_ct` int(11) DEFAULT NULL,
+  `term2_subject_3_ct` int(11) DEFAULT NULL,
+  `term2_subject_4_ct` int(11) DEFAULT NULL,
+  `term2_subject_5_ct` int(11) DEFAULT NULL,
+  `term2_subject_6_ct` int(11) DEFAULT NULL,
+  `term2_subject_7_ct` int(11) DEFAULT NULL,
+  `term2_subject_8_ct` int(11) DEFAULT NULL,
+  `term2_subject_9_ct` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `marks`
 --
 
-INSERT INTO `marks` (`mark_id`, `student_id`, `academic_year`, `rollno`, `class`, `term1_subject_1`, `term1_subject_1_periodic_test`, `term1_subject_1_subject_enrichment`, `term1_subject_1_multiple_assessment`, `term1_subject_1_portfolio`, `term1_subject_2`, `term1_subject_2_periodic_test`, `term1_subject_2_subject_enrichment`, `term1_subject_2_multiple_assessment`, `term1_subject_2_portfolio`, `term1_subject_3`, `term1_subject_3_periodic_test`, `term1_subject_3_subject_enrichment`, `term1_subject_3_multiple_assessment`, `term1_subject_3_portfolio`, `term1_subject_4`, `term1_subject_4_periodic_test`, `term1_subject_4_subject_enrichment`, `term1_subject_4_multiple_assessment`, `term1_subject_4_portfolio`, `term1_subject_5`, `term1_subject_5_periodic_test`, `term1_subject_5_subject_enrichment`, `term1_subject_5_multiple_assessment`, `term1_subject_5_portfolio`, `term1_subject_6`, `term1_subject_6_periodic_test`, `term1_subject_6_subject_enrichment`, `term1_subject_6_multiple_assessment`, `term1_subject_6_portfolio`, `term1_subject_7`, `term1_subject_7_periodic_test`, `term1_subject_7_subject_enrichment`, `term1_subject_7_multiple_assessment`, `term1_subject_7_portfolio`, `term2_subject_1`, `term2_subject_1_periodic_test`, `term2_subject_1_subject_enrichment`, `term2_subject_1_multiple_assessment`, `term2_subject_1_portfolio`, `term2_subject_2`, `term2_subject_2_periodic_test`, `term2_subject_2_subject_enrichment`, `term2_subject_2_multiple_assessment`, `term2_subject_2_portfolio`, `term2_subject_3`, `term2_subject_3_periodic_test`, `term2_subject_3_subject_enrichment`, `term2_subject_3_multiple_assessment`, `term2_subject_3_portfolio`, `term2_subject_4`, `term2_subject_4_periodic_test`, `term2_subject_4_subject_enrichment`, `term2_subject_4_multiple_assessment`, `term2_subject_4_portfolio`, `term2_subject_5`, `term2_subject_5_periodic_test`, `term2_subject_5_subject_enrichment`, `term2_subject_5_multiple_assessment`, `term2_subject_5_portfolio`, `term2_subject_6`, `term2_subject_6_periodic_test`, `term2_subject_6_subject_enrichment`, `term2_subject_6_multiple_assessment`, `term2_subject_6_portfolio`, `term2_subject_7`, `term2_subject_7_periodic_test`, `term2_subject_7_subject_enrichment`, `term2_subject_7_multiple_assessment`, `term2_subject_7_portfolio`, `term1_subject_8`, `term1_subject_8_periodic_test`, `term1_subject_8_subject_enrichment`, `term1_subject_8_multiple_assessment`, `term1_subject_8_portfolio`, `term2_subject_8`, `term2_subject_8_periodic_test`, `term2_subject_8_subject_enrichment`, `term2_subject_8_multiple_assessment`, `term2_subject_8_portfolio`, `term1_subject_9`, `term1_subject_9_periodic_test`, `term1_subject_9_subject_enrichment`, `term1_subject_9_multiple_assessment`, `term1_subject_9_portfolio`, `term2_subject_9`, `term2_subject_9_periodic_test`, `term2_subject_9_subject_enrichment`, `term2_subject_9_multiple_assessment`, `term2_subject_9_portfolio`) VALUES
-(52, 1, '2023', 'a504', '5th', 65, 2, 2, 2, 2, 23, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 75, 5, 5, 2, 2, 55, 2, 2, 2, 2, 65, 2, 2, 2, 2, 55, 2, 2, 2, 2, 44, 2, 2, 2, 2, 58, 3, 3, 3, 3, 49, 4, 4, 4, 4, 67, 3, 3, 3, 3, 59, 3, 3, 3, 3, 69, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(56, 1, '2024', 'a604', '6th', 35, 2, 2, 2, 2, 55, 2, 2, 2, 2, 75, 2, 2, 2, 2, 55, 2, 2, 2, 2, 65, 2, 2, 2, 2, 45, 2, 2, 2, 2, 75, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(57, 1, '2025', 'a704', '7th', 65, 2, 2, 2, 2, 66, 2, 2, 2, 2, 66, 3, 3, 3, 3, 55, 2, 2, 2, 2, 45, 2, 2, 2, 2, 65, 2, 2, 2, 2, 65, 2, 2, 3, 2, 65, 2, 2, 2, 2, 55, 2, 2, 2, 2, 66, 3, 3, 3, 3, 48, 5, 5, 2, 2, 65, 2, 2, 3, 3, 74, 4, 4, 4, 4, 78, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(62, 6, '2025', 'a504', '5th', 55, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(67, 1, '2027', 'a904', '9th', 55, 5, 5, 5, 5, 45, 5, 5, 5, 0, 55, 5, 5, 5, 5, 45, 5, 5, 0, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 0, 55, 0, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 0, 5, 65, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(68, 9, '2024', 'a111', '1', 80, 5, 5, 5, 5, 25, 2, 2, 2, 2, 25, 2, 2, 2, 2, 62, 2, 2, 2, 5, 25, 2, 2, 2, 2, 25, 2, 3, 4, 5, 25, 2, 2, 2, 2, 52, 0, 5, 5, 5, 42, 5, 2, 4, 5, 52, 3, 3, 3, 3, 54, 5, 4, 1, 1, 52, 2, 3, 2, 1, 25, 2, 5, 2, 5, 52, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(69, 9, '2026', 'c1000', '10th', 52, 5, 5, 5, 5, 52, 2, 2, 2, 2, 52, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(70, 9, '2024', 'A505', '6th', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 5, 5, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(71, 8, '2028', '001', '6th', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(72, 4, '2024', 'Q005', '3rd', 51, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(73, 5, '2026', 'k539', '6', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `marks` (`mark_id`, `student_id`, `academic_year`, `rollno`, `class`, `term1_subject_1`, `term1_subject_1_ct`, `term1_subject_1_periodic_test`, `term1_subject_1_subject_enrichment`, `term1_subject_1_multiple_assessment`, `term1_subject_1_portfolio`, `term1_subject_2`, `term1_subject_2_periodic_test`, `term1_subject_2_subject_enrichment`, `term1_subject_2_multiple_assessment`, `term1_subject_2_portfolio`, `term1_subject_3`, `term1_subject_3_periodic_test`, `term1_subject_3_subject_enrichment`, `term1_subject_3_multiple_assessment`, `term1_subject_3_portfolio`, `term1_subject_4`, `term1_subject_4_periodic_test`, `term1_subject_4_subject_enrichment`, `term1_subject_4_multiple_assessment`, `term1_subject_4_portfolio`, `term1_subject_5`, `term1_subject_5_periodic_test`, `term1_subject_5_subject_enrichment`, `term1_subject_5_multiple_assessment`, `term1_subject_5_portfolio`, `term1_subject_6`, `term1_subject_6_periodic_test`, `term1_subject_6_subject_enrichment`, `term1_subject_6_multiple_assessment`, `term1_subject_6_portfolio`, `term1_subject_7`, `term1_subject_7_periodic_test`, `term1_subject_7_subject_enrichment`, `term1_subject_7_multiple_assessment`, `term1_subject_7_portfolio`, `term2_subject_1`, `term2_subject_1_periodic_test`, `term2_subject_1_subject_enrichment`, `term2_subject_1_multiple_assessment`, `term2_subject_1_portfolio`, `term2_subject_2`, `term2_subject_2_periodic_test`, `term2_subject_2_subject_enrichment`, `term2_subject_2_multiple_assessment`, `term2_subject_2_portfolio`, `term2_subject_3`, `term2_subject_3_periodic_test`, `term2_subject_3_subject_enrichment`, `term2_subject_3_multiple_assessment`, `term2_subject_3_portfolio`, `term2_subject_4`, `term2_subject_4_periodic_test`, `term2_subject_4_subject_enrichment`, `term2_subject_4_multiple_assessment`, `term2_subject_4_portfolio`, `term2_subject_5`, `term2_subject_5_periodic_test`, `term2_subject_5_subject_enrichment`, `term2_subject_5_multiple_assessment`, `term2_subject_5_portfolio`, `term2_subject_6`, `term2_subject_6_periodic_test`, `term2_subject_6_subject_enrichment`, `term2_subject_6_multiple_assessment`, `term2_subject_6_portfolio`, `term2_subject_7`, `term2_subject_7_periodic_test`, `term2_subject_7_subject_enrichment`, `term2_subject_7_multiple_assessment`, `term2_subject_7_portfolio`, `term1_subject_8`, `term1_subject_8_periodic_test`, `term1_subject_8_subject_enrichment`, `term1_subject_8_multiple_assessment`, `term1_subject_8_portfolio`, `term2_subject_8`, `term2_subject_8_periodic_test`, `term2_subject_8_subject_enrichment`, `term2_subject_8_multiple_assessment`, `term2_subject_8_portfolio`, `term1_subject_9`, `term1_subject_9_periodic_test`, `term1_subject_9_subject_enrichment`, `term1_subject_9_multiple_assessment`, `term1_subject_9_portfolio`, `term2_subject_9`, `term2_subject_9_periodic_test`, `term2_subject_9_subject_enrichment`, `term2_subject_9_multiple_assessment`, `term2_subject_9_portfolio`, `term1_subject_2_ct`, `term1_subject_3_ct`, `term1_subject_4_ct`, `term1_subject_5_ct`, `term1_subject_6_ct`, `term1_subject_7_ct`, `term1_subject_8_ct`, `term1_subject_9_ct`, `term2_subject_1_ct`, `term2_subject_2_ct`, `term2_subject_3_ct`, `term2_subject_4_ct`, `term2_subject_5_ct`, `term2_subject_6_ct`, `term2_subject_7_ct`, `term2_subject_8_ct`, `term2_subject_9_ct`) VALUES
+(52, 1, '2023', 'a504', '5th', 65, NULL, 2, 2, 2, 2, 23, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 75, 5, 5, 2, 2, 55, 2, 2, 2, 2, 65, 2, 2, 2, 2, 55, 2, 2, 2, 2, 44, 2, 2, 2, 2, 58, 3, 3, 3, 3, 49, 4, 4, 4, 4, 67, 3, 3, 3, 3, 59, 3, 3, 3, 3, 69, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 1, '2024', 'a604', '6th', 35, NULL, 2, 2, 2, 2, 55, 2, 2, 2, 2, 75, 2, 2, 2, 2, 55, 2, 2, 2, 2, 65, 2, 2, 2, 2, 45, 2, 2, 2, 2, 75, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(57, 1, '2025', 'a704', '7th', 65, NULL, 2, 2, 2, 2, 66, 2, 2, 2, 2, 66, 3, 3, 3, 3, 55, 2, 2, 2, 2, 45, 2, 2, 2, 2, 65, 2, 2, 2, 2, 65, 2, 2, 3, 2, 65, 2, 2, 2, 2, 55, 2, 2, 2, 2, 66, 3, 3, 3, 3, 48, 5, 5, 2, 2, 65, 2, 2, 3, 3, 74, 4, 4, 4, 4, 78, 5, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(62, 6, '2025', 'a504', '5th', 55, NULL, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 45, 2, 2, 2, 2, 55, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 2, 2, 2, 2, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(67, 1, '2027', 'a904', '9th', 55, NULL, 5, 5, 5, 5, 45, 5, 5, 5, 0, 55, 5, 5, 5, 5, 45, 5, 5, 0, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 0, 55, 0, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 5, 5, 55, 5, 5, 0, 5, 65, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(68, 9, '2024', 'a111', '1', 80, NULL, 5, 5, 5, 5, 25, 2, 2, 2, 2, 25, 2, 2, 2, 2, 62, 2, 2, 2, 5, 25, 2, 2, 2, 2, 25, 2, 3, 4, 5, 25, 2, 2, 2, 2, 52, 0, 5, 5, 5, 42, 5, 2, 4, 5, 52, 3, 3, 3, 3, 54, 5, 4, 1, 1, 52, 2, 3, 2, 1, 25, 2, 5, 2, 5, 52, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(69, 9, '2026', 'c1000', '10th', 52, NULL, 5, 5, 5, 5, 52, 2, 2, 2, 2, 52, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(70, 9, '2024', 'A505', '6th', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 5, 5, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(71, 8, '2028', '001', '6th', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(72, 4, '2024', 'Q005', '3rd', 51, NULL, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(73, 5, '2026', 'k539', '6', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(74, 9, '2222', '222', '2', 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 88, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8),
+(75, 5, '2030', 'W554', '1', 50, 10, 25, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(76, 9, '2032', 'U001', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(77, 9, '2042', 'U111', '1', 50, 10, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(78, 9, '2045', 'v123', '2', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(79, 2, '2050', 'J500', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(80, 9, '2005', 'a008', '1', 50, 10, 25, 5, 5, 5, 50, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(81, 9, '2030', 'd006', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(82, 9, '2004', '005', '2', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(83, 9, '2026', 'J222', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, 8, '2029', 'B232', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(85, 9, '2050', 'f999', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(86, 4, '2065', 'O001', '1', 50, 10, 25, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -275,7 +306,18 @@ INSERT INTO `results` (`result_id`, `student_id`, `academic_year`, `term1_total_
 (51, 9, '2024', 94, 13.43, 'E', 0, 0.00, 'E'),
 (52, 8, '2028', 3, 0.43, 'E', 0, 0.00, 'E'),
 (53, 4, '2024', 56, 8.00, 'E', 0, 0.00, 'E'),
-(54, 5, '2026', 0, 0.00, 'E', 0, 0.00, 'E');
+(54, 5, '2026', 0, 0.00, 'E', 0, 0.00, 'E'),
+(55, 5, '2030', 85, 12.14, 'E', 0, 0.00, 'E'),
+(56, 9, '2032', 90, 12.86, 'E', 0, 0.00, 'E'),
+(57, 9, '2042', 65, 9.29, 'E', 0, 0.00, 'E'),
+(58, 9, '2045', 90, 12.86, 'E', 0, 0.00, 'E'),
+(59, 2, '2050', 90, 12.86, 'E', 0, 0.00, 'E'),
+(60, 9, '2005', 200, 28.57, 'E', 0, 0.00, 'E'),
+(61, 9, '2030', 100, 14.29, 'E', 0, 0.00, 'E'),
+(62, 9, '2004', 100, 14.29, 'E', 0, 0.00, 'E'),
+(63, 9, '2026', 100, 14.29, 'E', 0, 0.00, 'E'),
+(64, 8, '2029', 100, 14.29, 'E', 0, 0.00, 'E'),
+(65, 4, '2065', 100, 14.29, 'E', 0, 0.00, 'E');
 
 -- --------------------------------------------------------
 
@@ -394,13 +436,13 @@ ALTER TABLE `excellence`
 -- AUTO_INCREMENT for table `marks`
 --
 ALTER TABLE `marks`
-  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `students`
