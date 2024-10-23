@@ -54,10 +54,14 @@ class UsersController extends AppController
     // Set the count to the view
     $this->set('studentCount', $studentCount);
   // Get the count of results
-    // $resultCount = $this->Results->find()->count();
+    $resultCount = $this->Results->find()->count();
 
     // // Set the count to the view
-    // $this->set('resultCount', $resultCount);
+    $this->set('resultCount', $resultCount);
+
+    $excellenceCount = $this->Results->find()->count();
+    // // Set the count to the view
+    $this->set('excellenceCount', $excellenceCount);
 
 }
     
