@@ -41,30 +41,66 @@
                             <th>Periodic Test</th>
                             <th>Subject Enrichment</th>
                             <th>Multiple Assessment</th>
-                            <th>Portfolio</th>
+                            <!-- <th>Portfolio</th> -->
+                            <th>
+                        <?php 
+                        // Change header based on class
+                        if ($marks->class >= 1 && $marks->class <= 4) {
+                            echo 'CT Marks';
+                        } else {
+                            echo 'Portfolio';
+                        }
+                        ?>
+                    </th>
                             <th>Mid Term</th>
+
                             <th>Total Marks</th>
                             <th>Grade</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        $subjects = [
-                            ['English', 'term1_subject_1', 'term2_subject_1'],
-                            ['Hindi', 'term1_subject_2', 'term2_subject_2'],
-                            ['Marathi/Sanskrit', 'term1_subject_3', 'term2_subject_3'],
-                            ['Mathematics', 'term1_subject_4', 'term2_subject_4'],
-                            ['Science', 'term1_subject_5', 'term2_subject_5'],
-                            ['Social Science', 'term1_subject_6', 'term2_subject_6'],
-                            ['Computer', 'term1_subject_7', 'term2_subject_7']
-                        ];
+                    <?php 
+                // Determine the subject list based on class
+                if ($marks->class >= 1 && $marks->class <= 4) {
+                    // Subjects for classes 1-4
+                    $subjects = [
+                        ['English', 'term1_subject_1', 'term2_subject_1'],
+                        ['Hindi', 'term1_subject_2', 'term2_subject_2'],
+                        ['Marathi', 'term1_subject_3', 'term2_subject_3'],
+                        ['Mathematics', 'term1_subject_4', 'term2_subject_4'],
+                        ['Computer', 'term1_subject_7', 'term2_subject_7'],
+                        ['EVS', 'term1_subject_8', 'term2_subject_8'],
+                        ['GK', 'term1_subject_9', 'term2_subject_9']
+                    ];
+                } else {
+                    // Subjects for classes 5-10
+                    $subjects = [
+                        ['English', 'term1_subject_1', 'term2_subject_1'],
+                        ['Hindi', 'term1_subject_2', 'term2_subject_2'],
+                        ['Marathi/Sanskrit', 'term1_subject_3', 'term2_subject_3'],
+                        ['Mathematics', 'term1_subject_4', 'term2_subject_4'],
+                        ['Computer', 'term1_subject_7', 'term2_subject_7'],
+                        ['Science', 'term1_subject_5', 'term2_subject_5'],
+                        ['Social Science', 'term1_subject_6', 'term2_subject_6']
+                    ];
+                }
                         foreach ($subjects as $subject): ?>
                         <tr>
                             <th><?= $subject[0] ?></th>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_periodic_test' : $subject[2].'_periodic_test'}) ?></td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_subject_enrichment' : $subject[2].'_subject_enrichment'}) ?></td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_multiple_assessment' : $subject[2].'_multiple_assessment'}) ?></td>
-                            <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_portfolio' : $subject[2].'_portfolio'}) ?></td>
+                            <!-- <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_portfolio' : $subject[2].'_portfolio'}) ?></td> -->
+                            <td>
+                        <?php 
+                        // Show CT Marks for classes 1-4, Portfolio for classes 5-10
+                        if ($marks->class >= 1 && $marks->class <= 4) {
+                            echo h($marks->{$term == 'Term1' ? $subject[1].'_ct' : $subject[2].'_ct'});
+                        } else {
+                            echo h($marks->{$term == 'Term1' ? $subject[1].'_portfolio' : $subject[2].'_portfolio'});
+                        }
+                        ?>
+                    </td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1] : $subject[2]}) ?></td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_total' : $subject[2].'_total'}) ?></td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_grade' : $subject[2].'_grade'}) ?></td>
