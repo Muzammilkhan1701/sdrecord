@@ -46,7 +46,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_1', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                    <?= $this->Form->control('term1_subject_1_ct', ['class' => 'subject-ct']); ?>
+                                    <?= $this->Form->control('term1_subject_1_ct'); ?>
 
                                     <?= $this->Form->control('term1_subject_1_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_1_ptcal', 'type' => 'number']) ?>
 
@@ -66,7 +66,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields ">
                                     <?= $this->Form->control('term2_subject_1', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                    <?= $this->Form->control('term2_subject_1_ct', ['class' => 'subject-ct']); ?>
+                                    <?= $this->Form->control('term2_subject_1_ct'); ?>
                                     <?= $this->Form->control('term2_subject_1_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_1_ptcal', 'type' => 'number']) ?>
 
                                 <?= $this->Form->control('term1_subject_5_periodic_test', [
@@ -99,7 +99,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_2', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                       <?=  $this->Form->control('term1_subject_2_ct', ['class' => 'subject-ct']); ?>
+                                                                       <?=  $this->Form->control('term1_subject_2_ct'); ?>
                                     <?= $this->Form->control('term1_subject_2_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_2_ptcal', 'type' => 'number']) ?>
 
                                 <?= $this->Form->control('term1_subject_2_periodic_test', [
@@ -118,7 +118,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_2', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                       <?=  $this->Form->control('term2_subject_2_ct', ['class' => 'subject-ct']); ?>
+                                                                       <?=  $this->Form->control('term2_subject_2_ct'); ?>
                                     <?= $this->Form->control('term2_subject_2_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_2_ptcal', 'type' => 'number']) ?>
 
                                 <?= $this->Form->control('term2_subject_2_periodic_test', [
@@ -151,7 +151,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_3', ['label' => 'Exam Marks (Term 1)','max' => 5,'max' => 80]) ?>
-                                                                        <?=   $this->Form->control('term1_subject_3_ct', ['class' => 'subject-ct']);?>
+                                                                        <?=   $this->Form->control('term1_subject_3_ct');?>
                                     <?= $this->Form->control('term1_subject_3_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_3_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term1_subject_3_periodic_test', [
@@ -170,7 +170,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_3', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                        <?=   $this->Form->control('term2_subject_3_ct', ['class' => 'subject-ct']); ?>
+                                                                        <?=   $this->Form->control('term2_subject_3_ct'); ?>
                                     <?= $this->Form->control('term2_subject_3_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_3_ptcal', 'type' => 'number', ]) ?>
 
                                 <?= $this->Form->control('term2_subject_3_periodic_test', [
@@ -203,7 +203,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_4', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                        <?=  $this->Form->control('term1_subject_4_ct', ['class' => 'subject-ct']); ?>
+                                                                        <?=  $this->Form->control('term1_subject_4_ct'); ?>
                                     <?= $this->Form->control('term1_subject_4_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_4_ptcal', 'type' => 'number', ]) ?>
 
                                 <?= $this->Form->control('term1_subject_4_periodic_test', [
@@ -222,7 +222,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_4', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                       <?= $this->Form->control('term2_subject_4_ct', ['class' => 'subject-ct']);?>
+                                                                       <?= $this->Form->control('term2_subject_4_ct');?>
                                     <?= $this->Form->control('term2_subject_4_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_4_ptcal', 'type' => 'number', ]) ?>
 
                                 <?= $this->Form->control('term2_subject_4_periodic_test', [
@@ -255,7 +255,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                  <?= $this->Form->control('term1_subject_5', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                     <?= $this->Form->control('term1_subject_5_ct', ['class' => 'subject-ct']);?>   
+                                                                     <?= $this->Form->control('term1_subject_5_ct');?>   
 
                                 <?= $this->Form->control('term1_subject_5_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_5_ptcal', 'type' => 'number',]) ?>
 
@@ -274,7 +274,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_5', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                       <?=   $this->Form->control('term2_subject_5_ct', ['class' => 'subject-ct']);?>
+                                                                       <?=   $this->Form->control('term2_subject_5_ct');?>
                                     <?= $this->Form->control('term2_subject_5_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_5_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term2_subject_5_periodic_test', [
@@ -307,7 +307,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_6', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                        <?= $this->Form->control('term1_subject_6_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term1_subject_6_ct');?>
                                     <?= $this->Form->control('term1_subject_6_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_6_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term1_subject_6_periodic_test', [
@@ -326,7 +326,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_6', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                        <?=$this->Form->control('term2_subject_6_ct', ['class' => 'subject-ct']);?>
+                                                                        <?=$this->Form->control('term2_subject_6_ct');?>
                                     <?= $this->Form->control('term2_subject_6_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_6_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term2_subject_6_periodic_test', [
@@ -359,7 +359,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)','max' => 80,]) ?>
-                                                                        <?= $this->Form->control('term1_subject_7_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term1_subject_7_ct');?>
                                     <?= $this->Form->control('term1_subject_7_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_7_ptcal', 'type' => 'number', 'max' => 25]) ?>
 
                                 <?= $this->Form->control('term1_subject_7_periodic_test', [
@@ -378,7 +378,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)','max' => 80,   ]) ?>
-                                                                        <?= $this->Form->control('term2_subject_7_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term2_subject_7_ct');?>
                                     <?= $this->Form->control('term2_subject_7_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_7_ptcal', 'type' => 'number', ]) ?>
 
                                 <?= $this->Form->control('term2_subject_7_periodic_test', [
@@ -411,7 +411,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_8', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                        <?= $this->Form->control('term1_subject_8_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term1_subject_8_ct');?>
                                     <?= $this->Form->control('term1_subject_8_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_8_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term1_subject_8_periodic_test', [
@@ -430,7 +430,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_8', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                        <?= $this->Form->control('term2_subject_8_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term2_subject_8_ct');?>
                                     <?= $this->Form->control('term2_subject_8_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_8_ptcal', 'type' => 'number',]) ?>
 
                                 <?= $this->Form->control('term2_subject_8_periodic_test', [
@@ -463,7 +463,7 @@
                                 <!-- Fields for Term 1 -->
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_9', ['label' => 'Exam Marks (Term 1)','max' => 80]) ?>
-                                                                        <?= $this->Form->control('term1_subject_9_ct', ['class' => 'subject-ct']);?>
+                                                                        <?= $this->Form->control('term1_subject_9_ct');?>
                                     <?= $this->Form->control('term1_subject_9_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_9_ptcal', 'type' => 'number', ]) ?>
 
                                 <?= $this->Form->control('term1_subject_9_periodic_test', [
@@ -482,7 +482,7 @@
                                 <!-- Fields for Term 2 -->
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_9', ['label' => 'Exam Marks (Term 2)','max' => 80]) ?>
-                                                                        <?= $this->Form->control('term2_subject_9_ct', ['class' => 'subject-ct']); ?>
+                                                                        <?= $this->Form->control('term2_subject_9_ct'); ?>
                                     <?= $this->Form->control('term2_subject_9_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_9_ptcal', 'type' => 'number', 'max' => 25]) ?>
 
                                 <?= $this->Form->control('term2_subject_9_periodic_test', [
@@ -519,27 +519,6 @@
 
 <script>
     $(document).ready(function() {
-        // Handle term selection
-        $('#term-select').change(function() {
-            var selectedTerm = $(this).val();
-            if (selectedTerm === 'Term 1') {
-                $('.term1-fields').show();
-                $('.term2-fields').hide();
-            } else if (selectedTerm === 'Term 2') {
-                $('.term1-fields').hide();
-                $('.term2-fields').show();
-            } else {
-                $('.term1-fields, .term2-fields').hide();
-            }
-        });
-
-        // Initially hide Term 2 fields
-        $('.term2-fields').hide();
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
         // Initially hide all subject fields
         $('.class-1-4-subjects, .class-5-10-subjects').hide();
 
@@ -566,7 +545,7 @@
             var factor = 0;
 
             if (classValue >= 1 && classValue <= 2) {
-                factor = 1;  // No calculation for 1st and 2nd classes
+                factor = 0;  // No calculation for 1st and 2nd classes
             } else if (classValue >= 3 && classValue <= 4) {
                 factor = 0.2;  // 20% for 3rd and 4th classes
             } else if (classValue >= 5 && classValue <= 10) {
@@ -598,24 +577,6 @@
         // Initialize periodic test listeners
         attachListeners();
     });
-
-    $(document).ready(function() {
-    $('#class').change(function() {
-        var selectedClass = $(this).val();
-        
-        // Hide CT fields if class is 5 to 10
-        if (selectedClass >= 5 && selectedClass <= 10) {
-            $('.subject-ct').hide();
-        } else {
-            $('.subject-ct').show();
-        }
-    });
-
-    // Trigger change event on page load to apply the logic based on the current selection
-    // $('#class-select').trigger('change');
-});
-
 </script>
-
 
 

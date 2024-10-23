@@ -624,6 +624,78 @@ class MarksTable extends Table
             ->integer('term2_total')
             ->allowEmptyString('term2_total');
 
+        $validator
+            ->integer('term1_subject_1_ct')
+            ->allowEmptyString('term1_subject_1_ct');
+
+        $validator
+            ->integer('term1_subject_2_ct')
+            ->allowEmptyString('term1_subject_2_ct');
+
+        $validator
+            ->integer('term1_subject_3_ct')
+            ->allowEmptyString('term1_subject_3_ct');
+
+        $validator
+            ->integer('term1_subject_4_ct')
+            ->allowEmptyString('term1_subject_4_ct');
+
+        $validator
+            ->integer('term1_subject_5_ct')
+            ->allowEmptyString('term1_subject_5_ct');
+
+        $validator
+            ->integer('term1_subject_6_ct')
+            ->allowEmptyString('term1_subject_6_ct');
+
+        $validator
+            ->integer('term1_subject_7_ct')
+            ->allowEmptyString('term1_subject_7_ct');
+
+        $validator
+            ->integer('term1_subject_8_ct')
+            ->allowEmptyString('term1_subject_8_ct');
+
+        $validator
+            ->integer('term1_subject_9_ct')
+            ->allowEmptyString('term1_subject_9_ct');
+
+        $validator
+            ->integer('term2_subject_1_ct')
+            ->allowEmptyString('term2_subject_1_ct');
+
+        $validator
+            ->integer('term2_subject_2_ct')
+            ->allowEmptyString('term2_subject_2_ct');
+
+        $validator
+            ->integer('term2_subject_3_ct')
+            ->allowEmptyString('term2_subject_3_ct');
+
+        $validator
+            ->integer('term2_subject_4_ct')
+            ->allowEmptyString('term2_subject_4_ct');
+
+        $validator
+            ->integer('term2_subject_5_ct')
+            ->allowEmptyString('term2_subject_5_ct');
+
+        $validator
+            ->integer('term2_subject_6_ct')
+            ->allowEmptyString('term2_subject_6_ct');
+
+        $validator
+            ->integer('term2_subject_7_ct')
+            ->allowEmptyString('term2_subject_7_ct');
+
+        $validator
+            ->integer('term2_subject_8_ct')
+            ->allowEmptyString('term2_subject_8_ct');
+
+        $validator
+            ->integer('term2_subject_9_ct')
+            ->allowEmptyString('term2_subject_9_ct');
+
         return $validator;
     }
 

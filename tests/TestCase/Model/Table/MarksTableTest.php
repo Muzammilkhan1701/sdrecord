@@ -26,8 +26,6 @@ class MarksTableTest extends TestCase
     protected array $fixtures = [
         'app.Marks',
         'app.Students',
-        'app.Results',
-        'app.Excellence',
     ];
 
     /**
@@ -52,39 +50,6 @@ class MarksTableTest extends TestCase
         unset($this->Marks);
 
         parent::tearDown();
-    }
-
-    /**
-     * Test addMarks method
-     *
-     * @return void
-     * @uses \App\Model\Table\MarksTable::addMarks()
-     */
-    public function testAddMarks(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test updateMarks method
-     *
-     * @return void
-     * @uses \App\Model\Table\MarksTable::updateMarks()
-     */
-    public function testUpdateMarks(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test deleteMarks method
-     *
-     * @return void
-     * @uses \App\Model\Table\MarksTable::deleteMarks()
-     */
-    public function testDeleteMarks(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
