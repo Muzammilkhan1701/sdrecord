@@ -15,6 +15,7 @@
                     <th><?= $this->Paginator->sort('Admission_no') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('mother_name') ?></th>
+                    <th><?= $this->Paginator->sort('dob') ?></th>
                     <th><?= $this->Paginator->sort('section') ?></th>
                     <th><?= $this->Paginator->sort('admission_year') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -27,6 +28,7 @@
                     <td><?= h($student->Admission_no) ?></td>
                     <td><?= h($student->name) ?></td>
                     <td><?= h($student->mother_name) ?></td>
+                    <td><?= h($student->dob) ?></td>
                     <td><?= h($student->section) ?></td>
                     <td><?= h($student->admission_year) ?></td>
                     <td class="actions">

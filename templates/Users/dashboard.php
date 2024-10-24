@@ -44,7 +44,7 @@
           <?php if ($this->request->getAttribute('identity')->role === 'admin' || $this->request->getAttribute('identity')->role === 'teacher'): ?>
             <div class="col-md-6 mb-4">
             <div class="card bg-info text-white">
-                <a href="<?= $this->Url->build(['controller' => 'students', 'action' => 'index']); ?>" class="text-white text-decoration-none">
+                <a href="<?= $this->Url->build(['controller' => 'marks', 'action' => 'index']); ?>" class="text-white text-decoration-none">
                     <div class="card-body">
                         <h5 class="card-title">Marks Management</h5>
                         <p class="card-text">Manage Marks</p>

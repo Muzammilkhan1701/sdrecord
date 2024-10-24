@@ -95,7 +95,7 @@
                             <td>
                         <?php 
                         // Show CT Marks for classes 1-4, Portfolio for classes 5-10
-                        if ($marks->class >= 1 && $marks->class <= 4) {
+                        if ($marks->class >= 1 && $marks->class <= 5) {
                             echo h($marks->{$term == 'Term1' ? $subject[1].'_ct' : $subject[2].'_ct'});
                         } else {
                             echo h($marks->{$term == 'Term1' ? $subject[1].'_portfolio' : $subject[2].'_portfolio'});

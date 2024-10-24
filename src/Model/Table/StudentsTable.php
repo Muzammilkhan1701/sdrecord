@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -13,24 +13,24 @@ use Cake\Validation\Validator;
  *
  * @method \App\Model\Entity\Student newEmptyEntity()
  * @method \App\Model\Entity\Student newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Student[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Student get($primaryKey, $options = [])
- * @method \App\Model\Entity\Student findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method array<\App\Model\Entity\Student> newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Student get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \App\Model\Entity\Student findOrCreate($search, ?callable $callback = null, array $options = [])
  * @method \App\Model\Entity\Student patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Student[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Student|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Student saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Student[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Student[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Student[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Student[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method array<\App\Model\Entity\Student> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Student|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \App\Model\Entity\Student saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method iterable<\App\Model\Entity\Student>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Student>|false saveMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Student>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Student> saveManyOrFail(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Student>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Student>|false deleteMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Student>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Student> deleteManyOrFail(iterable $entities, array $options = [])
  */
 class StudentsTable extends Table
 {
     /**
      * Initialize method
      *
-     * @param array $config The configuration for the Table.
+     * @param array<string, mixed> $config The configuration for the Table.
      * @return void
      */
     public function initialize(array $config): void
@@ -40,7 +40,6 @@ class StudentsTable extends Table
         $this->setTable('students');
         $this->setDisplayField('name');
         $this->setPrimaryKey('student_id');
-
         $this->hasMany('Excellence', [
             'foreignKey' => 'student_id', // Foreign key in the excellence table
         ]);
@@ -71,6 +70,11 @@ class StudentsTable extends Table
             ->maxLength('mother_name', 255)
             ->requirePresence('mother_name', 'create')
             ->notEmptyString('mother_name');
+
+        $validator
+            ->date('dob')
+            ->requirePresence('dob', 'create')
+            ->notEmptyDate('dob');
 
         $validator
             ->scalar('section')

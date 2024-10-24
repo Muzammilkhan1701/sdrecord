@@ -23,6 +23,7 @@ class StudentsFixture extends TestFixture
                 'Admission_no' => 'Lorem ips',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'mother_name' => 'Lorem ipsum dolor sit amet',
+                'dob' => '2024-10-24',
                 'section' => 'Lorem ipsum dolor sit amet',
                 'admission_year' => 'Lorem ipsum dolor sit amet',
             ],

@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $rollno
  * @property string $class
  * @property int|null $term1_subject_1
+ * @property int|null $term1_subject_1_ct
  * @property int|null $term1_subject_1_periodic_test
  * @property int|null $term1_subject_1_subject_enrichment
  * @property int|null $term1_subject_1_multiple_assessment
@@ -141,7 +142,6 @@ use Cake\ORM\Entity;
  * @property int|null $term2_subject_9_total
  * @property string|null $term2_subject_9_grade
  * @property int|null $term2_total
- * @property int|null $term1_subject_1_ct
  * @property int|null $term1_subject_2_ct
  * @property int|null $term1_subject_3_ct
  * @property int|null $term1_subject_4_ct
@@ -174,11 +174,13 @@ class Mark extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
+        'mark_id' => true,
         'student_id' => true,
         'academic_year' => true,
         'rollno' => true,
         'class' => true,
         'term1_subject_1' => true,
+        'term1_subject_1_ct' => true,
         'term1_subject_1_periodic_test' => true,
         'term1_subject_1_subject_enrichment' => true,
         'term1_subject_1_multiple_assessment' => true,
@@ -306,7 +308,6 @@ class Mark extends Entity
         'term2_subject_9_total' => true,
         'term2_subject_9_grade' => true,
         'term2_total' => true,
-        'term1_subject_1_ct' => true,
         'term1_subject_2_ct' => true,
         'term1_subject_3_ct' => true,
         'term1_subject_4_ct' => true,
