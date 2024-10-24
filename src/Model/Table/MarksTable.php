@@ -43,9 +43,16 @@ class MarksTable extends Table
         $this->setDisplayField('academic_year');
         $this->setPrimaryKey('mark_id');
 
+        $this->belongsTo('Marks', [
+            'foreignKey' => 'mark_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
         ]);
+        // $this->hasMany('Marks', [
+        //     'foreignKey' => 'mark_id',
+        // ]);
     }
 
     /**
@@ -56,6 +63,10 @@ class MarksTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator
+            ->integer('mark_id')
+            ->notEmptyString('mark_id');
+
         $validator
             ->integer('student_id')
             ->allowEmptyString('student_id');
@@ -81,6 +92,10 @@ class MarksTable extends Table
         $validator
             ->integer('term1_subject_1')
             ->allowEmptyString('term1_subject_1');
+
+        $validator
+            ->integer('term1_subject_1_ct')
+            ->allowEmptyString('term1_subject_1_ct');
 
         $validator
             ->integer('term1_subject_1_periodic_test')
@@ -490,27 +505,22 @@ class MarksTable extends Table
 
         $validator
             ->integer('term1_subject_8')
-            ->requirePresence('term1_subject_8', 'create')
             ->allowEmptyString('term1_subject_8');
 
         $validator
             ->integer('term1_subject_8_periodic_test')
-            ->requirePresence('term1_subject_8_periodic_test', 'create')
             ->allowEmptyString('term1_subject_8_periodic_test');
 
         $validator
             ->integer('term1_subject_8_subject_enrichment')
-            ->requirePresence('term1_subject_8_subject_enrichment', 'create')
             ->allowEmptyString('term1_subject_8_subject_enrichment');
 
         $validator
             ->integer('term1_subject_8_multiple_assessment')
-            ->requirePresence('term1_subject_8_multiple_assessment', 'create')
             ->allowEmptyString('term1_subject_8_multiple_assessment');
 
         $validator
             ->integer('term1_subject_8_portfolio')
-            ->requirePresence('term1_subject_8_portfolio', 'create')
             ->allowEmptyString('term1_subject_8_portfolio');
 
         $validator
@@ -518,35 +528,28 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_8_total');
 
         $validator
-            // ->integer('term1_subject_8_grade')
-            // ->allowEmptyString('term1_subject_8_grade');
             ->scalar('term1_subject_8_grade')
             ->maxLength('term1_subject_8_grade', 5)
             ->allowEmptyString('term1_subject_8_grade');
 
         $validator
             ->integer('term2_subject_8')
-            ->requirePresence('term2_subject_8', 'create')
             ->allowEmptyString('term2_subject_8');
 
         $validator
             ->integer('term2_subject_8_periodic_test')
-            ->requirePresence('term2_subject_8_periodic_test', 'create')
             ->allowEmptyString('term2_subject_8_periodic_test');
 
         $validator
             ->integer('term2_subject_8_subject_enrichment')
-            ->requirePresence('term2_subject_8_subject_enrichment', 'create')
             ->allowEmptyString('term2_subject_8_subject_enrichment');
 
         $validator
             ->integer('term2_subject_8_multiple_assessment')
-            ->requirePresence('term2_subject_8_multiple_assessment', 'create')
             ->allowEmptyString('term2_subject_8_multiple_assessment');
 
         $validator
             ->integer('term2_subject_8_portfolio')
-            ->requirePresence('term2_subject_8_portfolio', 'create')
             ->allowEmptyString('term2_subject_8_portfolio');
 
         $validator
@@ -554,36 +557,28 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_8_total');
 
         $validator
-            // ->integer('term2_subject_8_grade')
-            // ->allowEmptyString('term2_subject_8_grade');
             ->scalar('term2_subject_8_grade')
             ->maxLength('term2_subject_8_grade', 5)
             ->allowEmptyString('term2_subject_8_grade');
 
-
         $validator
             ->integer('term1_subject_9')
-            ->requirePresence('term1_subject_9', 'create')
             ->allowEmptyString('term1_subject_9');
 
         $validator
             ->integer('term1_subject_9_periodic_test')
-            ->requirePresence('term1_subject_9_periodic_test', 'create')
             ->allowEmptyString('term1_subject_9_periodic_test');
 
         $validator
             ->integer('term1_subject_9_subject_enrichment')
-            ->requirePresence('term1_subject_9_subject_enrichment', 'create')
             ->allowEmptyString('term1_subject_9_subject_enrichment');
 
         $validator
             ->integer('term1_subject_9_multiple_assessment')
-            ->requirePresence('term1_subject_9_multiple_assessment', 'create')
             ->allowEmptyString('term1_subject_9_multiple_assessment');
 
         $validator
             ->integer('term1_subject_9_portfolio')
-            ->requirePresence('term1_subject_9_portfolio', 'create')
             ->allowEmptyString('term1_subject_9_portfolio');
 
         $validator
@@ -591,36 +586,28 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_9_total');
 
         $validator
-            // ->integer('term1_subject_9_grade')
-            // ->allowEmptyString('term1_subject_9_grade');
             ->scalar('term1_subject_9_grade')
             ->maxLength('term1_subject_9_grade', 5)
             ->allowEmptyString('term1_subject_9_grade');
 
-
         $validator
             ->integer('term2_subject_9')
-            ->requirePresence('term2_subject_9', 'create')
             ->allowEmptyString('term2_subject_9');
 
         $validator
             ->integer('term2_subject_9_periodic_test')
-            ->requirePresence('term2_subject_9_periodic_test', 'create')
             ->allowEmptyString('term2_subject_9_periodic_test');
 
         $validator
             ->integer('term2_subject_9_subject_enrichment')
-            ->requirePresence('term2_subject_9_subject_enrichment', 'create')
             ->allowEmptyString('term2_subject_9_subject_enrichment');
 
         $validator
             ->integer('term2_subject_9_multiple_assessment')
-            ->requirePresence('term2_subject_9_multiple_assessment', 'create')
             ->allowEmptyString('term2_subject_9_multiple_assessment');
 
         $validator
             ->integer('term2_subject_9_portfolio')
-            ->requirePresence('term2_subject_9_portfolio', 'create')
             ->allowEmptyString('term2_subject_9_portfolio');
 
         $validator
@@ -628,20 +615,13 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_9_total');
 
         $validator
-            // ->integer('term2_subject_9_grade')
-            // ->allowEmptyString('term2_subject_9_grade');
             ->scalar('term2_subject_9_grade')
             ->maxLength('term2_subject_9_grade', 5)
             ->allowEmptyString('term2_subject_9_grade');
 
-
         $validator
             ->integer('term2_total')
             ->allowEmptyString('term2_total');
-
-        $validator
-            ->integer('term1_subject_1_ct')
-            ->allowEmptyString('term1_subject_1_ct');
 
         $validator
             ->integer('term1_subject_2_ct')
@@ -723,7 +703,7 @@ class MarksTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['student_id', 'academic_year', 'class', 'rollno'], ['allowMultipleNulls' => true]), ['errorField' => 'student_id']);
+        $rules->add($rules->existsIn(['mark_id'], 'Marks'), ['errorField' => 'mark_id']);
         $rules->add($rules->existsIn(['student_id'], 'Students'), ['errorField' => 'student_id']);
 
         return $rules;

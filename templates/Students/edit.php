@@ -16,7 +16,7 @@
             <?= $this->Html->link(__('List Students'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column column-80">
         <div class="students form content">
             <?= $this->Form->create($student) ?>
             <fieldset>
@@ -25,6 +25,7 @@
                     echo $this->Form->control('Admission_no');
                     echo $this->Form->control('name');
                     echo $this->Form->control('mother_name');
+                    echo $this->Form->control('dob');
                     echo $this->Form->control('section');
                     echo $this->Form->control('admission_year');
                 ?>
