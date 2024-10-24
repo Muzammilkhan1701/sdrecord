@@ -603,19 +603,18 @@
     $('#class').change(function() {
         var selectedClass = $(this).val();
         
-        // Hide CT fields if class is 5 to 10
+        // Hide both label and input fields if class is 5 to 10
         if (selectedClass >= 5 && selectedClass <= 10) {
-            $('.subject-ct').hide();
+            $('.subject-ct').closest('.input').hide(); // Hide label and input
         } else {
-            $('.subject-ct').show();
+            $('.subject-ct').closest('.input').show(); // Show label and input
         }
     });
 
     // Trigger change event on page load to apply the logic based on the current selection
-    // $('#class-select').trigger('change');
+    $('#class').trigger('change');
 });
 
 </script>
-
 
 
