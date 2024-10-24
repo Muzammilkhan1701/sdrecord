@@ -639,7 +639,7 @@
     });
 
 //     // Trigger change event on page load to apply the logic based on the current selection
-//     $('#class').trigger('change');
-// });
+    $('#class').trigger('change');
+});
 
 </script>
