@@ -23,7 +23,8 @@
                     <strong>Mother's Name:</strong> <?= isset($student) ? h($student->mother_name) : 'N/A' ?>
                 </div>
                 <div class="bg-light p-3 rounded">
-                    <strong>Section:</strong> <?= isset($student) ? h($student->section) : 'N/A' ?>
+                    <strong>Section:</strong><?= isset($student) ? h(strtoupper($student->section)) : 'N/A' ?>
+
                 </div>
             </div>
         </div>

@@ -518,7 +518,10 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_8_total');
 
         $validator
-            ->integer('term1_subject_8_grade')
+            // ->integer('term1_subject_8_grade')
+            // ->allowEmptyString('term1_subject_8_grade');
+            ->scalar('term1_subject_8_grade')
+            ->maxLength('term1_subject_8_grade', 5)
             ->allowEmptyString('term1_subject_8_grade');
 
         $validator
@@ -551,8 +554,12 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_8_total');
 
         $validator
-            ->integer('term2_subject_8_grade')
+            // ->integer('term2_subject_8_grade')
+            // ->allowEmptyString('term2_subject_8_grade');
+            ->scalar('term2_subject_8_grade')
+            ->maxLength('term2_subject_8_grade', 5)
             ->allowEmptyString('term2_subject_8_grade');
+
 
         $validator
             ->integer('term1_subject_9')
@@ -584,8 +591,12 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_9_total');
 
         $validator
-            ->integer('term1_subject_9_grade')
+            // ->integer('term1_subject_9_grade')
+            // ->allowEmptyString('term1_subject_9_grade');
+            ->scalar('term1_subject_9_grade')
+            ->maxLength('term1_subject_9_grade', 5)
             ->allowEmptyString('term1_subject_9_grade');
+
 
         $validator
             ->integer('term2_subject_9')
@@ -617,8 +628,12 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_9_total');
 
         $validator
-            ->integer('term2_subject_9_grade')
+            // ->integer('term2_subject_9_grade')
+            // ->allowEmptyString('term2_subject_9_grade');
+            ->scalar('term2_subject_9_grade')
+            ->maxLength('term2_subject_9_grade', 5)
             ->allowEmptyString('term2_subject_9_grade');
+
 
         $validator
             ->integer('term2_total')
