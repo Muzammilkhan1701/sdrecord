@@ -599,21 +599,21 @@
         attachListeners();
     });
 
-    $(document).ready(function() {
-    $('#class').change(function() {
-        var selectedClass = $(this).val();
+//     $(document).ready(function() {
+//     $('#class').change(function() {
+//         var selectedClass = $(this).val();
         
-        // Hide both label and input fields if class is 5 to 10
-        if (selectedClass >= 5 && selectedClass <= 10) {
-            $('.subject-ct').closest('.input').hide(); // Hide label and input
-        } else {
-            $('.subject-ct').closest('.input').show(); // Show label and input
-        }
-    });
+//         // Hide both label and input fields if class is 5 to 10
+//         if (selectedClass >= 5 && selectedClass <= 10) {
+//             $('.subject-ct').closest('.input').hide(); // Hide label and input
+//         } else {
+//             $('.subject-ct').closest('.input').show(); // Show label and input
+//         }
+//     });
 
-    // Trigger change event on page load to apply the logic based on the current selection
-    $('#class').trigger('change');
-});
+//     // Trigger change event on page load to apply the logic based on the current selection
+//     $('#class').trigger('change');
+// });
 
 </script>
 
