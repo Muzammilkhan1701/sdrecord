@@ -118,28 +118,28 @@ use Cake\ORM\Entity;
  * @property int|null $term1_subject_8_multiple_assessment
  * @property int|null $term1_subject_8_portfolio
  * @property int|null $term1_subject_8_total
- * @property int|null $term1_subject_8_grade
+ * @property string|null $term1_subject_8_grade
  * @property int|null $term2_subject_8
  * @property int|null $term2_subject_8_periodic_test
  * @property int|null $term2_subject_8_subject_enrichment
  * @property int|null $term2_subject_8_multiple_assessment
  * @property int|null $term2_subject_8_portfolio
  * @property int|null $term2_subject_8_total
- * @property int|null $term2_subject_8_grade
+ * @property string|null $term2_subject_8_grade
  * @property int|null $term1_subject_9
  * @property int|null $term1_subject_9_periodic_test
  * @property int|null $term1_subject_9_subject_enrichment
  * @property int|null $term1_subject_9_multiple_assessment
  * @property int|null $term1_subject_9_portfolio
  * @property int|null $term1_subject_9_total
- * @property int|null $term1_subject_9_grade
+ * @property string|null $term1_subject_9_grade
  * @property int|null $term2_subject_9
  * @property int|null $term2_subject_9_periodic_test
  * @property int|null $term2_subject_9_subject_enrichment
  * @property int|null $term2_subject_9_multiple_assessment
  * @property int|null $term2_subject_9_portfolio
  * @property int|null $term2_subject_9_total
- * @property int|null $term2_subject_9_grade
+ * @property string|null $term2_subject_9_grade
  * @property int|null $term2_total
  * @property int|null $term1_subject_1_ct
  * @property int|null $term1_subject_2_ct

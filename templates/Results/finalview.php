@@ -41,7 +41,17 @@
                         <th>Periodic Test</th>
                         <th>Subject Enrichment</th>
                         <th>Multiple Assessment</th>
-                        <th>Portfolio</th>
+                        <!-- <th>Portfolio</th> -->
+                        <th>
+                        <?php 
+                        // Change header based on class
+                        if ($marks->class >= 1 && $marks->class <= 4) {
+                            echo 'CT Marks';
+                        } else {
+                            echo 'Portfolio';
+                        }
+                        ?>
+                    </th>
                         <th>Mid Term</th>
                         <th>Total Marks</th>
                         <th>Grade</th>
@@ -140,7 +150,17 @@
                         <th>Periodic Test</th>
                         <th>Subject Enrichment</th>
                         <th>Multiple Assessment</th>
-                        <th>Portfolio</th>
+                        <!-- <th>Portfolio</th> -->
+                        <th>
+                        <?php 
+                        // Change header based on class
+                        if ($marks->class >= 1 && $marks->class <= 4) {
+                            echo 'CT Marks';
+                        } else {
+                            echo 'Portfolio';
+                        }
+                        ?>
+                    </th>
                         <th>Mid Term</th>
                         <th>Total Marks</th>
                         <th>Grade</th>
