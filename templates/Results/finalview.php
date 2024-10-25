@@ -30,6 +30,331 @@
         </div>
     </div>
 
+    <?php
+                    if ($marks->class >= 1 && $marks->class <= 4) {
+
+    // Define subjects
+    $subjects = [
+        'English' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_1_periodic_test',
+                'ct' => 'term1_subject_1_ct',
+                'subject_enrichment' => 'term1_subject_1_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_1_multiple_assessment',
+                'portfolio' => 'term1_subject_1_portfolio',
+                'mid_term' => 'term1_subject_1',
+                'total' => 'term1_subject_1_total',
+                'grade' => 'term1_subject_1_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_1_periodic_test',
+                                'ct' => 'term2_subject_1_ct',
+                'subject_enrichment' => 'term2_subject_1_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_1_multiple_assessment',
+                'portfolio' => 'term2_subject_1_portfolio',
+                'mid_term' => 'term2_subject_1',
+                'total' => 'term2_subject_1_total',
+                'grade' => 'term2_subject_1_grade'
+            ]
+        ],
+        'Hindi' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_2_periodic_test',
+                                'ct' => 'term1_subject_2_ct',
+                'subject_enrichment' => 'term1_subject_2_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_2_multiple_assessment',
+                'portfolio' => 'term1_subject_2_portfolio',
+                'mid_term' => 'term1_subject_2',
+                'total' => 'term1_subject_2_total',
+                'grade' => 'term1_subject_2_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_2_periodic_test',
+                                'ct' => 'term2_subject_2_ct',
+                'subject_enrichment' => 'term2_subject_2_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_2_multiple_assessment',
+                'portfolio' => 'term2_subject_2_portfolio',
+                'mid_term' => 'term2_subject_2',
+                'total' => 'term2_subject_2_total',
+                'grade' => 'term2_subject_2_grade'
+            ]
+            ],
+        'Marathi/Sanskrit' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_3_periodic_test',
+                                'ct' => 'term1_subject_3_ct',
+                'subject_enrichment' => 'term1_subject_3_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_3_multiple_assessment',
+                'portfolio' => 'term1_subject_3_portfolio',
+                'mid_term' => 'term1_subject_3',
+                'total' => 'term1_subject_3_total',
+                'grade' => 'term1_subject_3_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_3_periodic_test',
+                                'ct' => 'term2_subject_3_ct',
+                'subject_enrichment' => 'term2_subject_3_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_3_multiple_assessment',
+                'portfolio' => 'term2_subject_3_portfolio',
+                'mid_term' => 'term2_subject_3',
+                'total' => 'term2_subject_3_total',
+                'grade' => 'term2_subject_3_grade'
+            ]
+            ],
+            'Mathematics' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_4_periodic_test',
+                                'ct' => 'term1_subject_4_ct',
+                'subject_enrichment' => 'term1_subject_4_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_4_multiple_assessment',
+                'portfolio' => 'term1_subject_4_portfolio',
+                'mid_term' => 'term1_subject_4',
+                'total' => 'term1_subject_4_total',
+                'grade' => 'term1_subject_4_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_4_periodic_test',
+                                'ct' => 'term2_subject_4_ct',
+                'subject_enrichment' => 'term2_subject_4_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_4_multiple_assessment',
+                'portfolio' => 'term2_subject_4_portfolio',
+                'mid_term' => 'term2_subject_4',
+                'total' => 'term2_subject_4_total',
+                'grade' => 'term2_subject_4_grade'
+            ]
+            ],
+        'EVS' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_8_periodic_test',
+                                'ct' => 'term1_subject_8_ct',
+                'subject_enrichment' => 'term1_subject_8_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_8_multiple_assessment',
+                'portfolio' => 'term1_subject_8_portfolio',
+                'mid_term' => 'term1_subject_8',
+                'total' => 'term1_subject_8_total',
+                'grade' => 'term1_subject_8_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_8_periodic_test',
+                                'ct' => 'term2_subject_8_ct',
+                'subject_enrichment' => 'term2_subject_8_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_8_multiple_assessment',
+                'portfolio' => 'term2_subject_8_portfolio',
+                'mid_term' => 'term2_subject_8',
+                'total' => 'term2_subject_8_total',
+                'grade' => 'term2_subject_8_grade'
+            ]
+            ],
+            'GK' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_9_periodic_test',
+                                'ct' => 'term1_subject_9_ct',
+                'subject_enrichment' => 'term1_subject_9_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_9_multiple_assessment',
+                'portfolio' => 'term1_subject_9_portfolio',
+                'mid_term' => 'term1_subject_9',
+                'total' => 'term1_subject_9_total',
+                'grade' => 'term1_subject_9_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_9_periodic_test',
+                                'ct' => 'term2_subject_9_ct',
+                'subject_enrichment' => 'term2_subject_9_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_9_multiple_assessment',
+                'portfolio' => 'term2_subject_9_portfolio',
+                'mid_term' => 'term2_subject_9',
+                'total' => 'term2_subject_9_total',
+                'grade' => 'term2_subject_9_grade'
+            ]
+            ],
+            'Computer' => [
+            'term1' => [
+                'periodic_test' => 'term1_subject_7_periodic_test',
+                                'ct' => 'term1_subject_7_ct',
+                'subject_enrichment' => 'term1_subject_7_subject_enrichment',
+                'multiple_assessment' => 'term1_subject_7_multiple_assessment',
+                'portfolio' => 'term1_subject_7_portfolio',
+                'mid_term' => 'term1_subject_7',
+                'total' => 'term1_subject_7_total',
+                'grade' => 'term1_subject_7_grade'
+            ],
+            'term2' => [
+                'periodic_test' => 'term2_subject_7_periodic_test',
+                                'ct' => 'term2_subject_7_ct',
+                'subject_enrichment' => 'term2_subject_7_subject_enrichment',
+                'multiple_assessment' => 'term2_subject_7_multiple_assessment',
+                'portfolio' => 'term2_subject_7_portfolio',
+                'mid_term' => 'term2_subject_7',
+                'total' => 'term2_subject_7_total',
+                'grade' => 'term2_subject_7_grade'
+            ]
+        ]
+        
+        // Add more subjects as needed
+    ];
+} else{
+        // Define subjects
+        $subjects = [
+            'English' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_1_periodic_test',
+                    'ct' => 'term1_subject_1_ct',
+                    'subject_enrichment' => 'term1_subject_1_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_1_multiple_assessment',
+                    'portfolio' => 'term1_subject_1_portfolio',
+                    'mid_term' => 'term1_subject_1',
+                    'total' => 'term1_subject_1_total',
+                    'grade' => 'term1_subject_1_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_1_periodic_test',
+                                    'ct' => 'term2_subject_1_ct',
+                    'subject_enrichment' => 'term2_subject_1_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_1_multiple_assessment',
+                    'portfolio' => 'term2_subject_1_portfolio',
+                    'mid_term' => 'term2_subject_1',
+                    'total' => 'term2_subject_1_total',
+                    'grade' => 'term2_subject_1_grade'
+                ]
+            ],
+            'Hindi' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_2_periodic_test',
+                                    'ct' => 'term1_subject_2_ct',
+                    'subject_enrichment' => 'term1_subject_2_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_2_multiple_assessment',
+                    'portfolio' => 'term1_subject_2_portfolio',
+                    'mid_term' => 'term1_subject_2',
+                    'total' => 'term1_subject_2_total',
+                    'grade' => 'term1_subject_2_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_2_periodic_test',
+                                    'ct' => 'term2_subject_2_ct',
+                    'subject_enrichment' => 'term2_subject_2_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_2_multiple_assessment',
+                    'portfolio' => 'term2_subject_2_portfolio',
+                    'mid_term' => 'term2_subject_2',
+                    'total' => 'term2_subject_2_total',
+                    'grade' => 'term2_subject_2_grade'
+                ]
+                ],
+            'Marathi/Sanskrit' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_3_periodic_test',
+                                    'ct' => 'term1_subject_3_ct',
+                    'subject_enrichment' => 'term1_subject_3_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_3_multiple_assessment',
+                    'portfolio' => 'term1_subject_3_portfolio',
+                    'mid_term' => 'term1_subject_3',
+                    'total' => 'term1_subject_3_total',
+                    'grade' => 'term1_subject_3_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_3_periodic_test',
+                                    'ct' => 'term2_subject_3_ct',
+                    'subject_enrichment' => 'term2_subject_3_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_3_multiple_assessment',
+                    'portfolio' => 'term2_subject_3_portfolio',
+                    'mid_term' => 'term2_subject_3',
+                    'total' => 'term2_subject_3_total',
+                    'grade' => 'term2_subject_3_grade'
+                ]
+                ],
+                'Mathematics' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_4_periodic_test',
+                                    'ct' => 'term1_subject_4_ct',
+                    'subject_enrichment' => 'term1_subject_4_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_4_multiple_assessment',
+                    'portfolio' => 'term1_subject_4_portfolio',
+                    'mid_term' => 'term1_subject_4',
+                    'total' => 'term1_subject_4_total',
+                    'grade' => 'term1_subject_4_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_4_periodic_test',
+                                    'ct' => 'term2_subject_4_ct',
+                    'subject_enrichment' => 'term2_subject_4_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_4_multiple_assessment',
+                    'portfolio' => 'term2_subject_4_portfolio',
+                    'mid_term' => 'term2_subject_4',
+                    'total' => 'term2_subject_4_total',
+                    'grade' => 'term2_subject_4_grade'
+                ]
+                ],
+            'Science' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_5_periodic_test',
+                                    'ct' => 'term1_subject_5_ct',
+                    'subject_enrichment' => 'term1_subject_5_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_5_multiple_assessment',
+                    'portfolio' => 'term1_subject_5_portfolio',
+                    'mid_term' => 'term1_subject_5',
+                    'total' => 'term1_subject_5_total',
+                    'grade' => 'term1_subject_5_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_5_periodic_test',
+                                    'ct' => 'term2_subject_5_ct',
+                    'subject_enrichment' => 'term2_subject_5_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_5_multiple_assessment',
+                    'portfolio' => 'term2_subject_5_portfolio',
+                    'mid_term' => 'term2_subject_5',
+                    'total' => 'term2_subject_5_total',
+                    'grade' => 'term2_subject_5_grade'
+                ]
+                ],
+                'Social Science' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_6_periodic_test',
+                                    'ct' => 'term1_subject_6_ct',
+                    'subject_enrichment' => 'term1_subject_6_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_6_multiple_assessment',
+                    'portfolio' => 'term1_subject_6_portfolio',
+                    'mid_term' => 'term1_subject_6',
+                    'total' => 'term1_subject_6_total',
+                    'grade' => 'term1_subject_6_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_6_periodic_test',
+                                    'ct' => 'term2_subject_6_ct',
+                    'subject_enrichment' => 'term2_subject_6_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_6_multiple_assessment',
+                    'portfolio' => 'term2_subject_6_portfolio',
+                    'mid_term' => 'term2_subject_6',
+                    'total' => 'term2_subject_6_total',
+                    'grade' => 'term2_subject_6_grade'
+                ]
+                ],
+                'Computer' => [
+                'term1' => [
+                    'periodic_test' => 'term1_subject_7_periodic_test',
+                                    'ct' => 'term1_subject_7_ct',
+                    'subject_enrichment' => 'term1_subject_7_subject_enrichment',
+                    'multiple_assessment' => 'term1_subject_7_multiple_assessment',
+                    'portfolio' => 'term1_subject_7_portfolio',
+                    'mid_term' => 'term1_subject_7',
+                    'total' => 'term1_subject_7_total',
+                    'grade' => 'term1_subject_7_grade'
+                ],
+                'term2' => [
+                    'periodic_test' => 'term2_subject_7_periodic_test',
+                                    'ct' => 'term2_subject_7_ct',
+                    'subject_enrichment' => 'term2_subject_7_subject_enrichment',
+                    'multiple_assessment' => 'term2_subject_7_multiple_assessment',
+                    'portfolio' => 'term2_subject_7_portfolio',
+                    'mid_term' => 'term2_subject_7',
+                    'total' => 'term2_subject_7_total',
+                    'grade' => 'term2_subject_7_grade'
+                ]
+            ]
+            
+            // Add more subjects as needed
+        ];
+}
+    ?>
+
     <!-- Term 1 Marks Section -->
     <div class="card bg-light border-0 shadow-sm p-4 mb-5">
         <h5 class="text-center text-primary">Scholastic Areas: Term I (100 Marks)</h5>
@@ -41,101 +366,53 @@
                         <th>Periodic Test</th>
                         <th>Subject Enrichment</th>
                         <th>Multiple Assessment</th>
-                        <!-- <th>Portfolio</th> -->
-                        <th>
+                        <th><?= $marks->class <= 5 ? 'CT Marks' : 'Portfolio' ?></th>
+                        <!-- <th>
                         <?php 
-                        // Change header based on class
-                        if ($marks->class >= 1 && $marks->class <= 4) {
-                            echo 'CT Marks';
+                        // Show CT Marks for classes 1-4, Portfolio for classes 5-10
+                        if ($marks->class >= 1 && $marks->class <= 5) {
+                            echo "Class Test ";
                         } else {
                             echo 'Portfolio';
                         }
-                        ?>
-                    </th>
+                        ?> -->
+                        </th>
                         <th>Mid Term</th>
                         <th>Total Marks</th>
                         <th>Grade</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>English</td>
-                        <td><?= h($marks->term1_subject_1_periodic_test) ?></td>
-                        <td><?= h($marks->term1_subject_1_subject_enrichment) ?></td>
-                        <td><?= h($marks->term1_subject_1_multiple_assessment) ?></td>
-                        <td><?= h($marks->term1_subject_1_portfolio) ?></td>
-                        <td><?= h($marks->term1_subject_1) ?></td>
-                        <td><?= h($marks->term1_subject_1_total) ?></td>
-                        <td><?= h(strtoupper($marks->term1_subject_1_grade)) ?></td>
-                    </tr>
-                    <tr>
-                            <td>Hindi</td>
-                            <td><?= h($marks->term1_subject_2_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_2_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_2_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_2_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_2) ?></td>
-                            <td><?= h($marks->term1_subject_2_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_2_grade)) ?></td>
-                        </tr>
+                    <?php foreach ($subjects as $subject => $terms): ?>
                         <tr>
-                            <td>Marathi</td>
-                            <td><?= h($marks->term1_subject_3_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_3_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_3_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_3_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_3) ?></td>
-                            <td><?= h($marks->term1_subject_3_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_3_grade)) ?></td>
+                            <td><?= $subject ?></td>
+                            <td><?= h($marks->{$terms['term1']['periodic_test']}) ?></td>
+                            <td><?= h($marks->{$terms['term1']['subject_enrichment']}) ?></td>
+                            <td><?= h($marks->{$terms['term1']['multiple_assessment']}) ?></td>
+                            <!-- <td><?= h($marks->{$terms['term1']['portfolio']}) ?></td> -->
+                            <td>
+                                                        <?php 
+                        // Show CT Marks for classes 1-4, Portfolio for classes 5-10
+                        if ($marks->class >= 1 && $marks->class <= 5) {
+                            echo h($marks->{$terms['term1']['ct']});
+                        } else {
+                            echo h($marks->{$terms['term1']['portfolio']});
+                        }
+                        ?>
+
+                            </td>
+                            <td><?= h($marks->{$terms['term1']['mid_term']}) ?></td>
+                            <td><?= h($marks->{$terms['term1']['total']}) ?></td>
+                            <td><?= h(strtoupper($marks->{$terms['term1']['grade']})) ?></td>
                         </tr>
-                        <tr>
-                            <td>Mathematics</td>
-                            <td><?= h($marks->term1_subject_4_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_4_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_4_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_4_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_4) ?></td>
-                            <td><?= h($marks->term1_subject_4_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_4_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Science</td>
-                            <td><?= h($marks->term1_subject_5_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_5_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_5_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_5_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_5) ?></td>
-                            <td><?= h($marks->term1_subject_5_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_5_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Social Science</td>
-                            <td><?= h($marks->term1_subject_6_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_6_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_6_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_6_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_6) ?></td>
-                            <td><?= h($marks->term1_subject_6_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_6_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Computer</td>
-                            <td><?= h($marks->term1_subject_7_periodic_test) ?></td>
-                            <td><?= h($marks->term1_subject_7_subject_enrichment) ?></td>
-                            <td><?= h($marks->term1_subject_7_multiple_assessment) ?></td>
-                            <td><?= h($marks->term1_subject_7_portfolio) ?></td>
-                            <td><?= h($marks->term1_subject_7) ?></td>
-                            <td><?= h($marks->term1_subject_7_total) ?></td>
-                            <td><?= h(strtoupper($marks->term1_subject_7_grade)) ?></td>
-                        </tr>
-                    <!-- Repeat for other subjects -->
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-                <div class="d-flex justify-content-between">
-                    <h5>Percentage: <?=($results->term1_percentage) ?>%</h5>
-                    <h5>Total Marks: <?= h($results->term1_total_marks) ?></h5>
-                    <h5>Final Grade: <?= h(strtoupper($results->term1_grade)) ?></h5>
-                </div>
+            <div class="d-flex justify-content-between">
+                <h5>Percentage: <?= h($results->term1_percentage) ?>%</h5>
+                <h5>Total Marks: <?= h($results->term1_total_marks) ?></h5>
+                <h5>Final Grade: <?= h(strtoupper($results->term1_grade)) ?></h5>
+            </div>
         </div>
     </div>
 
@@ -150,103 +427,35 @@
                         <th>Periodic Test</th>
                         <th>Subject Enrichment</th>
                         <th>Multiple Assessment</th>
-                        <!-- <th>Portfolio</th> -->
-                        <th>
-                        <?php 
-                        // Change header based on class
-                        if ($marks->class >= 1 && $marks->class <= 4) {
-                            echo 'CT Marks';
-                        } else {
-                            echo 'Portfolio';
-                        }
-                        ?>
-                    </th>
+                        <th><?= $marks->class <= 5 ? 'CT Marks' : 'Portfolio' ?></th>
                         <th>Mid Term</th>
                         <th>Total Marks</th>
                         <th>Grade</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>English</td>
-                        <td><?= h($marks->term2_subject_1_periodic_test) ?></td>
-                        <td><?= h($marks->term2_subject_1_subject_enrichment) ?></td>
-                        <td><?= h($marks->term2_subject_1_multiple_assessment) ?></td>
-                        <td><?= h($marks->term2_subject_1_portfolio) ?></td>
-                        <td><?= h($marks->term2_subject_1) ?></td>
-                        <td><?= h($marks->term2_subject_1_total) ?></td>
-                        <td><?= h(strtoupper($marks->term2_subject_1_grade)) ?></td>
-                    </tr>
-                    <tr>
-                            <td>Hindi</td>
-                            <td><?= h($marks->term2_subject_2_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_2_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_2_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_2_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_2) ?></td>
-                            <td><?= h($marks->term2_subject_2_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_2_grade)) ?></td>
-                        </tr>
+                    <?php foreach ($subjects as $subject => $terms): ?>
                         <tr>
-                            <td>Marathi</td>
-                            <td><?= h($marks->term2_subject_3_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_3_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_3_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_3_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_3) ?></td>
-                            <td><?= h($marks->term2_subject_3_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_3_grade)) ?></td>
+                            <td><?= $subject ?></td>
+                            <td><?= h($marks->{$terms['term2']['periodic_test']}) ?></td>
+                            <td><?= h($marks->{$terms['term2']['subject_enrichment']}) ?></td>
+                            <td><?= h($marks->{$terms['term2']['multiple_assessment']}) ?></td>
+                            <td><?= h($marks->{$terms['term2']['portfolio']}) ?></td>
+                            <td><?= h($marks->{$terms['term2']['mid_term']}) ?></td>
+                            <td><?= h($marks->{$terms['term2']['total']}) ?></td>
+                            <td><?= h(strtoupper($marks->{$terms['term2']['grade']})) ?></td>
                         </tr>
-                        <tr>
-                            <td>Mathematics</td>
-                            <td><?= h($marks->term2_subject_4_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_4_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_4_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_4_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_4) ?></td>
-                            <td><?= h($marks->term2_subject_4_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_4_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Science</td>
-                            <td><?= h($marks->term2_subject_5_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_5_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_5_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_5_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_5) ?></td>
-                            <td><?= h($marks->term2_subject_5_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_5_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Social Science</td>
-                            <td><?= h($marks->term2_subject_6_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_6_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_6_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_6_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_6) ?></td>
-                            <td><?= h($marks->term2_subject_6_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_6_grade)) ?></td>
-                        </tr>
-                        <tr>
-                            <td>Computer</td>
-                            <td><?= h($marks->term2_subject_7_periodic_test) ?></td>
-                            <td><?= h($marks->term2_subject_7_subject_enrichment) ?></td>
-                            <td><?= h($marks->term2_subject_7_multiple_assessment) ?></td>
-                            <td><?= h($marks->term2_subject_7_portfolio) ?></td>
-                            <td><?= h($marks->term2_subject_7) ?></td>
-                            <td><?= h($marks->term2_subject_7_total) ?></td>
-                            <td><?= h(strtoupper($marks->term2_subject_7_grade)) ?></td>
-                        </tr>
-                    <!-- Repeat for other subjects -->
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-                <div class="d-flex justify-content-between">
-                    <h5>Percentage: <?=($results->term2_percentage) ?>%</h5>
-                    <h5>Total Marks: <?= h($results->term2_total_marks) ?></h5>
-                    <h5>Final Grade: <?= h(strtoupper($results->term2_grade)) ?></h5>
-                </div>
+            <div class="d-flex justify-content-between">
+                <h5>Percentage: <?= h($results->term2_percentage) ?>%</h5>
+                <h5>Total Marks: <?= h($results->term2_total_marks) ?></h5>
+                <h5>Final Grade: <?= h(strtoupper($results->term2_grade)) ?></h5>
+            </div>
         </div>
     </div>
+</div>
 
     <!-- Co-Scholastic Areas Section -->
     <div class="card bg-light border-0 shadow-sm p-4 mb-5">
@@ -311,3 +520,4 @@
         document.body.innerHTML = originalContent;
     }
 </script>
+
