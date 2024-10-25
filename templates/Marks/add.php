@@ -500,7 +500,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Repeat similar collapsible sections for other subjects like Hindi, Science, etc. -->
                 </div>
                 <!-- Accordion End -->
@@ -594,30 +593,10 @@
                 })(i);
             }
         }
-
         // Initialize periodic test listeners
         attachListeners();
     });
 
-    // $(document).ready(function() {
-    //     $('#class').change(function() {
-    //         var selectedClass = $(this).val();
-    //         if (selectedClass >= 1 && selectedClass <= 5) {
-    //             $('.subject-port').closest('.input').hide(); // Hide label and input
-    //             $('.subject-ct').closest('.input').show(); // Show label and input
-
-    //         } elseif (selectedClass >= 6 && selectedClass <= 10) {
-    //             $('.subject-ct').closest('.input').hide(); // Hide label and input
-    //             $('.subject-port').closest('.input').ahow(); // Hide label and input
-
-    //         } else {
-    //             $('.subject-ct').closest('.input').show(); // Show label and input
-    //         }
-    //     });
-
-    //     // Trigger change event on page load to apply the logic based on the current selection
-    //     $('#class').trigger('change');
-    // });
     $(document).ready(function() {
     $('#class').change(function() {
         var selectedClass = $(this).val();

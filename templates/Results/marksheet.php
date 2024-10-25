@@ -9,23 +9,38 @@
                     <strong>Student Name:</strong> <?= isset($student) ? h($student->name) : 'N/A' ?>
                 </div>
                 <div class="bg-light p-3 mb-3 rounded">
-                    <strong>Roll No:</strong> <?= isset($student) ? h($marks->rollno) : 'N/A' ?>
+                    <strong>Roll No:</strong> <?= isset($student) ? h(strtoupper($marks->rollno)) : 'N/A' ?>
                 </div>
                 <div class="bg-light p-3 rounded">
                     <strong>Admission No:</strong> <?= isset($student) ? h($student->Admission_no) : 'N/A' ?>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="bg-light p-3 mb-3 rounded">
+             <div class="col-md-6">
+            <!--    <div class="bg-light p-3 mb-3 rounded">
                     <strong>Class:</strong> <?= isset($student) ? h($marks->class) : 'N/A' ?>
-                </div>
+                </div> -->
+                <div class="bg-light p-3 mb-3 rounded">
+                <strong>Date of Birth</strong>
+                <?= isset($student) ? h($student->dob) : 'N/A' ?>
+            </div>
+                <div class="bg-light p-3 mb-3 rounded">
+    <strong>Class</strong>
+
+        <?= isset($marks) && isset($student) 
+            ? h($marks->class . ' - ' . strtoupper($student->section)) 
+            : 'N/A' 
+        ?>
+    
+</div>
+
+
                 <div class="bg-light p-3 mb-3 rounded">
                     <strong>Mother's Name:</strong> <?= isset($student) ? h($student->mother_name) : 'N/A' ?>
                 </div>
-                <div class="bg-light p-3 rounded">
+                <!-- <div class="bg-light p-3 rounded">
                     <strong>Section:</strong><?= isset($student) ? h(strtoupper($student->section)) : 'N/A' ?>
 
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -46,7 +61,7 @@
                             <th>
                         <?php 
                         // Change header based on class
-                        if ($marks->class >= 1 && $marks->class <= 4) {
+                        if ($marks->class >= 1 && $marks->class <= 5) {
                             echo 'CT Marks';
                         } else {
                             echo 'Portfolio';
@@ -104,7 +119,7 @@
                     </td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1] : $subject[2]}) ?></td>
                             <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_total' : $subject[2].'_total'}) ?></td>
-                            <td><?= h($marks->{$term == 'Term1' ? $subject[1].'_grade' : $subject[2].'_grade'}) ?></td>
+                            <td><?= h(strtoupper($marks->{$term == 'Term1' ? $subject[1].'_grade' : $subject[2].'_grade'})) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -136,19 +151,19 @@
                     <?php foreach ($excellence as $excellence): ?>
 
                     <td>Work Education (or Pre-Vocational Education)</td>
-                    <td><?= h($term == 'Term1' ? $excellence->term1_work_education : $excellence->term2_work_education) ?></td>
+                    <td><?= h(strtoupper($term == 'Term1' ? $excellence->term1_work_education : $excellence->term2_work_education)) ?></td>
                 </tr>
                 <tr>
                     <td>Art Education</td>
-                    <td><?= h($term == 'Term1' ? $excellence->term1_art_education : $excellence->term2_art_education) ?></td>
+                    <td><?= h(strtoupper($term == 'Term1' ? $excellence->term1_art_education : $excellence->term2_art_education) )?></td>
                     </tr>
                 <tr>
                     <td>Health & Physical Education</td>
-                    <td><?= h($term == 'Term1' ? $excellence->term1_physical_education : $excellence->term2_physical_education) ?></td>
+                    <td><?= h(strtoupper($term == 'Term1' ? $excellence->term1_physical_education : $excellence->term2_physical_education)) ?></td>
                     </tr>
                 <tr>
                 <td>Discipline: Term <?= $term == 'Term1' ? 'I' : 'II' ?> (on a 3-point grading scale)</td>
-                <td><?= h($term == 'Term1' ? $excellence->term1_discipline : $excellence->term2_discipline) ?></td>
+                <td><?= h(strtoupper($term == 'Term1' ? $excellence->term1_discipline : $excellence->term2_discipline)) ?></td>
                 </tr>
             </tbody>
             <?php endforeach; ?>
