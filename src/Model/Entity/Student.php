@@ -12,8 +12,11 @@ use Cake\ORM\Entity;
  * @property string $Admission_no
  * @property string $name
  * @property string $mother_name
+ * @property \Cake\I18n\Date $dob
  * @property string $section
  * @property string $admission_year
+ *
+ * @property \App\Model\Entity\Excellence[] $excellence
  */
 class Student extends Entity
 {
@@ -30,7 +33,9 @@ class Student extends Entity
         'Admission_no' => true,
         'name' => true,
         'mother_name' => true,
+        'dob' => true,
         'section' => true,
         'admission_year' => true,
+        'excellence' => true,
     ];
 }

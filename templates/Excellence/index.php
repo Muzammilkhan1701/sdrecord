@@ -6,7 +6,7 @@
 ?>
 <div class="excellence index content">
     <?= $this->Html->link(__('New Excellence'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Excellence') ?></h3>
+    <h3><?= __('Co-Scholastic') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>

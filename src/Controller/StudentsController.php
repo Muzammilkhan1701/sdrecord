@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Datasource\Exception\RecordNotFoundException;
+use Authorization\Exception\ForbiddenException;
+
 
 /**
  * Students Controller
@@ -33,6 +36,8 @@ public function initialize(): void
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
         $students = $this->paginate($this->Students);
 
         $this->set(compact('students'));
@@ -47,6 +52,8 @@ public function initialize(): void
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $student = $this->Students->get($id, contain: []);
 
         $this->set(compact('student'));
@@ -59,7 +66,10 @@ public function initialize(): void
      */
     public function add()
     {
-        $student = $this->Students->newEmptyEntity();
+try{
+    $student = $this->Students->newEmptyEntity();
+        $this->Authorization->authorize($student);
+
         if ($this->request->is('post')) {
             $student = $this->Students->patchEntity($student, $this->request->getData());
             if ($this->Students->save($student)) {
@@ -70,6 +80,16 @@ public function initialize(): void
             $this->Flash->error(__('The student could not be saved. Please, try again.'));
         }
         $this->set(compact('student'));
+        
+
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
+
     }
 
     /**
@@ -81,17 +101,30 @@ public function initialize(): void
      */
     public function edit($id = null)
     {
-        $student = $this->Students->get($id, contain: []);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $student = $this->Students->patchEntity($student, $this->request->getData());
-            if ($this->Students->save($student)) {
-                $this->Flash->success(__('The student has been saved.'));
+        
+try{
+    $student = $this->Students->get($id, contain: []);
+    $this->Authorization->authorize($student);
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The student could not be saved. Please, try again.'));
+    if ($this->request->is(['patch', 'post', 'put'])) {
+        $student = $this->Students->patchEntity($student, $this->request->getData());
+        if ($this->Students->save($student)) {
+            $this->Flash->success(__('The student has been saved.'));
+
+            return $this->redirect(['action' => 'index']);
         }
-        $this->set(compact('student'));
+        $this->Flash->error(__('The student could not be saved. Please, try again.'));
+    }
+    $this->set(compact('student'));
+
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
+
     }
 
     /**
@@ -103,14 +136,27 @@ public function initialize(): void
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $student = $this->Students->get($id);
-        if ($this->Students->delete($student)) {
-            $this->Flash->success(__('The student has been deleted.'));
-        } else {
-            $this->Flash->error(__('The student could not be deleted. Please, try again.'));
-        }
+     
+try{
+    $this->request->allowMethod(['post', 'delete']);
+    $student = $this->Students->get($id);
+    $this->Authorization->authorize($student);
 
-        return $this->redirect(['action' => 'index']);
+    if ($this->Students->delete($student)) {
+        $this->Flash->success(__('The student has been deleted.'));
+    } else {
+        $this->Flash->error(__('The student could not be deleted. Please, try again.'));
+    }
+
+    return $this->redirect(['action' => 'index']);
+    
+} catch (ForbiddenException $e) {
+    $this->Flash->error(__('You are not authorized to perform this action.'));
+    return $this->redirect(['action' => 'index']);
+} catch (RecordNotFoundException $e) {
+    $this->Flash->error(__('The record could not be found.'));
+    return $this->redirect(['action' => 'index']);
+}
+
     }
 }

@@ -23,7 +23,7 @@
           <a class="nav-link mx-5 text-white fw-bold" href="<?= $this->Url->build(['controller'=>'pages','action'=>'landing']);?>">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-5 text-white fw-bold" href="#">Admission</a>
+          <a class="nav-link mx-5 text-white fw-bold" href="<?= $this->Url->build(['controller'=>'pages','action'=>'landing']);?>">Admission</a>
         </li>
           <li class="nav-item dropdown">
             <a class="nav-link mx-5 text-white fw-bold " href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,12 +31,13 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="<?= $this->Url->build(['controller'=>'Results','action'=>'rform']);?>"> Result</a></li>
+              <!-- <li><a class="dropdown-item" href="#">1st-4th std final Result</a></li> -->
               <!-- <li><a class="dropdown-item" href="#">5th std final Result</a></li> -->
               <!-- <li><a class="dropdown-item" href="#">6th -8th std final Result</a></li> -->
             </ul>
           </li>
         <li class="nav-item">
-          <a class="nav-link mx-5 text-white fw-bold" href="#">Photo Gallery</a>
+          <a class="nav-link mx-5 text-white fw-bold" href="<?= $this->Url->build(['controller'=>'pages','action'=>'landing']);?>">Photo Gallery</a>
         </li>
       </ul>
     </div>

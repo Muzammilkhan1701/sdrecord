@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\Datasource\Exception\RecordNotFoundException;
+use Authorization\Exception\ForbiddenException;
+
 
 /**
  * Results Controller
@@ -34,6 +37,8 @@ class ResultsController extends AppController
     }
     public function rform()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->viewBuilder()->setLayout('home');
 
         // Fetch academic years from the academic_years table
@@ -53,12 +58,16 @@ class ResultsController extends AppController
 
     public function finalview()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->viewBuilder()->setLayout('home');
         
     }
 
     public function marksheet()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->viewBuilder()->setLayout('home');
 
         if ($this->request->is('post')) {
@@ -142,6 +151,8 @@ class ResultsController extends AppController
 
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+
          // Create a query with the desired options
     $query = $this->Results->find()
     ->contain(['Students']); // Adjust this if you have other associations
@@ -162,6 +173,8 @@ $results = $this->paginate($query);
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $result = $this->Results->get($id, contain: ['Students']);
 
         $this->set(compact('result'));
@@ -174,7 +187,10 @@ $results = $this->paginate($query);
      */
     public function add()
     {
+       try{
         $result = $this->Results->newEmptyEntity();
+        $this->Authorization->authorize($result);
+
         if ($this->request->is('post')) {
             $result = $this->Results->patchEntity($result, $this->request->getData());
             if ($this->Results->save($result)) {
@@ -186,6 +202,14 @@ $results = $this->paginate($query);
         }
         $students = $this->Results->Students->find('list', ['limit' => 200])->all();
         $this->set(compact('result', 'students'));
+
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not authorized to perform this action.'));
+            return $this->redirect(['action' => 'index']);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The record could not be found.'));
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     /**
@@ -197,7 +221,11 @@ $results = $this->paginate($query);
      */
     public function edit($id = null)
     {
-        $result = $this->Results->get($id, contain: []);
+        
+        try{
+            $result = $this->Results->get($id, contain: []);
+        $this->Authorization->authorize($result);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $result = $this->Results->patchEntity($result, $this->request->getData());
             if ($this->Results->save($result)) {
@@ -209,6 +237,15 @@ $results = $this->paginate($query);
         }
         $students = $this->Results->Students->find('list', ['limit' => 200])->all();
         $this->set(compact('result', 'students'));
+
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not authorized to perform this action.'));
+            return $this->redirect(['action' => 'index']);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The record could not be found.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
     }
 
     /**
@@ -220,14 +257,25 @@ $results = $this->paginate($query);
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $result = $this->Results->get($id);
-        if ($this->Results->delete($result)) {
-            $this->Flash->success(__('The result has been deleted.'));
-        } else {
-            $this->Flash->error(__('The result could not be deleted. Please, try again.'));
-        }
+        try{
+            $this->request->allowMethod(['post', 'delete']);
+            $result = $this->Results->get($id);
+            $this->Authorization->authorize($result);
+    
+            if ($this->Results->delete($result)) {
+                $this->Flash->success(__('The result has been deleted.'));
+            } else {
+                $this->Flash->error(__('The result could not be deleted. Please, try again.'));
+            }
+    
+            return $this->redirect(['action' => 'index']);
 
-        return $this->redirect(['action' => 'index']);
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not authorized to perform this action.'));
+            return $this->redirect(['action' => 'index']);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The record could not be found.'));
+            return $this->redirect(['action' => 'index']);
+        }
     }
 }

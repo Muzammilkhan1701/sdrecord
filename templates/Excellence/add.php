@@ -2,14 +2,14 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Excellence'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Co-Scholastic'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="excellence form content">
             <?= $this->Form->create($excellence) ?>
             <fieldset>
-                <legend><?= __('Add Excellence') ?></legend>
+                <legend><?= __('Add Co-Scholastic') ?></legend>
 
                 <!-- Student Selection Dropdown -->
                     <?= $this->Form->control('student_id', ['label' => 'Student', 'options' => $students, 'empty' => true])?>

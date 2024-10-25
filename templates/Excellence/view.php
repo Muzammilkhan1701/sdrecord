@@ -8,10 +8,10 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Excellence'), ['action' => 'edit', $excellence->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Excellence'), ['action' => 'delete', $excellence->id], ['confirm' => __('Are you sure you want to delete # {0}?', $excellence->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Excellence'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Excellence'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Co-Scholastic'), ['action' => 'edit', $excellence->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Co-Scholastic'), ['action' => 'delete', $excellence->id], ['confirm' => __('Are you sure you want to delete # {0}?', $excellence->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Co-Scholastic'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('New Co-Scholastic'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">

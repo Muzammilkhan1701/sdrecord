@@ -11,9 +11,9 @@
                     <th><?= $this->Paginator->sort('rollno', 'Roll No') ?></th>
                     <th><?= $this->Paginator->sort('class', 'Class') ?></th>
                     <!-- Term-1 Columns -->
-                    <th colspan="7" class="text-center">Term 1 Results</th>
+                    <th colspan="9" class="text-center">Term 1 Results</th>
                     <!-- Term-2 Columns -->
-                    <th colspan="7" class="text-center">Term 2 Results</th>
+                    <th colspan="9" class="text-center">Term 2 Results</th>
                     <th><?= $this->Paginator->sort('term1_total', 'Term 1 Total') ?></th>
                     <th><?= $this->Paginator->sort('term2_total', 'Term 2 Total') ?></th>
                     <th class="text-center"><?= __('Actions') ?></th>
@@ -28,6 +28,9 @@
                     <th>Science</th>
                     <th>Social</th>
                     <th>Computer</th>
+                    <th>EVS</th>
+                    <th>GK</th>
+
                     <!-- Term 2 Subjects -->
                     <th>English</th>
                     <th>Hindi</th>
@@ -36,45 +39,54 @@
                     <th>Science</th>
                     <th>Social</th>
                     <th>Computer</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>EVS</th>
+                    <th>GK</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($marks as $mark): ?>
-                <tr>
-                    <td><?= $this->Number->format($mark->mark_id) ?></td>
-                    <td><?= $mark->has('student') ? $this->Html->link($mark->student->name, ['controller' => 'Students', 'action' => 'view', $mark->student->student_id]) : '' ?></td>
-                    <td><?= h($mark->academic_year) ?></td>
-                    <td><?= h($mark->rollno) ?></td>
-                    <td><?= h($mark->class) ?></td>
-                    <!-- Term 1 -->
-                    <td><?= $this->Number->format($mark->term1_subject_1_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_2_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_3_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_4_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_5_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_6_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_subject_7_total) ?></td>
-                    <!-- Term 2 -->
-                    <td><?= $this->Number->format($mark->term2_subject_1_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_2_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_3_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_4_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_5_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_6_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_subject_7_total) ?></td>
-                    <td><?= $this->Number->format($mark->term1_total) ?></td>
-                    <td><?= $this->Number->format($mark->term2_total) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(('View'), ['action' => 'view', $mark->mark_id], ['class' => 'btn btn-info btn-sm']) ?>
-                        <?= $this->Html->link(('Edit'), ['action' => 'edit', $mark->mark_id], ['class' => 'btn btn-warning btn-sm']) ?>
-                        <?= $this->Form->postLink(('Delete'), ['action' => 'delete', $mark->mark_id], ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id), 'class' => 'btn btn-danger btn-sm']) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
+    <?php foreach ($marks as $mark): ?>
+    <tr>
+        <td><?= $this->Number->format($mark->mark_id) ?></td>
+        <td><?= $mark->has('student') ? $this->Html->link($mark->student->name, ['controller' => 'Students', 'action' => 'view', $mark->student->student_id]) : '' ?></td>
+        <td><?= h($mark->academic_year) ?></td>
+        <td><?= h($mark->rollno) ?></td>
+        <td><?= h($mark->class) ?></td>
+
+        <!-- Term 1 -->
+        <td><?= $mark->term1_subject_1_total !== null ? $this->Number->format($mark->term1_subject_1_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_2_total !== null ? $this->Number->format($mark->term1_subject_2_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_3_total !== null ? $this->Number->format($mark->term1_subject_3_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_4_total !== null ? $this->Number->format($mark->term1_subject_4_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_5_total !== null ? $this->Number->format($mark->term1_subject_5_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_6_total !== null ? $this->Number->format($mark->term1_subject_6_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_7_total !== null ? $this->Number->format($mark->term1_subject_7_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_8_total !== null ? $this->Number->format($mark->term1_subject_8_total) : '-' ?></td>
+        <td><?= $mark->term1_subject_9_total !== null ? $this->Number->format($mark->term1_subject_9_total) : '-' ?></td>
+
+        <!-- Term 2 -->
+        <td><?= $mark->term2_subject_1_total !== null ? $this->Number->format($mark->term2_subject_1_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_2_total !== null ? $this->Number->format($mark->term2_subject_2_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_3_total !== null ? $this->Number->format($mark->term2_subject_3_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_4_total !== null ? $this->Number->format($mark->term2_subject_4_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_5_total !== null ? $this->Number->format($mark->term2_subject_5_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_6_total !== null ? $this->Number->format($mark->term2_subject_6_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_7_total !== null ? $this->Number->format($mark->term2_subject_7_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_8_total !== null ? $this->Number->format($mark->term2_subject_8_total) : '-' ?></td>
+        <td><?= $mark->term2_subject_9_total !== null ? $this->Number->format($mark->term2_subject_9_total) : '-' ?></td>
+
+        <!-- Totals -->
+        <td><?= $mark->term1_total !== null ? $this->Number->format($mark->term1_total) : '-' ?></td>
+        <td><?= $mark->term2_total !== null ? $this->Number->format($mark->term2_total) : '-' ?></td>
+
+        <td class="actions">
+            <?= $this->Html->link(('View'), ['action' => 'view', $mark->mark_id], ['class' => 'btn btn-info btn-sm']) ?>
+            <?= $this->Html->link(('Edit'), ['action' => 'edit', $mark->mark_id], ['class' => 'btn btn-warning btn-sm']) ?>
+            <?= $this->Form->postLink(('Delete'), ['action' => 'delete', $mark->mark_id], ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id), 'class' => 'btn btn-danger btn-sm']) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</tbody>
+
         </table>
         <div class="paginator">
             <ul class="pagination">
@@ -88,3 +100,4 @@
         </div>
     </div>
 </div>
+
