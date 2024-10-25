@@ -9,23 +9,38 @@
                     <strong>Student Name:</strong> <?= isset($student) ? h($student->name) : 'N/A' ?>
                 </div>
                 <div class="bg-light p-3 mb-3 rounded">
-                    <strong>Roll No:</strong> <?= isset($student) ? h($marks->rollno) : 'N/A' ?>
+                    <strong>Roll No:</strong> <?= isset($student) ? h(strtoupper($marks->rollno)) : 'N/A' ?>
                 </div>
                 <div class="bg-light p-3 rounded">
                     <strong>Admission No:</strong> <?= isset($student) ? h($student->Admission_no) : 'N/A' ?>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="bg-light p-3 mb-3 rounded">
+             <div class="col-md-6">
+            <!--    <div class="bg-light p-3 mb-3 rounded">
                     <strong>Class:</strong> <?= isset($student) ? h($marks->class) : 'N/A' ?>
-                </div>
+                </div> -->
+                <div class="bg-light p-3 mb-3 rounded">
+                <strong>Date of Birth</strong>
+                <?= isset($student) ? h($student->dob) : 'N/A' ?>
+            </div>
+                <div class="bg-light p-3 mb-3 rounded">
+    <strong>Class</strong>
+
+        <?= isset($marks) && isset($student) 
+            ? h($marks->class . ' - ' . strtoupper($student->section)) 
+            : 'N/A' 
+        ?>
+    
+</div>
+
+
                 <div class="bg-light p-3 mb-3 rounded">
                     <strong>Mother's Name:</strong> <?= isset($student) ? h($student->mother_name) : 'N/A' ?>
                 </div>
-                <div class="bg-light p-3 rounded">
+                <!-- <div class="bg-light p-3 rounded">
                     <strong>Section:</strong><?= isset($student) ? h(strtoupper($student->section)) : 'N/A' ?>
 
-                </div>
+                </div> -->
             </div>
         </div>
 

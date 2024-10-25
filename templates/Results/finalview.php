@@ -9,24 +9,38 @@
             </div>
             <div class="col-md-4">
                 <h6>Roll No</h6>
-                <p><?= isset($marks) ? h($marks->rollno) : 'N/A' ?></p>
+                <p><?= isset($marks) ? h(strtoupper($marks->rollno) ): 'N/A' ?></p>
             </div>
             <div class="col-md-4">
                 <h6>Admission No</h6>
                 <p><?= isset($student) ? h($student->Admission_no) : 'N/A' ?></p>
             </div>
             <div class="col-md-4">
+                <h6>Date of Birth</h6>
+                <p><?= isset($student) ? h($student->dob) : 'N/A' ?></p>
+            </div>
+            <!-- <div class="col-md-4">
                 <h6>Class</h6>
                 <p><?= isset($marks) ? h($marks->class) : 'N/A' ?></p>
-            </div>
+            </div> -->
+            <div class="col-md-4">
+    <h6>Class</h6>
+    <p>
+        <?= isset($marks) && isset($student) 
+            ? h($marks->class . ' - ' . strtoupper($student->section)) 
+            : 'N/A' 
+        ?>
+    </p>
+</div>
+
             <div class="col-md-4">
                 <h6>Mother's Name</h6>
                 <p><?= isset($student) ? h($student->mother_name) : 'N/A' ?></p>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <h6>Section</h6>
                 <p><?= isset($student) ? h(strtoupper($student->section)) : 'N/A' ?></p>
-            </div>
+            </div> -->
         </div>
     </div>
 
