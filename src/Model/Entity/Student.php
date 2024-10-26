@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $mother_name
  * @property \Cake\I18n\Date $dob
+ * @property string $class
  * @property string $section
  * @property string $admission_year
  *
@@ -34,6 +35,7 @@ class Student extends Entity
         'name' => true,
         'mother_name' => true,
         'dob' => true,
+        'class' => true,
         'section' => true,
         'admission_year' => true,
         'excellence' => true,

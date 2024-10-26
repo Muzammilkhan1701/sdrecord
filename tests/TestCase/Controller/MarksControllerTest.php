@@ -27,6 +27,28 @@ class MarksControllerTest extends TestCase
     ];
 
     /**
+     * Test marksadd method
+     *
+     * @return void
+     * @uses \App\Controller\MarksController::marksadd()
+     */
+    public function testMarksadd(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test beforeFilter method
+     *
+     * @return void
+     * @uses \App\Controller\MarksController::beforeFilter()
+     */
+    public function testBeforeFilter(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
      * Test index method
      *
      * @return void

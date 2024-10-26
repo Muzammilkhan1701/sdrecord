@@ -28,7 +28,7 @@
                     <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
                     <?= $this->Form->control('academic_year') ?>
                     <?= $this->Form->control('rollno') ?>
-                    <!-- <?= $this->Form->control('class') ?> -->
+                    <?= $this->Form->control('class') ?>
                 </div>
 
                 <!-- Dropdown to select Term 1 or Term 2 -->

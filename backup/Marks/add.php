@@ -1,34 +1,22 @@
-<?php
-
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Mark $mark
- * @var string[]|\Cake\Collection\CollectionInterface $students
- */
-?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $mark->mark_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id), 'class' => 'side-nav-item']
-            ) ?>
             <?= $this->Html->link(__('List Marks'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="marks form content">
-            <?= $this->Form->create($mark) ?>
+            <?= $this->Form->create($mark, ['url' => ['action' => 'add']]) ?>
             <fieldset>
-                <legend><?= __('Edit Mark') ?></legend>
+                <legend><?= __('Add Mark') ?></legend>
+
                 <div class="mb-5">
                     <!-- Other fields outside the accordion -->
                     <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
                     <?= $this->Form->control('academic_year') ?>
                     <?= $this->Form->control('rollno') ?>
-                    <!-- <?= $this->Form->control('class') ?> -->
+                    <?= $this->Form->control('class', ['id' => 'class']) ?>
                 </div>
 
                 <!-- Dropdown to select Term 1 or Term 2 -->
@@ -38,7 +26,7 @@
                         'options' => ['Term 1' => 'Term 1', 'Term 2' => 'Term 2'],
                         'empty' => 'Select Term',
                         'id' => 'term-select',
-                        'required' => true
+                        'required' => true,
                     ]) ?>
                 </div>
 
@@ -278,7 +266,7 @@
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
 
-                                    10 <?= $this->Form->control('term1_subject_5_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
+                    10            <?= $this->Form->control('term1_subject_5_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
                                     <?= $this->Form->control('term1_subject_5_multiple_assessment', ['label' => 'Multiple Assessment (Term 1)', 'max' => 5]) ?>
                                     <?= $this->Form->control('term1_subject_5_portfolio', ['label' => 'Portfolio (Term 1)', 'max' => 5, 'class' => 'subject-port']) ?>
                                 </div>
@@ -505,18 +493,19 @@
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_9_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
                                     <?= $this->Form->control('term2_subject_9_multiple_assessment', ['label' => 'Multiple Assessment (Term 2)', 'max' => 10]) ?>
-                                    <?= $this->Form->control('term2_subject_9_portfolio', ['label' => 'Portfolio (Term 2)', 'max' => 5, 'class' => 'subject-port']) ?>
+                                    <?= $this->Form->control('term2_subject_9_portfolio', ['label' => 'Portfolio (Term 2)', 'max' => 5, 'class' => 'subject-port' ]) ?>
                                     <!-- <?= $this->Form->control('term2_subject_9_total', ['label' => 'Total (Term 2)', 'max' => 5]) ?>
                                     <?= $this->Form->control('term2_subject_9_grade', ['label' => 'Grade (Term 2)', 'max' => 5]) ?> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!-- Repeat similar collapsible sections for other subjects like Hindi, Science, etc. -->
                 </div>
+                <!-- Accordion End -->
             </fieldset>
-            <?= $this->Form->button(__('Edit Co-Scholastic Grade')) ?>
+
+            <?= $this->Form->button(__('Add Co-Scholastic Grade')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
@@ -604,32 +593,32 @@
                 })(i);
             }
         }
-
         // Initialize periodic test listeners
         attachListeners();
     });
 
     $(document).ready(function() {
-        $('#class').change(function() {
-            var selectedClass = $(this).val();
-
-            // For classes 1 to 5
-            if (selectedClass >= 1 && selectedClass <= 5) {
-                $('.subject-port').closest('.input').hide(); // Hide label and input
-                $('.subject-ct').closest('.input').show(); // Show label and input
-            }
-            // For classes 6 to 10
-            else if (selectedClass >= 6 && selectedClass <= 10) {
-                $('.subject-ct').closest('.input').hide(); // Hide label and input
-                $('.subject-port').closest('.input').show(); // Show label and input
-            }
-            // For other cases
-            else {
-                $('.subject-ct').closest('.input').show(); // Show label and input
-            }
-        });
-
-        // Trigger change event on page load to apply the logic based on the current selection
-        $('#class').trigger('change');
+    $('#class').change(function() {
+        var selectedClass = $(this).val();
+        
+        // For classes 1 to 5
+        if (selectedClass >= 1 && selectedClass <= 5) {
+            $('.subject-port').closest('.input').hide(); // Hide label and input
+            $('.subject-ct').closest('.input').show();  // Show label and input
+        } 
+        // For classes 6 to 10
+        else if (selectedClass >= 6 && selectedClass <= 10) {
+            $('.subject-ct').closest('.input').hide(); // Hide label and input
+            $('.subject-port').closest('.input').show();  // Show label and input
+        } 
+        // For other cases
+        else {
+            $('.subject-ct').closest('.input').show(); // Show label and input
+        }
     });
+
+    // Trigger change event on page load to apply the logic based on the current selection
+    $('#class').trigger('change');
+});
+
 </script>

@@ -10,14 +10,15 @@
             <?= $this->Form->create($mark, ['url' => ['action' => 'add']]) ?>
             <fieldset>
                 <legend><?= __('Add Mark') ?></legend>
-
                 <div class="mb-5">
-                    <!-- Other fields outside the accordion -->
-                    <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
-                    <?= $this->Form->control('academic_year') ?>
-                    <?= $this->Form->control('rollno') ?>
-                    <?= $this->Form->control('class', ['id' => 'class']) ?>
-                </div>
+    <!-- Dropdown for selecting student -->
+    <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true, 'id' => 'student-id']) ?>
+    <?= $this->Form->control('academic_year') ?>
+    <?= $this->Form->control('rollno') ?>
+    
+    <!-- Class display area -->
+    <div class="form-control " id="class-display">Select a student to view the class</div>
+</div>
 
                 <!-- Dropdown to select Term 1 or Term 2 -->
                 <div class="mb-5">
@@ -536,6 +537,28 @@
         $('.term2-fields').hide();
     });
 </script>
+<script>
+$(document).ready(function() {
+    $('#student-id').change(function() {
+        let studentId = $(this).val();
+        if (studentId) {
+            $.ajax({
+                url: '/sdrecord/students/getClass?student_id=' + studentId,
+                type: 'GET',
+                success: function(response) {
+                    $('#class-display').text(response.class);
+                },
+                error: function() {
+                    alert('Error fetching class');
+                }
+            });
+        } else {
+            $('#class-display').text(''); // Clear the class display if no student is selected
+        }
+    });
+});
+</script>
+
 
 <script>
     $(document).ready(function() {

@@ -31,10 +31,6 @@
                     <td><?= h($student->mother_name) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Class') ?></th>
-                    <td><?= h($student->class) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Section') ?></th>
                     <td><?= h($student->section) ?></td>
                 </tr>

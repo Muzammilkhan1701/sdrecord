@@ -26,6 +26,7 @@
                     echo $this->Form->control('name');
                     echo $this->Form->control('mother_name');
                     echo $this->Form->control('dob');
+                    echo $this->Form->control('class');
                     echo $this->Form->control('section');
                     echo $this->Form->control('admission_year');
                 ?>

@@ -8,6 +8,11 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Form->postLink(
+                __('Delete'),
+                ['action' => 'delete', $student->student_id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $student->student_id), 'class' => 'side-nav-item']
+            ) ?>
             <?= $this->Html->link(__('List Students'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
@@ -15,13 +20,12 @@
         <div class="students form content">
             <?= $this->Form->create($student) ?>
             <fieldset>
-                <legend><?= __('Add Student') ?></legend>
+                <legend><?= __('Edit Student') ?></legend>
                 <?php
                     echo $this->Form->control('Admission_no');
                     echo $this->Form->control('name');
                     echo $this->Form->control('mother_name');
                     echo $this->Form->control('dob');
-                    echo $this->Form->control('class');
                     echo $this->Form->control('section');
                     echo $this->Form->control('admission_year');
                 ?>

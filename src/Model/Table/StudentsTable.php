@@ -40,9 +40,6 @@ class StudentsTable extends Table
         $this->setTable('students');
         $this->setDisplayField('name');
         $this->setPrimaryKey('student_id');
-        $this->hasMany('Excellence', [
-            'foreignKey' => 'student_id', // Foreign key in the excellence table
-        ]);
     }
 
     /**
@@ -75,6 +72,12 @@ class StudentsTable extends Table
             ->date('dob')
             ->requirePresence('dob', 'create')
             ->notEmptyDate('dob');
+
+        $validator
+            ->scalar('class')
+            ->maxLength('class', 5)
+            ->requirePresence('class', 'create')
+            ->notEmptyString('class');
 
         $validator
             ->scalar('section')
