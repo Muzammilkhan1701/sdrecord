@@ -11,10 +11,10 @@ use Cake\ORM\Entity;
  * @property int $result_id
  * @property int|null $student_id
  * @property string|null $academic_year
- * @property int|null $term1_total_marks
+ * @property string|null $term1_total_marks
  * @property string|null $term1_percentage
  * @property string|null $term1_grade
- * @property int|null $term2_total_marks
+ * @property string|null $term2_total_marks
  * @property string|null $term2_percentage
  * @property string|null $term2_grade
  *

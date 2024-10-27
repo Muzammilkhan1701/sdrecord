@@ -72,7 +72,7 @@ class ResultsTable extends Table
             ->allowEmptyString('academic_year');
 
         $validator
-            ->integer('term1_total_marks')
+            ->decimal('term1_total_marks')
             ->allowEmptyString('term1_total_marks');
 
         $validator
@@ -85,7 +85,7 @@ class ResultsTable extends Table
             ->allowEmptyString('term1_grade');
 
         $validator
-            ->integer('term2_total_marks')
+            ->decimal('term2_total_marks')
             ->allowEmptyString('term2_total_marks');
 
         $validator
