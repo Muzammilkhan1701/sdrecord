@@ -278,7 +278,7 @@ class MarksController extends AppController
         }
         $this->Flash->error(__('The mark could not be saved. Please, try again.'));
     }
-    $students = $this->Marks->Students->find('list', ['limit' => 200])->all();
+    $students = $this->Marks->Students->find('list', ['limit' =>500])->all();
     $this->set(compact('mark', 'students'));
 
     ob_end_flush(); // Flush the output buffer and turn it off
