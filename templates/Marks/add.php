@@ -13,7 +13,12 @@
 
                 <div class="mb-5">
                     <!-- Other fields outside the accordion -->
-                    <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true]) ?>
+                    <!-- <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true , 'id' => 'student_id']) ?> -->
+                    <!-- Dropdown for Select2 Search -->
+<?= $this->Form->control('student_id', [
+    'empty' => 'Select a Student',
+    'id' => 'student_id' 
+]) ?>
                     <?= $this->Form->control('academic_year') ?>
                     <?= $this->Form->control('rollno') ?>
                     <?= $this->Form->control('class', ['id' => 'class']) ?>
@@ -53,6 +58,7 @@
                                     <?= $this->Form->control('term1_subject_1_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_1_periodic_test',
+                                        'step' => '0.01', // Allow decimal values
                                         'max' => 5,
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
@@ -73,6 +79,7 @@
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_1_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_1_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -100,12 +107,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_2', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_2_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_2_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_2_ptcal', 'type' => 'number']) ?>
+                                    <?= $this->Form->control('term1_subject_2_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_2_ptcal', 'type' => 'number'   , 'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_2_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_2_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_2_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -119,12 +128,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_2', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_2_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_2_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_2_ptcal', 'type' => 'number']) ?>
+                                    <?= $this->Form->control('term2_subject_2_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_2_ptcal', 'type' => 'number' ,   'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_2_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_2_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_2_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -152,12 +163,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_3', ['label' => 'Exam Marks (Term 1)', 'max' => 5, 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_3_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_3_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_3_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_3_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_3_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_3_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_3_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_3_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -171,12 +184,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_3', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_3_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_3_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_3_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_3_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_3_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_3_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_3_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_3_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -204,12 +219,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_4', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_4_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_4_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_4_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_4_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_4_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_4_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_4_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_4_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -223,12 +240,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_4', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_4_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_4_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_4_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_4_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_4_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_4_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_4_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_4_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -257,12 +276,14 @@
                                     <?= $this->Form->control('term1_subject_5', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_5_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
 
-                                    <?= $this->Form->control('term1_subject_5_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_5_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_5_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_5_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_5_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_5_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
 
@@ -275,12 +296,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_5', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_5_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_5_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_5_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_5_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_5_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_5_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_5_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_5_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -308,12 +331,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_6', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_6_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_6_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_6_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_6_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_6_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_6_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_6_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_6_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -327,12 +352,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_6', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_6_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_6_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_6_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_6_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_6_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_6_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_6_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_6_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -360,12 +387,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_7', ['label' => 'Exam Marks (Term 1)', 'max' => 80,]) ?>
                                     <?= $this->Form->control('term1_subject_7_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_7_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_7_ptcal', 'type' => 'number', 'max' => 25]) ?>
+                                    <?= $this->Form->control('term1_subject_7_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_7_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_7_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_7_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5,]) ?>
@@ -379,12 +408,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_7', ['label' => 'Exam Marks (Term 2)', 'max' => 80,]) ?>
                                     <?= $this->Form->control('term2_subject_7_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_7_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_7_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_7_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_7_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_7_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_7_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5,]) ?>
@@ -412,12 +443,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_8', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_8_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_8_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_8_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_8_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_8_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_8_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_8_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_8_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -431,12 +464,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_8', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_8_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_8_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_8_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term2_subject_8_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_8_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_8_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_8_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_8_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -464,12 +499,14 @@
                                 <div class="term1-fields">
                                     <?= $this->Form->control('term1_subject_9', ['label' => 'Exam Marks (Term 1)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term1_subject_9_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term1_subject_9_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_9_ptcal', 'type' => 'number',]) ?>
+                                    <?= $this->Form->control('term1_subject_9_ptcal', ['label' => 'PT Calc (Term 1)', 'id' => 'term1_subject_9_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term1_subject_9_periodic_test', [
                                         'label' => 'Periodic Test (Term 1)',
                                         'id' => 'term1_subject_9_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual change9
                                     ]) ?>
                                     <?= $this->Form->control('term1_subject_9_subject_enrichment', ['label' => 'Subject Enrichment (Term 1)', 'max' => 5]) ?>
@@ -483,12 +520,14 @@
                                 <div class="term2-fields">
                                     <?= $this->Form->control('term2_subject_9', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_9_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
-                                    <?= $this->Form->control('term2_subject_9_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_9_ptcal', 'type' => 'number', 'max' => 25]) ?>
+                                    <?= $this->Form->control('term2_subject_9_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_9_ptcal', 'type' => 'number',    'step' => '0.1', // Allow decimal values
+]) ?>
 
                                     <?= $this->Form->control('term2_subject_9_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_9_periodic_test',
                                         'max' => 5,
+                                        'step' => '0.01',
                                         'readonly' => true,  // Make this field read-only to prevent manual changes
                                     ]) ?>
                                     <?= $this->Form->control('term2_subject_9_subject_enrichment', ['label' => 'Subject Enrichment (Term 2)', 'max' => 5]) ?>
@@ -515,7 +554,41 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Select2 CSS and JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize Select2 on the student dropdown
+    $('#student_id').select2({
+        placeholder: "Search for a student",
+        allowClear: true
+    });
 
+    // Populate the dropdown options with student names and IDs
+    Object.keys(studentsData).forEach(function(studentId) {
+        const studentName = studentsData[studentId].name;
+        $('#student_id').append(new Option(studentName, studentId));
+    });
+
+    // Event listener to display the selected student's class
+    $('#student_id').on('change', function() {
+        const selectedId = $(this).val();
+        
+        // Log to confirm the selectedId and student data
+        console.log('Selected ID:', selectedId);
+        console.log('Student Data:', studentsData[selectedId]);
+
+        if (selectedId && studentsData[selectedId]) {
+            const className = studentsData[selectedId].class;
+            $('#class-display').text(className || 'Class not found');
+        } else {
+            $('#class-display').text('Select a student to view the class');
+        }
+    });
+});
+</script>
 <script>
     $(document).ready(function() {
         // Handle term selection
@@ -560,25 +633,26 @@
 
         // Attach event listeners for periodic test calculations
         function calculatePeriodicTest(ptcalId, periodicTestId) {
-            var ptcalValue = parseFloat(document.getElementById(ptcalId).value);
-            var classValue = document.getElementById('class').value;
-            var factor = 0;
+    var ptcalValue = parseFloat(document.getElementById(ptcalId).value);
+    var classValue = document.getElementById('class').value;
+    var factor = 0;
 
-            if (classValue >= 1 && classValue <= 2) {
-                factor = 1; // No calculation for 1st and 2nd classes
-            } else if (classValue >= 3 && classValue <= 5) {
-                factor = 0.2; // 20% for 3rd and 4th classes
-            } else if (classValue >= 6 && classValue <= 10) {
-                factor = 0.125; // 12.5% for 5th to 10th classes
-            }
+    if (classValue >= 1 && classValue <= 2) {
+        factor = 1; // No calculation for 1st and 2nd classes
+    } else if (classValue >= 3 && classValue <= 5) {
+        factor = 0.2; // 20% for 3rd and 4th classes
+    } else if (classValue >= 6 && classValue <= 10) {
+        factor = 0.125; // 12.5% for 5th to 10th classes
+    }
 
-            if (!isNaN(ptcalValue) && factor > 0) {
-                var periodicTestValue = Math.round(ptcalValue * factor);
-                document.getElementById(periodicTestId).value = periodicTestValue;
-            } else {
-                document.getElementById(periodicTestId).value = factor === 0 ? 'No calculation' : '';
-            }
-        }
+    if (!isNaN(ptcalValue) && factor > 0) {
+        var periodicTestValue = (ptcalValue * factor).toFixed(2); // Keep 2 decimal places
+        document.getElementById(periodicTestId).value = periodicTestValue;
+    } else {
+        document.getElementById(periodicTestId).value = factor === 0 ? 'No calculation' : '';
+    }
+}
+
 
         // Attach listeners for each subject's periodic test
         function attachListeners() {

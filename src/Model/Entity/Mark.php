@@ -12,154 +12,154 @@ use Cake\ORM\Entity;
  * @property int|null $student_id
  * @property string $academic_year
  * @property string $rollno
- * @property string $class
- * @property int|null $term1_subject_1
- * @property int|null $term1_subject_1_ct
- * @property int|null $term1_subject_1_periodic_test
- * @property int|null $term1_subject_1_subject_enrichment
- * @property int|null $term1_subject_1_multiple_assessment
- * @property int|null $term1_subject_1_portfolio
- * @property int|null $term1_subject_1_total
+ * @property string|null $term1_subject_1
+ * @property string|null $term1_subject_1_ct
+ * @property string|null $term1_subject_1_periodic_test
+ * @property string|null $term1_subject_1_subject_enrichment
+ * @property string|null $term1_subject_1_multiple_assessment
+ * @property string|null $term1_subject_1_portfolio
+ * @property string|null $term1_subject_1_total
  * @property string|null $term1_subject_1_grade
- * @property int|null $term1_subject_2
- * @property int|null $term1_subject_2_periodic_test
- * @property int|null $term1_subject_2_subject_enrichment
- * @property int|null $term1_subject_2_multiple_assessment
- * @property int|null $term1_subject_2_portfolio
- * @property int|null $term1_subject_2_total
+ * @property string|null $term1_subject_2
+ * @property string|null $term1_subject_2_periodic_test
+ * @property string|null $term1_subject_2_subject_enrichment
+ * @property string|null $term1_subject_2_multiple_assessment
+ * @property string|null $term1_subject_2_portfolio
+ * @property string|null $term1_subject_2_total
  * @property string|null $term1_subject_2_grade
- * @property int|null $term1_subject_3
- * @property int|null $term1_subject_3_periodic_test
- * @property int|null $term1_subject_3_subject_enrichment
- * @property int|null $term1_subject_3_multiple_assessment
- * @property int|null $term1_subject_3_portfolio
- * @property int|null $term1_subject_3_total
+ * @property string|null $term1_subject_3
+ * @property string|null $term1_subject_3_periodic_test
+ * @property string|null $term1_subject_3_subject_enrichment
+ * @property string|null $term1_subject_3_multiple_assessment
+ * @property string|null $term1_subject_3_portfolio
+ * @property string|null $term1_subject_3_total
  * @property string|null $term1_subject_3_grade
- * @property int|null $term1_subject_4
- * @property int|null $term1_subject_4_periodic_test
- * @property int|null $term1_subject_4_subject_enrichment
- * @property int|null $term1_subject_4_multiple_assessment
- * @property int|null $term1_subject_4_portfolio
- * @property int|null $term1_subject_4_total
+ * @property string|null $term1_subject_4
+ * @property string|null $term1_subject_4_periodic_test
+ * @property string|null $term1_subject_4_subject_enrichment
+ * @property string|null $term1_subject_4_multiple_assessment
+ * @property string|null $term1_subject_4_portfolio
+ * @property string|null $term1_subject_4_total
  * @property string|null $term1_subject_4_grade
- * @property int|null $term1_subject_5
- * @property int|null $term1_subject_5_periodic_test
- * @property int|null $term1_subject_5_subject_enrichment
- * @property int|null $term1_subject_5_multiple_assessment
- * @property int|null $term1_subject_5_portfolio
- * @property int|null $term1_subject_5_total
+ * @property string|null $term1_subject_5
+ * @property string|null $term1_subject_5_periodic_test
+ * @property string|null $term1_subject_5_subject_enrichment
+ * @property string|null $term1_subject_5_multiple_assessment
+ * @property string|null $term1_subject_5_portfolio
+ * @property string|null $term1_subject_5_total
  * @property string|null $term1_subject_5_grade
- * @property int|null $term1_subject_6
- * @property int|null $term1_subject_6_periodic_test
- * @property int|null $term1_subject_6_subject_enrichment
- * @property int|null $term1_subject_6_multiple_assessment
- * @property int|null $term1_subject_6_portfolio
- * @property int|null $term1_subject_6_total
+ * @property string|null $term1_subject_6
+ * @property string|null $term1_subject_6_periodic_test
+ * @property string|null $term1_subject_6_subject_enrichment
+ * @property string|null $term1_subject_6_multiple_assessment
+ * @property string|null $term1_subject_6_portfolio
+ * @property string|null $term1_subject_6_total
  * @property string|null $term1_subject_6_grade
- * @property int|null $term1_subject_7
- * @property int|null $term1_subject_7_periodic_test
- * @property int|null $term1_subject_7_subject_enrichment
- * @property int|null $term1_subject_7_multiple_assessment
- * @property int|null $term1_subject_7_portfolio
- * @property int|null $term1_subject_7_total
+ * @property string|null $term1_subject_7
+ * @property string|null $term1_subject_7_periodic_test
+ * @property string|null $term1_subject_7_subject_enrichment
+ * @property string|null $term1_subject_7_multiple_assessment
+ * @property string|null $term1_subject_7_portfolio
+ * @property string|null $term1_subject_7_total
  * @property string|null $term1_subject_7_grade
- * @property int|null $term1_total
- * @property int|null $term2_subject_1
- * @property int|null $term2_subject_1_periodic_test
- * @property int|null $term2_subject_1_subject_enrichment
- * @property int|null $term2_subject_1_multiple_assessment
- * @property int|null $term2_subject_1_portfolio
- * @property int|null $term2_subject_1_total
+ * @property string|null $term1_total
+ * @property string|null $term2_subject_1
+ * @property string|null $term2_subject_1_periodic_test
+ * @property string|null $term2_subject_1_subject_enrichment
+ * @property string|null $term2_subject_1_multiple_assessment
+ * @property string|null $term2_subject_1_portfolio
+ * @property string|null $term2_subject_1_total
  * @property string|null $term2_subject_1_grade
- * @property int|null $term2_subject_2
- * @property int|null $term2_subject_2_periodic_test
- * @property int|null $term2_subject_2_subject_enrichment
- * @property int|null $term2_subject_2_multiple_assessment
- * @property int|null $term2_subject_2_portfolio
- * @property int|null $term2_subject_2_total
+ * @property string|null $term2_subject_2
+ * @property string|null $term2_subject_2_periodic_test
+ * @property string|null $term2_subject_2_subject_enrichment
+ * @property string|null $term2_subject_2_multiple_assessment
+ * @property string|null $term2_subject_2_portfolio
+ * @property string|null $term2_subject_2_total
  * @property string|null $term2_subject_2_grade
- * @property int|null $term2_subject_3
- * @property int|null $term2_subject_3_periodic_test
- * @property int|null $term2_subject_3_subject_enrichment
- * @property int|null $term2_subject_3_multiple_assessment
- * @property int|null $term2_subject_3_portfolio
- * @property int|null $term2_subject_3_total
+ * @property string|null $term2_subject_3
+ * @property string|null $term2_subject_3_periodic_test
+ * @property string|null $term2_subject_3_subject_enrichment
+ * @property string|null $term2_subject_3_multiple_assessment
+ * @property string|null $term2_subject_3_portfolio
+ * @property string|null $term2_subject_3_total
  * @property string|null $term2_subject_3_grade
- * @property int|null $term2_subject_4
- * @property int|null $term2_subject_4_periodic_test
- * @property int|null $term2_subject_4_subject_enrichment
- * @property int|null $term2_subject_4_multiple_assessment
- * @property int|null $term2_subject_4_portfolio
- * @property int|null $term2_subject_4_total
+ * @property string|null $term2_subject_4
+ * @property string|null $term2_subject_4_periodic_test
+ * @property string|null $term2_subject_4_subject_enrichment
+ * @property string|null $term2_subject_4_multiple_assessment
+ * @property string|null $term2_subject_4_portfolio
+ * @property string|null $term2_subject_4_total
  * @property string|null $term2_subject_4_grade
- * @property int|null $term2_subject_5
- * @property int|null $term2_subject_5_periodic_test
- * @property int|null $term2_subject_5_subject_enrichment
- * @property int|null $term2_subject_5_multiple_assessment
- * @property int|null $term2_subject_5_portfolio
- * @property int|null $term2_subject_5_total
+ * @property string|null $term2_subject_5
+ * @property string|null $term2_subject_5_periodic_test
+ * @property string|null $term2_subject_5_subject_enrichment
+ * @property string|null $term2_subject_5_multiple_assessment
+ * @property string|null $term2_subject_5_portfolio
+ * @property string|null $term2_subject_5_total
  * @property string|null $term2_subject_5_grade
- * @property int|null $term2_subject_6
- * @property int|null $term2_subject_6_periodic_test
- * @property int|null $term2_subject_6_subject_enrichment
- * @property int|null $term2_subject_6_multiple_assessment
- * @property int|null $term2_subject_6_portfolio
- * @property int|null $term2_subject_6_total
+ * @property string|null $term2_subject_6
+ * @property string|null $term2_subject_6_periodic_test
+ * @property string|null $term2_subject_6_subject_enrichment
+ * @property string|null $term2_subject_6_multiple_assessment
+ * @property string|null $term2_subject_6_portfolio
+ * @property string|null $term2_subject_6_total
  * @property string|null $term2_subject_6_grade
- * @property int|null $term2_subject_7
- * @property int|null $term2_subject_7_periodic_test
- * @property int|null $term2_subject_7_subject_enrichment
- * @property int|null $term2_subject_7_multiple_assessment
- * @property int|null $term2_subject_7_portfolio
- * @property int|null $term2_subject_7_total
+ * @property string|null $term2_subject_7
+ * @property string|null $term2_subject_7_periodic_test
+ * @property string|null $term2_subject_7_subject_enrichment
+ * @property string|null $term2_subject_7_multiple_assessment
+ * @property string|null $term2_subject_7_portfolio
+ * @property string|null $term2_subject_7_total
  * @property string|null $term2_subject_7_grade
- * @property int|null $term1_subject_8
- * @property int|null $term1_subject_8_periodic_test
- * @property int|null $term1_subject_8_subject_enrichment
- * @property int|null $term1_subject_8_multiple_assessment
- * @property int|null $term1_subject_8_portfolio
- * @property int|null $term1_subject_8_total
+ * @property string|null $term1_subject_8
+ * @property string|null $term1_subject_8_periodic_test
+ * @property string|null $term1_subject_8_subject_enrichment
+ * @property string|null $term1_subject_8_multiple_assessment
+ * @property string|null $term1_subject_8_portfolio
+ * @property string|null $term1_subject_8_total
  * @property string|null $term1_subject_8_grade
- * @property int|null $term2_subject_8
- * @property int|null $term2_subject_8_periodic_test
- * @property int|null $term2_subject_8_subject_enrichment
- * @property int|null $term2_subject_8_multiple_assessment
- * @property int|null $term2_subject_8_portfolio
- * @property int|null $term2_subject_8_total
+ * @property string|null $term2_subject_8
+ * @property string|null $term2_subject_8_periodic_test
+ * @property string|null $term2_subject_8_subject_enrichment
+ * @property string|null $term2_subject_8_multiple_assessment
+ * @property string|null $term2_subject_8_portfolio
+ * @property string|null $term2_subject_8_total
  * @property string|null $term2_subject_8_grade
- * @property int|null $term1_subject_9
- * @property int|null $term1_subject_9_periodic_test
- * @property int|null $term1_subject_9_subject_enrichment
- * @property int|null $term1_subject_9_multiple_assessment
- * @property int|null $term1_subject_9_portfolio
- * @property int|null $term1_subject_9_total
+ * @property string|null $term1_subject_9
+ * @property string|null $term1_subject_9_periodic_test
+ * @property string|null $term1_subject_9_subject_enrichment
+ * @property string|null $term1_subject_9_multiple_assessment
+ * @property string|null $term1_subject_9_portfolio
+ * @property string|null $term1_subject_9_total
  * @property string|null $term1_subject_9_grade
- * @property int|null $term2_subject_9
- * @property int|null $term2_subject_9_periodic_test
- * @property int|null $term2_subject_9_subject_enrichment
- * @property int|null $term2_subject_9_multiple_assessment
- * @property int|null $term2_subject_9_portfolio
- * @property int|null $term2_subject_9_total
+ * @property string|null $term2_subject_9
+ * @property string|null $term2_subject_9_periodic_test
+ * @property string|null $term2_subject_9_subject_enrichment
+ * @property string|null $term2_subject_9_multiple_assessment
+ * @property string|null $term2_subject_9_portfolio
+ * @property string|null $term2_subject_9_total
  * @property string|null $term2_subject_9_grade
- * @property int|null $term2_total
- * @property int|null $term1_subject_2_ct
- * @property int|null $term1_subject_3_ct
- * @property int|null $term1_subject_4_ct
- * @property int|null $term1_subject_5_ct
- * @property int|null $term1_subject_6_ct
- * @property int|null $term1_subject_7_ct
- * @property int|null $term1_subject_8_ct
- * @property int|null $term1_subject_9_ct
- * @property int|null $term2_subject_1_ct
- * @property int|null $term2_subject_2_ct
- * @property int|null $term2_subject_3_ct
- * @property int|null $term2_subject_4_ct
- * @property int|null $term2_subject_5_ct
- * @property int|null $term2_subject_6_ct
- * @property int|null $term2_subject_7_ct
- * @property int|null $term2_subject_8_ct
- * @property int|null $term2_subject_9_ct
+ * @property string|null $term2_total
+ * @property string|null $term1_subject_2_ct
+ * @property string|null $term1_subject_3_ct
+ * @property string|null $term1_subject_4_ct
+ * @property string|null $term1_subject_5_ct
+ * @property string|null $term1_subject_6_ct
+ * @property string|null $term1_subject_7_ct
+ * @property string|null $term1_subject_8_ct
+ * @property string|null $term1_subject_9_ct
+ * @property string|null $term2_subject_1_ct
+ * @property string|null $term2_subject_2_ct
+ * @property string|null $term2_subject_3_ct
+ * @property string|null $term2_subject_4_ct
+ * @property string|null $term2_subject_5_ct
+ * @property string|null $term2_subject_6_ct
+ * @property string|null $term2_subject_7_ct
+ * @property string|null $term2_subject_8_ct
+ * @property string|null $term2_subject_9_ct
  *
+ * @property \App\Model\Entity\Mark $mark
  * @property \App\Model\Entity\Student $student
  */
 class Mark extends Entity
@@ -174,11 +174,9 @@ class Mark extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
-        'mark_id' => true,
         'student_id' => true,
         'academic_year' => true,
         'rollno' => true,
-        'class' => true,
         'term1_subject_1' => true,
         'term1_subject_1_ct' => true,
         'term1_subject_1_periodic_test' => true,
@@ -325,6 +323,7 @@ class Mark extends Entity
         'term2_subject_7_ct' => true,
         'term2_subject_8_ct' => true,
         'term2_subject_9_ct' => true,
+        'mark' => true,
         'student' => true,
     ];
 }

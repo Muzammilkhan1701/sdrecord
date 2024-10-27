@@ -12,6 +12,10 @@ namespace App\Controller;
 class AcademicYearsController extends AppController
 {
     
+    public $Students;
+
+   
+
 public function initialize(): void
 {
     parent::initialize();

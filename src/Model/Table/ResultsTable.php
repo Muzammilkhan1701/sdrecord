@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -15,24 +15,24 @@ use Cake\Validation\Validator;
  *
  * @method \App\Model\Entity\Result newEmptyEntity()
  * @method \App\Model\Entity\Result newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Result[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Result get($primaryKey, $options = [])
- * @method \App\Model\Entity\Result findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method array<\App\Model\Entity\Result> newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Result get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \App\Model\Entity\Result findOrCreate($search, ?callable $callback = null, array $options = [])
  * @method \App\Model\Entity\Result patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Result[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Result|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Result saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Result[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Result[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Result[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Result[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method array<\App\Model\Entity\Result> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Result|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \App\Model\Entity\Result saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method iterable<\App\Model\Entity\Result>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Result>|false saveMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Result>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Result> saveManyOrFail(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Result>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Result>|false deleteMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\Result>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\Result> deleteManyOrFail(iterable $entities, array $options = [])
  */
 class ResultsTable extends Table
 {
     /**
      * Initialize method
      *
-     * @param array $config The configuration for the Table.
+     * @param array<string, mixed> $config The configuration for the Table.
      * @return void
      */
     public function initialize(array $config): void
@@ -45,12 +45,6 @@ class ResultsTable extends Table
 
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
-            'joinType' => 'INNER',
-        ]);
-
-        $this->belongsTo('Marks', [
-            'foreignKey' => 'mark_id',
-            'joinType' => 'INNER',
         ]);
     }
 
@@ -72,7 +66,7 @@ class ResultsTable extends Table
             ->allowEmptyString('academic_year');
 
         $validator
-            ->integer('term1_total_marks')
+            ->decimal('term1_total_marks')
             ->allowEmptyString('term1_total_marks');
 
         $validator
@@ -85,7 +79,7 @@ class ResultsTable extends Table
             ->allowEmptyString('term1_grade');
 
         $validator
-            ->integer('term2_total_marks')
+            ->decimal('term2_total_marks')
             ->allowEmptyString('term2_total_marks');
 
         $validator
@@ -109,7 +103,7 @@ class ResultsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('student_id', 'Students'), ['errorField' => 'student_id']);
+        $rules->add($rules->existsIn(['student_id'], 'Students'), ['errorField' => 'student_id']);
 
         return $rules;
     }

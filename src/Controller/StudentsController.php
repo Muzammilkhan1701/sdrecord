@@ -14,6 +14,14 @@ use Authorization\Exception\ForbiddenException;
  */
 class StudentsController extends AppController
 {
+   
+    /**
+     * @var StudentsTable
+     */
+    public $Students;
+
+    
+
     public function beforeFilter(\Cake\Event\EventInterface $event)
 {
     parent::beforeFilter($event);

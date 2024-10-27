@@ -14,6 +14,12 @@ use Authorization\Exception\ForbiddenException;
 class ExcellenceController extends AppController
 {
     
+    /**
+     * @var ExcellenceTable
+     */
+    public $Excellence;
+
+    
 public function initialize(): void
 {
     parent::initialize();

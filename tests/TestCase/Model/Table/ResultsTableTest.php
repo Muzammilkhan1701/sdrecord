@@ -21,11 +21,12 @@ class ResultsTableTest extends TestCase
     /**
      * Fixtures
      *
-     * @var array<string>
+     * @var list<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'app.Results',
         'app.Students',
+        'app.Marks',
     ];
 
     /**

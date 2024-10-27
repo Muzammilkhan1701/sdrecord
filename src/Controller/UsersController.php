@@ -22,7 +22,31 @@ class UsersController extends AppController
     $this->Authentication->addUnauthenticatedActions(['login',]);
     }
     
-   
+   /**
+     * @var MarksTable
+     */
+    public $Marks;
+
+    /**
+     * @var StudentsTable
+     */
+    public $Students;
+
+    /**
+     * @var ResultsTable
+     */
+    public $Results;
+
+    /**
+     * @var AcademicYearsTable
+     */
+    public $AcademicYears;
+
+    /**
+     * @var ExcellenceTable
+     */
+    public $Excellence;
+
     /**
      * Initialize controller
      *

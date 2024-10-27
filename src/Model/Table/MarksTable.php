@@ -43,16 +43,9 @@ class MarksTable extends Table
         $this->setDisplayField('academic_year');
         $this->setPrimaryKey('mark_id');
 
-        $this->belongsTo('Marks', [
-            'foreignKey' => 'mark_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
         ]);
-        // $this->hasMany('Marks', [
-        //     'foreignKey' => 'mark_id',
-        // ]);
     }
 
     /**
@@ -63,10 +56,6 @@ class MarksTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
-        $validator
-            ->integer('mark_id')
-            ->notEmptyString('mark_id');
-
         $validator
             ->integer('student_id')
             ->allowEmptyString('student_id');
@@ -84,37 +73,31 @@ class MarksTable extends Table
             ->notEmptyString('rollno');
 
         $validator
-            ->scalar('class')
-            ->maxLength('class', 50)
-            ->requirePresence('class', 'create')
-            ->notEmptyString('class');
-
-        $validator
-            ->integer('term1_subject_1')
+            ->decimal('term1_subject_1')
             ->allowEmptyString('term1_subject_1');
 
         $validator
-            ->integer('term1_subject_1_ct')
+            ->decimal('term1_subject_1_ct')
             ->allowEmptyString('term1_subject_1_ct');
 
         $validator
-            ->integer('term1_subject_1_periodic_test')
+            ->decimal('term1_subject_1_periodic_test')
             ->allowEmptyString('term1_subject_1_periodic_test');
 
         $validator
-            ->integer('term1_subject_1_subject_enrichment')
+            ->decimal('term1_subject_1_subject_enrichment')
             ->allowEmptyString('term1_subject_1_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_1_multiple_assessment')
+            ->decimal('term1_subject_1_multiple_assessment')
             ->allowEmptyString('term1_subject_1_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_1_portfolio')
+            ->decimal('term1_subject_1_portfolio')
             ->allowEmptyString('term1_subject_1_portfolio');
 
         $validator
-            ->integer('term1_subject_1_total')
+            ->decimal('term1_subject_1_total')
             ->allowEmptyString('term1_subject_1_total');
 
         $validator
@@ -123,27 +106,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_1_grade');
 
         $validator
-            ->integer('term1_subject_2')
+            ->decimal('term1_subject_2')
             ->allowEmptyString('term1_subject_2');
 
         $validator
-            ->integer('term1_subject_2_periodic_test')
+            ->decimal('term1_subject_2_periodic_test')
             ->allowEmptyString('term1_subject_2_periodic_test');
 
         $validator
-            ->integer('term1_subject_2_subject_enrichment')
+            ->decimal('term1_subject_2_subject_enrichment')
             ->allowEmptyString('term1_subject_2_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_2_multiple_assessment')
+            ->decimal('term1_subject_2_multiple_assessment')
             ->allowEmptyString('term1_subject_2_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_2_portfolio')
+            ->decimal('term1_subject_2_portfolio')
             ->allowEmptyString('term1_subject_2_portfolio');
 
         $validator
-            ->integer('term1_subject_2_total')
+            ->decimal('term1_subject_2_total')
             ->allowEmptyString('term1_subject_2_total');
 
         $validator
@@ -152,27 +135,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_2_grade');
 
         $validator
-            ->integer('term1_subject_3')
+            ->decimal('term1_subject_3')
             ->allowEmptyString('term1_subject_3');
 
         $validator
-            ->integer('term1_subject_3_periodic_test')
+            ->decimal('term1_subject_3_periodic_test')
             ->allowEmptyString('term1_subject_3_periodic_test');
 
         $validator
-            ->integer('term1_subject_3_subject_enrichment')
+            ->decimal('term1_subject_3_subject_enrichment')
             ->allowEmptyString('term1_subject_3_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_3_multiple_assessment')
+            ->decimal('term1_subject_3_multiple_assessment')
             ->allowEmptyString('term1_subject_3_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_3_portfolio')
+            ->decimal('term1_subject_3_portfolio')
             ->allowEmptyString('term1_subject_3_portfolio');
 
         $validator
-            ->integer('term1_subject_3_total')
+            ->decimal('term1_subject_3_total')
             ->allowEmptyString('term1_subject_3_total');
 
         $validator
@@ -181,27 +164,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_3_grade');
 
         $validator
-            ->integer('term1_subject_4')
+            ->decimal('term1_subject_4')
             ->allowEmptyString('term1_subject_4');
 
         $validator
-            ->integer('term1_subject_4_periodic_test')
+            ->decimal('term1_subject_4_periodic_test')
             ->allowEmptyString('term1_subject_4_periodic_test');
 
         $validator
-            ->integer('term1_subject_4_subject_enrichment')
+            ->decimal('term1_subject_4_subject_enrichment')
             ->allowEmptyString('term1_subject_4_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_4_multiple_assessment')
+            ->decimal('term1_subject_4_multiple_assessment')
             ->allowEmptyString('term1_subject_4_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_4_portfolio')
+            ->decimal('term1_subject_4_portfolio')
             ->allowEmptyString('term1_subject_4_portfolio');
 
         $validator
-            ->integer('term1_subject_4_total')
+            ->decimal('term1_subject_4_total')
             ->allowEmptyString('term1_subject_4_total');
 
         $validator
@@ -210,27 +193,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_4_grade');
 
         $validator
-            ->integer('term1_subject_5')
+            ->decimal('term1_subject_5')
             ->allowEmptyString('term1_subject_5');
 
         $validator
-            ->integer('term1_subject_5_periodic_test')
+            ->decimal('term1_subject_5_periodic_test')
             ->allowEmptyString('term1_subject_5_periodic_test');
 
         $validator
-            ->integer('term1_subject_5_subject_enrichment')
+            ->decimal('term1_subject_5_subject_enrichment')
             ->allowEmptyString('term1_subject_5_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_5_multiple_assessment')
+            ->decimal('term1_subject_5_multiple_assessment')
             ->allowEmptyString('term1_subject_5_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_5_portfolio')
+            ->decimal('term1_subject_5_portfolio')
             ->allowEmptyString('term1_subject_5_portfolio');
 
         $validator
-            ->integer('term1_subject_5_total')
+            ->decimal('term1_subject_5_total')
             ->allowEmptyString('term1_subject_5_total');
 
         $validator
@@ -239,27 +222,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_5_grade');
 
         $validator
-            ->integer('term1_subject_6')
+            ->decimal('term1_subject_6')
             ->allowEmptyString('term1_subject_6');
 
         $validator
-            ->integer('term1_subject_6_periodic_test')
+            ->decimal('term1_subject_6_periodic_test')
             ->allowEmptyString('term1_subject_6_periodic_test');
 
         $validator
-            ->integer('term1_subject_6_subject_enrichment')
+            ->decimal('term1_subject_6_subject_enrichment')
             ->allowEmptyString('term1_subject_6_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_6_multiple_assessment')
+            ->decimal('term1_subject_6_multiple_assessment')
             ->allowEmptyString('term1_subject_6_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_6_portfolio')
+            ->decimal('term1_subject_6_portfolio')
             ->allowEmptyString('term1_subject_6_portfolio');
 
         $validator
-            ->integer('term1_subject_6_total')
+            ->decimal('term1_subject_6_total')
             ->allowEmptyString('term1_subject_6_total');
 
         $validator
@@ -268,27 +251,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_6_grade');
 
         $validator
-            ->integer('term1_subject_7')
+            ->decimal('term1_subject_7')
             ->allowEmptyString('term1_subject_7');
 
         $validator
-            ->integer('term1_subject_7_periodic_test')
+            ->decimal('term1_subject_7_periodic_test')
             ->allowEmptyString('term1_subject_7_periodic_test');
 
         $validator
-            ->integer('term1_subject_7_subject_enrichment')
+            ->decimal('term1_subject_7_subject_enrichment')
             ->allowEmptyString('term1_subject_7_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_7_multiple_assessment')
+            ->decimal('term1_subject_7_multiple_assessment')
             ->allowEmptyString('term1_subject_7_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_7_portfolio')
+            ->decimal('term1_subject_7_portfolio')
             ->allowEmptyString('term1_subject_7_portfolio');
 
         $validator
-            ->integer('term1_subject_7_total')
+            ->decimal('term1_subject_7_total')
             ->allowEmptyString('term1_subject_7_total');
 
         $validator
@@ -297,31 +280,31 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_7_grade');
 
         $validator
-            ->integer('term1_total')
+            ->decimal('term1_total')
             ->allowEmptyString('term1_total');
 
         $validator
-            ->integer('term2_subject_1')
+            ->decimal('term2_subject_1')
             ->allowEmptyString('term2_subject_1');
 
         $validator
-            ->integer('term2_subject_1_periodic_test')
+            ->decimal('term2_subject_1_periodic_test')
             ->allowEmptyString('term2_subject_1_periodic_test');
 
         $validator
-            ->integer('term2_subject_1_subject_enrichment')
+            ->decimal('term2_subject_1_subject_enrichment')
             ->allowEmptyString('term2_subject_1_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_1_multiple_assessment')
+            ->decimal('term2_subject_1_multiple_assessment')
             ->allowEmptyString('term2_subject_1_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_1_portfolio')
+            ->decimal('term2_subject_1_portfolio')
             ->allowEmptyString('term2_subject_1_portfolio');
 
         $validator
-            ->integer('term2_subject_1_total')
+            ->decimal('term2_subject_1_total')
             ->allowEmptyString('term2_subject_1_total');
 
         $validator
@@ -330,27 +313,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_1_grade');
 
         $validator
-            ->integer('term2_subject_2')
+            ->decimal('term2_subject_2')
             ->allowEmptyString('term2_subject_2');
 
         $validator
-            ->integer('term2_subject_2_periodic_test')
+            ->decimal('term2_subject_2_periodic_test')
             ->allowEmptyString('term2_subject_2_periodic_test');
 
         $validator
-            ->integer('term2_subject_2_subject_enrichment')
+            ->decimal('term2_subject_2_subject_enrichment')
             ->allowEmptyString('term2_subject_2_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_2_multiple_assessment')
+            ->decimal('term2_subject_2_multiple_assessment')
             ->allowEmptyString('term2_subject_2_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_2_portfolio')
+            ->decimal('term2_subject_2_portfolio')
             ->allowEmptyString('term2_subject_2_portfolio');
 
         $validator
-            ->integer('term2_subject_2_total')
+            ->decimal('term2_subject_2_total')
             ->allowEmptyString('term2_subject_2_total');
 
         $validator
@@ -359,27 +342,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_2_grade');
 
         $validator
-            ->integer('term2_subject_3')
+            ->decimal('term2_subject_3')
             ->allowEmptyString('term2_subject_3');
 
         $validator
-            ->integer('term2_subject_3_periodic_test')
+            ->decimal('term2_subject_3_periodic_test')
             ->allowEmptyString('term2_subject_3_periodic_test');
 
         $validator
-            ->integer('term2_subject_3_subject_enrichment')
+            ->decimal('term2_subject_3_subject_enrichment')
             ->allowEmptyString('term2_subject_3_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_3_multiple_assessment')
+            ->decimal('term2_subject_3_multiple_assessment')
             ->allowEmptyString('term2_subject_3_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_3_portfolio')
+            ->decimal('term2_subject_3_portfolio')
             ->allowEmptyString('term2_subject_3_portfolio');
 
         $validator
-            ->integer('term2_subject_3_total')
+            ->decimal('term2_subject_3_total')
             ->allowEmptyString('term2_subject_3_total');
 
         $validator
@@ -388,27 +371,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_3_grade');
 
         $validator
-            ->integer('term2_subject_4')
+            ->decimal('term2_subject_4')
             ->allowEmptyString('term2_subject_4');
 
         $validator
-            ->integer('term2_subject_4_periodic_test')
+            ->decimal('term2_subject_4_periodic_test')
             ->allowEmptyString('term2_subject_4_periodic_test');
 
         $validator
-            ->integer('term2_subject_4_subject_enrichment')
+            ->decimal('term2_subject_4_subject_enrichment')
             ->allowEmptyString('term2_subject_4_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_4_multiple_assessment')
+            ->decimal('term2_subject_4_multiple_assessment')
             ->allowEmptyString('term2_subject_4_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_4_portfolio')
+            ->decimal('term2_subject_4_portfolio')
             ->allowEmptyString('term2_subject_4_portfolio');
 
         $validator
-            ->integer('term2_subject_4_total')
+            ->decimal('term2_subject_4_total')
             ->allowEmptyString('term2_subject_4_total');
 
         $validator
@@ -417,27 +400,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_4_grade');
 
         $validator
-            ->integer('term2_subject_5')
+            ->decimal('term2_subject_5')
             ->allowEmptyString('term2_subject_5');
 
         $validator
-            ->integer('term2_subject_5_periodic_test')
+            ->decimal('term2_subject_5_periodic_test')
             ->allowEmptyString('term2_subject_5_periodic_test');
 
         $validator
-            ->integer('term2_subject_5_subject_enrichment')
+            ->decimal('term2_subject_5_subject_enrichment')
             ->allowEmptyString('term2_subject_5_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_5_multiple_assessment')
+            ->decimal('term2_subject_5_multiple_assessment')
             ->allowEmptyString('term2_subject_5_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_5_portfolio')
+            ->decimal('term2_subject_5_portfolio')
             ->allowEmptyString('term2_subject_5_portfolio');
 
         $validator
-            ->integer('term2_subject_5_total')
+            ->decimal('term2_subject_5_total')
             ->allowEmptyString('term2_subject_5_total');
 
         $validator
@@ -446,27 +429,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_5_grade');
 
         $validator
-            ->integer('term2_subject_6')
+            ->decimal('term2_subject_6')
             ->allowEmptyString('term2_subject_6');
 
         $validator
-            ->integer('term2_subject_6_periodic_test')
+            ->decimal('term2_subject_6_periodic_test')
             ->allowEmptyString('term2_subject_6_periodic_test');
 
         $validator
-            ->integer('term2_subject_6_subject_enrichment')
+            ->decimal('term2_subject_6_subject_enrichment')
             ->allowEmptyString('term2_subject_6_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_6_multiple_assessment')
+            ->decimal('term2_subject_6_multiple_assessment')
             ->allowEmptyString('term2_subject_6_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_6_portfolio')
+            ->decimal('term2_subject_6_portfolio')
             ->allowEmptyString('term2_subject_6_portfolio');
 
         $validator
-            ->integer('term2_subject_6_total')
+            ->decimal('term2_subject_6_total')
             ->allowEmptyString('term2_subject_6_total');
 
         $validator
@@ -475,27 +458,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_6_grade');
 
         $validator
-            ->integer('term2_subject_7')
+            ->decimal('term2_subject_7')
             ->allowEmptyString('term2_subject_7');
 
         $validator
-            ->integer('term2_subject_7_periodic_test')
+            ->decimal('term2_subject_7_periodic_test')
             ->allowEmptyString('term2_subject_7_periodic_test');
 
         $validator
-            ->integer('term2_subject_7_subject_enrichment')
+            ->decimal('term2_subject_7_subject_enrichment')
             ->allowEmptyString('term2_subject_7_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_7_multiple_assessment')
+            ->decimal('term2_subject_7_multiple_assessment')
             ->allowEmptyString('term2_subject_7_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_7_portfolio')
+            ->decimal('term2_subject_7_portfolio')
             ->allowEmptyString('term2_subject_7_portfolio');
 
         $validator
-            ->integer('term2_subject_7_total')
+            ->decimal('term2_subject_7_total')
             ->allowEmptyString('term2_subject_7_total');
 
         $validator
@@ -504,27 +487,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_7_grade');
 
         $validator
-            ->integer('term1_subject_8')
+            ->decimal('term1_subject_8')
             ->allowEmptyString('term1_subject_8');
 
         $validator
-            ->integer('term1_subject_8_periodic_test')
+            ->decimal('term1_subject_8_periodic_test')
             ->allowEmptyString('term1_subject_8_periodic_test');
 
         $validator
-            ->integer('term1_subject_8_subject_enrichment')
+            ->decimal('term1_subject_8_subject_enrichment')
             ->allowEmptyString('term1_subject_8_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_8_multiple_assessment')
+            ->decimal('term1_subject_8_multiple_assessment')
             ->allowEmptyString('term1_subject_8_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_8_portfolio')
+            ->decimal('term1_subject_8_portfolio')
             ->allowEmptyString('term1_subject_8_portfolio');
 
         $validator
-            ->integer('term1_subject_8_total')
+            ->decimal('term1_subject_8_total')
             ->allowEmptyString('term1_subject_8_total');
 
         $validator
@@ -533,27 +516,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_8_grade');
 
         $validator
-            ->integer('term2_subject_8')
+            ->decimal('term2_subject_8')
             ->allowEmptyString('term2_subject_8');
 
         $validator
-            ->integer('term2_subject_8_periodic_test')
+            ->decimal('term2_subject_8_periodic_test')
             ->allowEmptyString('term2_subject_8_periodic_test');
 
         $validator
-            ->integer('term2_subject_8_subject_enrichment')
+            ->decimal('term2_subject_8_subject_enrichment')
             ->allowEmptyString('term2_subject_8_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_8_multiple_assessment')
+            ->decimal('term2_subject_8_multiple_assessment')
             ->allowEmptyString('term2_subject_8_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_8_portfolio')
+            ->decimal('term2_subject_8_portfolio')
             ->allowEmptyString('term2_subject_8_portfolio');
 
         $validator
-            ->integer('term2_subject_8_total')
+            ->decimal('term2_subject_8_total')
             ->allowEmptyString('term2_subject_8_total');
 
         $validator
@@ -562,27 +545,27 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_8_grade');
 
         $validator
-            ->integer('term1_subject_9')
+            ->decimal('term1_subject_9')
             ->allowEmptyString('term1_subject_9');
 
         $validator
-            ->integer('term1_subject_9_periodic_test')
+            ->decimal('term1_subject_9_periodic_test')
             ->allowEmptyString('term1_subject_9_periodic_test');
 
         $validator
-            ->integer('term1_subject_9_subject_enrichment')
+            ->decimal('term1_subject_9_subject_enrichment')
             ->allowEmptyString('term1_subject_9_subject_enrichment');
 
         $validator
-            ->integer('term1_subject_9_multiple_assessment')
+            ->decimal('term1_subject_9_multiple_assessment')
             ->allowEmptyString('term1_subject_9_multiple_assessment');
 
         $validator
-            ->integer('term1_subject_9_portfolio')
+            ->decimal('term1_subject_9_portfolio')
             ->allowEmptyString('term1_subject_9_portfolio');
 
         $validator
-            ->integer('term1_subject_9_total')
+            ->decimal('term1_subject_9_total')
             ->allowEmptyString('term1_subject_9_total');
 
         $validator
@@ -591,27 +574,27 @@ class MarksTable extends Table
             ->allowEmptyString('term1_subject_9_grade');
 
         $validator
-            ->integer('term2_subject_9')
+            ->decimal('term2_subject_9')
             ->allowEmptyString('term2_subject_9');
 
         $validator
-            ->integer('term2_subject_9_periodic_test')
+            ->decimal('term2_subject_9_periodic_test')
             ->allowEmptyString('term2_subject_9_periodic_test');
 
         $validator
-            ->integer('term2_subject_9_subject_enrichment')
+            ->decimal('term2_subject_9_subject_enrichment')
             ->allowEmptyString('term2_subject_9_subject_enrichment');
 
         $validator
-            ->integer('term2_subject_9_multiple_assessment')
+            ->decimal('term2_subject_9_multiple_assessment')
             ->allowEmptyString('term2_subject_9_multiple_assessment');
 
         $validator
-            ->integer('term2_subject_9_portfolio')
+            ->decimal('term2_subject_9_portfolio')
             ->allowEmptyString('term2_subject_9_portfolio');
 
         $validator
-            ->integer('term2_subject_9_total')
+            ->decimal('term2_subject_9_total')
             ->allowEmptyString('term2_subject_9_total');
 
         $validator
@@ -620,75 +603,75 @@ class MarksTable extends Table
             ->allowEmptyString('term2_subject_9_grade');
 
         $validator
-            ->integer('term2_total')
+            ->decimal('term2_total')
             ->allowEmptyString('term2_total');
 
         $validator
-            ->integer('term1_subject_2_ct')
+            ->decimal('term1_subject_2_ct')
             ->allowEmptyString('term1_subject_2_ct');
 
         $validator
-            ->integer('term1_subject_3_ct')
+            ->decimal('term1_subject_3_ct')
             ->allowEmptyString('term1_subject_3_ct');
 
         $validator
-            ->integer('term1_subject_4_ct')
+            ->decimal('term1_subject_4_ct')
             ->allowEmptyString('term1_subject_4_ct');
 
         $validator
-            ->integer('term1_subject_5_ct')
+            ->decimal('term1_subject_5_ct')
             ->allowEmptyString('term1_subject_5_ct');
 
         $validator
-            ->integer('term1_subject_6_ct')
+            ->decimal('term1_subject_6_ct')
             ->allowEmptyString('term1_subject_6_ct');
 
         $validator
-            ->integer('term1_subject_7_ct')
+            ->decimal('term1_subject_7_ct')
             ->allowEmptyString('term1_subject_7_ct');
 
         $validator
-            ->integer('term1_subject_8_ct')
+            ->decimal('term1_subject_8_ct')
             ->allowEmptyString('term1_subject_8_ct');
 
         $validator
-            ->integer('term1_subject_9_ct')
+            ->decimal('term1_subject_9_ct')
             ->allowEmptyString('term1_subject_9_ct');
 
         $validator
-            ->integer('term2_subject_1_ct')
+            ->decimal('term2_subject_1_ct')
             ->allowEmptyString('term2_subject_1_ct');
 
         $validator
-            ->integer('term2_subject_2_ct')
+            ->decimal('term2_subject_2_ct')
             ->allowEmptyString('term2_subject_2_ct');
 
         $validator
-            ->integer('term2_subject_3_ct')
+            ->decimal('term2_subject_3_ct')
             ->allowEmptyString('term2_subject_3_ct');
 
         $validator
-            ->integer('term2_subject_4_ct')
+            ->decimal('term2_subject_4_ct')
             ->allowEmptyString('term2_subject_4_ct');
 
         $validator
-            ->integer('term2_subject_5_ct')
+            ->decimal('term2_subject_5_ct')
             ->allowEmptyString('term2_subject_5_ct');
 
         $validator
-            ->integer('term2_subject_6_ct')
+            ->decimal('term2_subject_6_ct')
             ->allowEmptyString('term2_subject_6_ct');
 
         $validator
-            ->integer('term2_subject_7_ct')
+            ->decimal('term2_subject_7_ct')
             ->allowEmptyString('term2_subject_7_ct');
 
         $validator
-            ->integer('term2_subject_8_ct')
+            ->decimal('term2_subject_8_ct')
             ->allowEmptyString('term2_subject_8_ct');
 
         $validator
-            ->integer('term2_subject_9_ct')
+            ->decimal('term2_subject_9_ct')
             ->allowEmptyString('term2_subject_9_ct');
 
         return $validator;
@@ -703,7 +686,6 @@ class MarksTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['mark_id'], 'Marks'), ['errorField' => 'mark_id']);
         $rules->add($rules->existsIn(['student_id'], 'Students'), ['errorField' => 'student_id']);
 
         return $rules;

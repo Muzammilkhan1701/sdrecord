@@ -11,14 +11,15 @@ use Cake\ORM\Entity;
  * @property int $result_id
  * @property int|null $student_id
  * @property string|null $academic_year
- * @property int|null $term1_total_marks
+ * @property string|null $term1_total_marks
  * @property string|null $term1_percentage
  * @property string|null $term1_grade
- * @property int|null $term2_total_marks
+ * @property string|null $term2_total_marks
  * @property string|null $term2_percentage
  * @property string|null $term2_grade
  *
  * @property \App\Model\Entity\Student $student
+ * @property \App\Model\Entity\Mark $mark
  */
 class Result extends Entity
 {
@@ -41,5 +42,6 @@ class Result extends Entity
         'term2_percentage' => true,
         'term2_grade' => true,
         'student' => true,
+        'mark' => true,
     ];
 }

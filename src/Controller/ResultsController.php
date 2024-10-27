@@ -15,6 +15,32 @@ use Authorization\Exception\ForbiddenException;
  */
 class ResultsController extends AppController
 {
+
+    /**
+     * @var MarksTable
+     */
+    public $Marks;
+
+    /**
+     * @var StudentsTable
+     */
+    public $Students;
+
+    /**
+     * @var ResultsTable
+     */
+    public $Results;
+
+    /**
+     * @var AcademicYearsTable
+     */
+    public $AcademicYears;
+
+    /**
+     * @var ExcellenceTable
+     */
+    public $Excellence;
+
     public function initialize(): void
     {
         parent::initialize();
@@ -200,7 +226,7 @@ $results = $this->paginate($query);
             }
             $this->Flash->error(__('The result could not be saved. Please, try again.'));
         }
-        $students = $this->Results->Students->find('list', ['limit' => 200])->all();
+        $students = $this->Results->Students->find('list')->all();
         $this->set(compact('result', 'students'));
 
         } catch (ForbiddenException $e) {
@@ -235,7 +261,7 @@ $results = $this->paginate($query);
             }
             $this->Flash->error(__('The result could not be saved. Please, try again.'));
         }
-        $students = $this->Results->Students->find('list', ['limit' => 200])->all();
+        $students = $this->Results->Students->find('list')->all();
         $this->set(compact('result', 'students'));
 
         } catch (ForbiddenException $e) {
