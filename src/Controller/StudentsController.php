@@ -90,34 +90,6 @@ class StudentsController extends AppController
         }
         $this->set(compact('student'));
     }
-    public function getClass()
-    {
-        $this->request->allowMethod(['ajax', 'get']);
-        $studentId = $this->request->getQuery('student_id');
-
-        if (!$studentId) {
-            throw new NotFoundException(__('Invalid student ID'));
-        }
-
-        // Fetch the student's class
-        $student = $this->Students->find()
-            ->select(['class']) // Only select the 'class' field
-            ->where(['id' => $studentId])
-            ->first();
-
-        if ($student) {
-            $this->set('class', $student->class);
-        } else {
-            $this->set('class', null);
-        }
-
-        $this->viewBuilder()->setOption('serialize', ['class']); // Serialize the response
-    }
-
-
-    
-
-
 
     /**
      * Edit method
