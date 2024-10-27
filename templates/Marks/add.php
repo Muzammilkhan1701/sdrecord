@@ -11,13 +11,26 @@
             <fieldset>
                 <legend><?= __('Add Mark') ?></legend>
                 <div class="mb-5">
-    <!-- Dropdown for selecting student -->
-    <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true, 'id' => 'student-id']) ?>
+    <!-- Dropdown for selecting student
+    <?= $this->Form->control('student_id', ['options' => $students, 'empty' => true, 'id' => 'std',]) ?>
+    <?= $this->Form->control('student_id', [
+    'options' => [], // Initially empty
+    'empty' => true, 
+    'id' => 'student_id' // Set ID for Select2
+]) ?> -->
+
+<!-- Dropdown for Select2 Search -->
+<?= $this->Form->control('student_id', [
+    'empty' => 'Select a Student',
+    'id' => 'student_id' 
+]) ?>
+
+
     <?= $this->Form->control('academic_year') ?>
     <?= $this->Form->control('rollno') ?>
     
     <!-- Class display area -->
-    <div class="form-control " id="class-display">Select a student to view the class</div>
+    <div id="class-display" style="margin-top: 10px; font-weight: bold;">Select a student to view the class</div>
 </div>
 
                 <!-- Dropdown to select Term 1 or Term 2 -->
@@ -485,7 +498,6 @@
                                     <?= $this->Form->control('term2_subject_9', ['label' => 'Exam Marks (Term 2)', 'max' => 80]) ?>
                                     <?= $this->Form->control('term2_subject_9_ct', ['label' => 'CT Marks (Term 1)', 'max' => 10, 'class' => 'subject-ct']); ?>
                                     <?= $this->Form->control('term2_subject_9_ptcal', ['label' => 'PT Calc (Term 2)', 'id' => 'term2_subject_9_ptcal', 'type' => 'number', 'max' => 25]) ?>
-
                                     <?= $this->Form->control('term2_subject_9_periodic_test', [
                                         'label' => 'Periodic Test (Term 2)',
                                         'id' => 'term2_subject_9_periodic_test',
@@ -516,6 +528,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Select2 Library -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -554,6 +570,84 @@ $(document).ready(function() {
             });
         } else {
             $('#class-display').text(''); // Clear the class display if no student is selected
+        }
+    });
+});
+</script>
+<!-- Preload Student Data into JavaScript -->
+<script>
+    // This PHP array contains each student's ID and class information
+    // const studentsData = <?= json_encode($students); ?>;
+    
+</script>
+<script>
+    <?php
+    // Convert the ResultSet into a suitable array for JavaScript
+    $studentsData = [];
+    foreach ($students as $student) {
+        $studentsData[$student->id] = [
+            'name' => $student->name,  // Replace 'name' with the actual name field in your student data
+            'class' => $student->class // Replace 'class' with the actual class field in your student data
+        ];
+    }
+    ?>
+    const studentsData = <?= json_encode($studentsData); ?>;
+</script>
+<!-- 
+<script>
+$(document).ready(function() {
+    // Initialize Select2 on the student dropdown
+    $('#student_id').select2({
+        placeholder: "Search for a student",
+        allowClear: true
+    });
+
+    // Populate Select2 options from studentsData
+    Object.keys(studentsData).forEach(function(studentId) {
+        const studentName = studentsData[studentId].name;  // Replace 'name' with actual field name
+        $('#student_id').append(new Option(studentName, studentId));
+    });
+
+    // Show the selected student's class
+    $('#student_id').on('change', function() {
+        const selectedId = $(this).val();
+        if (selectedId && studentsData[selectedId]) {
+            const className = studentsData[selectedId].class;  // Replace 'class' with actual field name
+            $('#class-display').text(className || 'Class not found');
+        } else {
+            $('#class-display').text('Select a student to view the class');
+        }
+    });
+});
+</script> -->
+
+<script>
+$(document).ready(function() {
+    // Initialize Select2 on the student dropdown
+    $('#student_id').select2({
+        placeholder: "Search for a student",
+        allowClear: true
+    });
+
+    // Populate the dropdown options with student names and IDs
+    Object.keys(studentsData).forEach(function(studentId) {
+        const studentName = studentsData[studentId].name;
+        $('#student_id').append(new Option(studentName, studentId));
+    });
+
+    // Event listener to display the selected student's class
+    $('#student_id').on('change', function() {
+        const selectedId = $(this).val();
+        
+        // Log to confirm the selectedId and student data
+        console.log('Selected ID:', selectedId);
+        console.log('Student Data:', studentsData[selectedId]);
+
+        if (selectedId && studentsData[selectedId]) {
+            const className = studentsData[selectedId].class;
+            $('#class-display').text(className || 'Class not found');
+        } else {
+            $('#class-display').text('Select a student to view the class');
         }
     });
 });
