@@ -14,11 +14,23 @@ use Authorization\Exception\ForbiddenException;
  */
 class MarksController extends AppController
 {
+
+    // public $Excellence;
+    // public $Results;
+    // public $Students;
+
+    // public $AcademicYears;
+
     public function initialize(): void
     {
+       
+
+
         parent::initialize();
 
         // Load the Results table
+        $this->Students = $this->fetchTable('Students');
+
         $this->Results = $this->fetchTable('Results');
         $this->AcademicYears = $this->fetchTable('AcademicYears');
         $this->Excellence = $this->fetchTable('Excellence');
@@ -77,16 +89,43 @@ class MarksController extends AppController
     ob_start(); // Start output buffering
     $mark = $this->Marks->newEmptyEntity();
     $this->Authorization->authorize($mark);
+    
+    $class= null;
+
 
     if ($this->request->is('post')) {
         $data = $this->request->getData(); // Retrieve request data
+
+        // Fetch the class of the selected student
+        $studentId = $data['student_id'] ?? null; // Get student ID from the request data
+
+        if ($studentId) {
+            $student = $this->Marks->Students->get($studentId, ['fields' => ['class']]);
+            $this->log("Student Object: " . print_r($student, true), 'debug');
+
+            if ($student) {
+                $class = $student->class; // Correctly assigning the class from the student entity
+                $this->log("Class: " . $class, 'debug'); // Ensure class is a string
+
+            } else {
+                $this->Flash->error(__('Student not found.'));
+                return $this->redirect(['action' => 'add']);
+            }
+        } else {
+            $this->Flash->error(__('No student selected.'));
+            return $this->redirect(['action' => 'add']);
+        }
+        
+
 
         // Check if the record already exists
         $existingMark = $this->Marks->find('all', [
             'conditions' => [
                 'student_id' => $data['student_id'],
                 'academic_year' => $data['academic_year'],
-                'class' => $data['class'], // Add class or other relevant fields here if needed
+                'class' => $class, // Use the fetched class here
+
+                // 'class' => $data['class'], // Add class or other relevant fields here if needed
             ]
         ])->first();
 
@@ -173,7 +212,7 @@ class MarksController extends AppController
         $this->Flash->error(__('The mark could not be saved. Please, try again.'));
     }
     $students = $this->Marks->Students->find('list', ['limit' =>500])->all();
-    $this->set(compact('mark', 'students'));
+    $this->set(compact('mark', 'students','class'));
 
     ob_end_flush(); // Flush the output buffer and turn it off
 }

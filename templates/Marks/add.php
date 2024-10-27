@@ -20,17 +20,33 @@
 ]) ?> -->
 
 <!-- Dropdown for Select2 Search -->
-<?= $this->Form->control('student_id', [
+<!-- <?= $this->Form->control('student_id', [
     'empty' => 'Select a Student',
     'id' => 'student_id' 
-]) ?>
+]) ?> -->
+
+<!-- Dropdown for selecting student -->
+<?= $this->Form->control('student_id', [
+            'options' => $students,
+            'empty' => 'Select a Student',
+            'id' => 'student_id'
+        ]) ?>
+
+        <!-- Class display area -->
+        <div id="class-display" style="margin-top: 10px; font-weight: bold;">
+            <?php if ($class): ?>
+                Selected Class: <?= h($class) ?>
+            <?php else: ?>
+                Select a student to view the class
+            <?php endif; ?>
+        </div>
 
 
     <?= $this->Form->control('academic_year') ?>
     <?= $this->Form->control('rollno') ?>
     
     <!-- Class display area -->
-    <div id="class-display" style="margin-top: 10px; font-weight: bold;">Select a student to view the class</div>
+    <!-- <div id="class-display" style="margin-top: 10px; font-weight: bold;">Select a student to view the class</div> -->
 </div>
 
                 <!-- Dropdown to select Term 1 or Term 2 -->
