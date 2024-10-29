@@ -18,7 +18,7 @@ class StudentsController extends AppController
     /**
      * @var StudentsTable
      */
-    public $Students;
+    // public $Students;
 
     
 
@@ -35,6 +35,8 @@ public function initialize(): void
     {
         parent::initialize();
         $this->fetchTable('Students'); // This loads the StudentsComponent
+        $this->fetchTable('Marks'); // This loads the StudentsComponent
+
     }
 
     /**
@@ -50,6 +52,31 @@ public function initialize(): void
 
         $this->set(compact('students'));
     }
+
+public function classwise()
+{
+    $this->Authorization->skipAuthorization();
+
+    // Get the selected class from query parameters
+    $class = $this->request->getQuery('class');
+
+    // Fetch students with their marks for the selected class
+    $results = $this->Students->find()
+        ->select(['Students.student_id', 'Students.name', 'Students.section', 'Marks.class'])
+        ->innerJoinWith('Marks', function ($q) use ($class) {
+            $query = $q->where(['Marks.class IS NOT' => null]);
+            if ($class) {
+                $query = $query->where(['Marks.class' => $class]);
+            }
+            return $query;
+        })
+        ->group(['Students.student_id', 'Students.name', 'Students.section', 'Marks.class'])
+        ->order(['Students.section' => 'ASC'])
+        ->all();
+
+    // Pass the results and selected class to the view
+    $this->set(compact('results', 'class'));
+}
 
     /**
      * View method

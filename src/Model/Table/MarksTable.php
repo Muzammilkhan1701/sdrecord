@@ -45,7 +45,16 @@ class MarksTable extends Table
 
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
+            'bindingKey' => 'student_id',
         ]);
+    }
+
+    public function getStudentClass($studentId)
+    {
+        return $this->find()
+            ->select(['class'])
+            ->where(['student_id' => $studentId])
+            ->first();
     }
 
     /**
@@ -71,6 +80,12 @@ class MarksTable extends Table
             ->maxLength('rollno', 20)
             ->requirePresence('rollno', 'create')
             ->notEmptyString('rollno');
+
+        $validator
+            ->scalar('class')
+            ->maxLength('class', 20)
+            ->requirePresence('class', 'create')
+            ->notEmptyString('class');
 
         $validator
             ->decimal('term1_subject_1')

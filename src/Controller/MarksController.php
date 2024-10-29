@@ -37,6 +37,8 @@ class MarksController extends AppController
         parent::initialize();
 
         // Load the Results table
+        $this->Students = $this->fetchTable('Students');
+
         $this->Results = $this->fetchTable('Results');
         $this->AcademicYears = $this->fetchTable('AcademicYears');
         $this->Excellence = $this->fetchTable('Excellence');
@@ -88,7 +90,6 @@ class MarksController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-
 
     public function add()
 {
@@ -196,7 +197,6 @@ class MarksController extends AppController
     ob_end_flush(); // Flush the output buffer and turn it off
 }
 
-
     private function handleAcademicYearAndResults($mark)
     {
         $studentId = $mark->student_id;
@@ -214,7 +214,6 @@ class MarksController extends AppController
             return;
         }
 
-
         if (!$this->AcademicYears->exists(['student_id' => $studentId, 'academic_year' => $academicYear])) {
             $academicYearEntity = $this->AcademicYears->newEntity([
                 'student_id' => $studentId,
@@ -222,9 +221,6 @@ class MarksController extends AppController
             ]);
             $this->AcademicYears->save($academicYearEntity);
         }
-
-
-
         $resultEntity = $this->Results->newEntity([
             'student_id' => $studentId,
             'academic_year' => $academicYear,
@@ -241,8 +237,6 @@ class MarksController extends AppController
             $this->Flash->error(__('The result could not be saved. Please, try again.'));
         }
     }
-
-
     // Private method to determine grades
     private function determineGrade($percent)
     {
@@ -264,8 +258,6 @@ class MarksController extends AppController
             return 'E';
         }
     }
-
-
 
     /**
      * Edit method
@@ -324,7 +316,6 @@ class MarksController extends AppController
                         $mark->$portfolioKey; // Calculate total
                 }
             }
-
             // Calculate Term 1 Total
             $term1Total = 0;
             for ($i = 1; $i <= 9; $i++) {
@@ -356,7 +347,6 @@ class MarksController extends AppController
                         $mark->$portfolioKey; // Calculate total
                 }
             }
-
             // Calculate Term 2 Total
             $term2Total = 0;
             for ($i = 1; $i <= 9; $i++) {
@@ -379,14 +369,10 @@ class MarksController extends AppController
                     ->where(['student_id' => $studentId, 'academic_year' => $academicYear])
                     ->first();
 
-                if ($excellence) {
-                    $excellenceId = $excellence->id;
+                    $this->Flash->success(__('The mark has been update.'));
 
-                    // Redirect to the Excellence edit page with excellence_id and student_id
-                    return $this->redirect(['controller' => 'marks', 'action' => 'index', $excellenceId, $studentId]);
-                } else {
-                    $this->Flash->error(__('No excellence record found for this student.'));
-                }
+                    return $this->redirect(['controller' => 'marks', 'action' => 'index',$mark_id]);
+
             } else {
                 $this->Flash->error(__('The marks could not be updated. Please, try again.'));
             }
@@ -429,8 +415,6 @@ class MarksController extends AppController
         }
     }
 
-
-
     /**
      * Delete method
      *
@@ -447,7 +431,6 @@ try{
 
     // Delete associated results and academic years
     $this->deleteAssociatedData($mark);
-    
 
     if ($this->Marks->delete($mark)) {
         $this->Flash->success(__('The mark has been deleted.'));
@@ -467,7 +450,6 @@ try{
 
     }
 
-
     // Private method to delete associated data
     private function deleteAssociatedData($mark)
     {
@@ -482,4 +464,6 @@ try{
         $this->fetchTable('AcademicYears');
         $this->AcademicYears->deleteAll(['student_id' => $studentId, 'academic_year' => $academicYear]);
     }
+
+
 }

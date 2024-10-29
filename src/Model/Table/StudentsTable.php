@@ -43,6 +43,10 @@ class StudentsTable extends Table
         $this->hasMany('Excellence', [
             'foreignKey' => 'student_id', // Foreign key in the excellence table
         ]);
+        $this->hasMany('Marks', [
+            'foreignKey' => 'student_id', // Adjust according to your actual foreign key
+            'joinType' => 'INNER' // You can change this to LEFT if needed
+        ]);
     }
 
     /**

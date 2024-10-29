@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property int|null $student_id
  * @property string $academic_year
  * @property string $rollno
+ * @property string $class
  * @property string|null $term1_subject_1
  * @property string|null $term1_subject_1_ct
  * @property string|null $term1_subject_1_periodic_test
@@ -177,6 +178,7 @@ class Mark extends Entity
         'student_id' => true,
         'academic_year' => true,
         'rollno' => true,
+        'class' => true,
         'term1_subject_1' => true,
         'term1_subject_1_ct' => true,
         'term1_subject_1_periodic_test' => true,
