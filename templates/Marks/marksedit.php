@@ -1,8 +1,8 @@
- <div class="container mt-5">
+<div class="container mt-5">
      <div class="row ">
          <div class="column-responsive column-100">
              <div class="marks form content">
-                 <?= $this->Form->create($mark, ['url' => ['action' => 'marksadd']]) ?>
+                 <?= $this->Form->create($mark, ) ?>
                  <fieldset>
                      <legend><?= __('Add Mark') ?></legend>
                      <div class="row mb-4">
@@ -45,7 +45,7 @@
                                      <th>Periodic Test (5)</th>
                                      <th>Subject Enrichment (5)</th>
                                      <th>Multiple Assessment (5)</th>
-                                     <th class="portfolio-field" >Portfolio / Oral (5)</th>
+                                     <th>Portfolio / Oral (5)</th>
                                  </tr>
                              </thead>
                              <tbody>
@@ -64,7 +64,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_1_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_1_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_1_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_1_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for English (Term 2) -->
                                  <tr class="term2-fields common-subjects">
@@ -81,7 +81,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_1_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_1_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_1_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_1_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
 
                                  <!-- Row for Hindi (Term 1) -->
@@ -99,7 +99,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_2_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_2_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_2_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_2_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Hindi (Term 2) -->
                                  <tr class="term2-fields common-subjects">
@@ -116,7 +116,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_2_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_2_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_2_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_2_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- marathi/sanskrit -->
                                  <tr class="term1-fields common-subjects">
@@ -133,7 +133,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_3_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_3_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_3_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_3_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Marathi (Term 2) -->
                                  <tr class="term2-fields common-subjects">
@@ -150,7 +150,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_3_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_3_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_3_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_3_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- maths -->
                                  <tr class="term1-fields common-subjects">
@@ -167,7 +167,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_4_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_4_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_4_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_4_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Mathematics (Term 2) -->
                                  <tr class="term2-fields common-subjects">
@@ -184,7 +184,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_4_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_4_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_4_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_4_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- science -->
                                  <tr class="term1-fields class-5-10-subjects">
@@ -201,7 +201,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_5_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_5_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_5_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_5_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Science (Term 2) -->
                                  <tr class="term2-fields class-5-10-subjects ">
@@ -218,7 +218,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_5_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_5_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_5_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_5_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- social science -->
                                  <tr class="term1-fields class-5-10-subjects">
@@ -235,7 +235,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_6_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_6_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_6_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_6_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Social Science (Term 2) -->
                                  <tr class="term2-fields class-5-10-subjects">
@@ -252,7 +252,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_6_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_6_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_6_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_6_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- computer -->
                                  <tr class="term1-fields common-subjects">
@@ -269,7 +269,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_7_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_7_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_7_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_7_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for Computer (Term 2) -->
                                  <tr class="term2-fields common-subjects ">
@@ -286,7 +286,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_7_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_7_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_7_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_7_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- evs  -->
                                  <tr class="term1-fields class-1-4-subjects">
@@ -303,7 +303,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_8_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_8_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_8_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_8_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for EVS (Term 2) -->
                                  <tr class="term2-fields class-1-4-subjects">
@@ -320,7 +320,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_8_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_8_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_8_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_8_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- gk -->
                                  <tr class="term1-fields class-1-4-subjects">
@@ -337,7 +337,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_9_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term1_subject_9_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term1_subject_9_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term1_subject_9_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
                                  <!-- Row for GK (Term 2) -->
                                  <tr class="term2-fields class-1-4-subjects">
@@ -354,7 +354,7 @@
                                             ]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_9_subject_enrichment', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                      <td><?= $this->Form->control('term2_subject_9_multiple_assessment', ['label' => false, 'step' => '0.1', 'max' => 10]) ?></td>
-                                     <td><?= $this->Form->control('term2_subject_9_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5,'class' => 'portfolio-field']) ?></td>
+                                     <td><?= $this->Form->control('term2_subject_9_portfolio', ['label' => false, 'step' => '0.1', 'max' => 5]) ?></td>
                                  </tr>
 
                              </tbody>
@@ -387,7 +387,6 @@
                                  if (classValue >= 1 && classValue <= 4) {
                                      $('.class-1-4-subjects').show();
                                      $('.class-5-10-subjects').hide();
-
                                  } else if (classValue >= 5 && classValue <= 10) {
                                      $('.class-5-10-subjects').show();
                                      $('.class-1-4-subjects').hide();
@@ -414,10 +413,8 @@
 
                                      if (classValue >= 1 && classValue <= 4) {
                                          $('.class-1-4-subjects.term1-fields').show();
-                                         $('.portfolio-field').hide();
                                      } else if (classValue >= 5 && classValue <= 10) {
                                          $('.class-5-10-subjects.term1-fields').show();
-                                         $('.portfolio-field').show();
                                      }
                                  } else if (selectedTerm === 'Term 2') {
                                      $('.term2-fields').hide();
@@ -425,10 +422,8 @@
 
                                      if (classValue >= 1 && classValue <= 4) {
                                          $('.class-1-4-subjects.term2-fields').show();
-                                         $('.portfolio-field').hide();
                                      } else if (classValue >= 5 && classValue <= 10) {
                                          $('.class-5-10-subjects.term2-fields').show();
-                                         $('.portfolio-field').show();
                                      }
                                  }
                              });

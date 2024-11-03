@@ -33,7 +33,7 @@
              <?php endif; ?>
 
              <!-- Admin and Teacher can see student classes -->
-             <!-- <?php if (in_array($role, ['admin', 'teacher'])): ?>
+              <?php if (in_array($role, ['admin', 'teacher'])): ?>
             
              <li class="nav-item p-3 pb-0 d-inline-flex gap-1">
                  <a class="nav-link text-white pb-0" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
@@ -43,38 +43,38 @@
              <div class="collapse" id="collapseExample2">
                  <div class="card card-body bg-dark border-0 p-0">
                  <li class="pb-0">
-                     <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'schoolclasses', 'action' => 'index']); ?>">
+                     <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'students', 'action' => 'classwise']); ?>">
                          <i class="fas fa-graduation-cap text-white"></i> Classes
                      </a>
                  </li>
-                 <li class="pb-0">
+                 <!-- <li class="pb-0">
                      <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'subjects', 'action' => 'index']); ?>">
                          <i class="fas fa-book text-white"></i> Subjects
                      </a>
-                 </li>
+                 </li> -->
 
-                  <li class="pb-0">
+                   <!-- <li class="pb-0">
                      <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'terms', 'action' => 'index']); ?>">
                          <i class="fas fa-book text-white"></i> Terms
-                     </a>
+                     </a> 
                  </li> 
 
                  <li class="pb-0">
                      <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'classsubcombs', 'action' => 'index']); ?>">
                          <i class="fas fa-book text-white"></i> Class Subject Combination
                      </a>
-                 </li>
-                  <li class="pb-0">
+                 </li> -->
+                  <!-- <li class="pb-0">
                      <a class="nav-link text-white" href="<?= $this->Url->build(['controller' => 'academicYears', 'action' => 'index']); ?>">
                          <i class="fas fa-book text-white"></i> Academic Year 
                      </a>
-                 </li> 
+                 </li>  -->
 
 
                 </div>
              </div>
 
-             <?php endif; ?> -->
+             <?php endif; ?> 
 
              <!-- Admin and Teacher can manage  -->
              <?php if (in_array($role, ['admin', 'teacher'])): ?>

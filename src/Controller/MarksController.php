@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Authorization\Exception\ForbiddenException;
 
@@ -14,7 +15,7 @@ use Authorization\Exception\ForbiddenException;
  */
 class MarksController extends AppController
 {
-    
+
 
     /**
      * @var ResultsTable
@@ -30,8 +31,8 @@ class MarksController extends AppController
      * @var ExcellenceTable
      */
     public $Excellence;
+    public $Students;
 
-    
     public function initialize(): void
     {
         parent::initialize();
@@ -53,6 +54,274 @@ class MarksController extends AppController
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login', 'marksheet', 'rform']);
     }
+    public function marksadd()
+    {
+        // $this->Authorization->skipAuthorization();
+        ob_start(); // Start output buffering
+        $mark = $this->Marks->newEmptyEntity();
+        $this->Authorization->authorize($mark);
+
+        if ($this->request->is('post')) {
+            $data = $this->request->getData(); // Retrieve request data
+
+            // Check if the record already exists
+            $existingMark = $this->Marks->find('all', [
+                'conditions' => [
+                    'student_id' => $data['student_id'],
+                    'academic_year' => $data['academic_year'],
+                    'class' => $data['class'], // Add class or other relevant fields here if needed
+                ]
+            ])->first();
+
+            if ($existingMark) {
+                // If record exists, show flash message
+                $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
+                return $this->redirect(['action' => 'marksadd']);
+            }
+
+            $mark = $this->Marks->patchEntity($mark, $data);
+
+            // Calculate Term 1 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term1_subject_$i";
+                $periodicTestKey = "term1_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term1_subject_{$i}_portfolio";
+                $ctKey = "term1_subject_{$i}_ct"; // Define separately for completeness
+
+                // Check if all required marks are set
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term1_subject_{$i}_total"; // Define the total key
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 1 Total
+            $term1Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term1_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term1Total += $mark->$totalKey;
+                }
+            }
+            $mark->term1_total = $term1Total;
+
+            // Calculate Term 2 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term2_subject_$i";
+                $periodicTestKey = "term2_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term2_subject_{$i}_portfolio";
+                $ctKey = "term2_subject_{$i}_ct"; // Define separately for completeness
+
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term2_subject_{$i}_total";
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 2 Total
+            $term2Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term2_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term2Total += $mark->$totalKey;
+                }
+            }
+            $mark->term2_total = $term2Total;
+
+            if ($this->Marks->save($mark)) {
+                if (isset($mark->term1_total) && isset($mark->term2_total)) {
+                    $this->handleAcademicYearAndResults($mark); // Handle results logic
+                } else {
+                    $this->Flash->error(__('Term totals are missing.'));
+                }
+
+                $this->Flash->success(__('The mark has been saved.'));
+                return $this->redirect(['controller' => 'marks', 'action' => 'index']);
+            }
+            $this->Flash->error(__('The mark could not be saved. Please, try again.'));
+        }
+        $students = $this->Marks->Students->find('list',)->all();
+        $this->set(compact('mark', 'students'));
+
+        ob_end_flush(); // Flush the output buffer and turn it off
+
+
+    }
+    public function marksedit($mark_id = null)
+    {
+        ob_start(); // Start output buffering
+        $mark = $this->Marks->get($mark_id, contain: []);
+        $this->Authorization->authorize($mark);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $data = $this->request->getData();
+            // Check if a duplicate entry exists (excluding the current record being edited)
+            $existingMark = $this->Marks->find(
+                'all',
+                [
+                    'conditions' => [
+                        'student_id' => $data['student_id'],
+                        'academic_year' => $data['academic_year'],
+                        'class' => $data['class'], // Add other relevant fields here
+                        'mark_id !=' => $mark_id, // Exclude current record from the check
+                    ]
+                ]
+            )->first();
+
+            if ($existingMark) {
+                $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
+                return $this->redirect(['action' => 'marksedit', $mark_id]);
+            }
+
+            $mark = $this->Marks->patchEntity($mark, $data);
+
+            // Calculate Term 1 Total for each subject
+            // Calculate Term 1 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term1_subject_$i";
+                $periodicTestKey = "term1_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term1_subject_{$i}_portfolio";
+                $ctKey = "term1_subject_{$i}_ct"; // Define separately for completeness
+
+                // Check if all required marks are set
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term1_subject_{$i}_total"; // Define the total key
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 1 Total
+            $term1Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term1_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term1Total += $mark->$totalKey;
+                }
+            }
+            $mark->term1_total = $term1Total;
+
+            // Calculate Term 2 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term2_subject_$i";
+                $periodicTestKey = "term2_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term2_subject_{$i}_portfolio";
+                $ctKey = "term2_subject_{$i}_ct"; // Define separately for completeness
+
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term2_subject_{$i}_total";
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 2 Total
+            $term2Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term2_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term2Total += $mark->$totalKey;
+                }
+            }
+            $mark->term2_total = $term2Total;
+
+            if ($this->Marks->save($mark)) {
+                $this->updateResultsTable($mark, $term1Total, $term2Total);
+                // Fetch the excellence_id based on the student_id
+                $studentId = $mark->student_id;
+                $academicYear = $mark->academic_year; // Assuming academic year is part of the marks table
+
+
+                // Find the excellence record associated with this student
+                $excellence = $this->Excellence->find('all')
+                    ->where(['student_id' => $studentId, 'academic_year' => $academicYear])
+                    ->first();
+
+                $this->Flash->success(__('The mark has been update.'));
+
+                return $this->redirect(['controller' => 'marks', 'action' => 'index', $mark_id]);
+            } else {
+                $this->Flash->error(__('The marks could not be updated. Please, try again.'));
+            }
+        }
+        $students = $this->Marks->Students->find('list',)->all();
+        $this->set(compact('mark', 'students'));
+
+        ob_end_flush(); // Flush the output buffer and turn it off
+
+    }
+
     /**
      * Index method
      *
@@ -92,110 +361,130 @@ class MarksController extends AppController
      */
 
     public function add()
-{
-    ob_start(); // Start output buffering
-    $mark = $this->Marks->newEmptyEntity();
-    $this->Authorization->authorize($mark);
+    {
+        ob_start(); // Start output buffering
+        $mark = $this->Marks->newEmptyEntity();
+        $this->Authorization->authorize($mark);
 
-    if ($this->request->is('post')) {
-        $data = $this->request->getData(); // Retrieve request data
+        if ($this->request->is('post')) {
+            $data = $this->request->getData(); // Retrieve request data
 
-        // Check if the record already exists
-        $existingMark = $this->Marks->find('all', [
-            'conditions' => [
-                'student_id' => $data['student_id'],
-                'academic_year' => $data['academic_year'],
-                'class' => $data['class'], // Add class or other relevant fields here if needed
-            ]
-        ])->first();
+            // Check if the record already exists
+            $existingMark = $this->Marks->find('all', [
+                'conditions' => [
+                    'student_id' => $data['student_id'],
+                    'academic_year' => $data['academic_year'],
+                    'class' => $data['class'], // Add class or other relevant fields here if needed
+                ]
+            ])->first();
 
-        if ($existingMark) {
-            // If record exists, show flash message
-            $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
-            return $this->redirect(['action' => 'add']);
-        }
-
-        $mark = $this->Marks->patchEntity($mark, $data);
-
-        // Calculate Term 1 Total for each subject
-        for ($i = 1; $i <= 9; $i++) {
-            $subjectKey = "term1_subject_$i";
-            $ctKey = "term1_subject_{$i}_ct";
-            $periodicTestKey = "term1_subject_{$i}_periodic_test";
-            $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
-            $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
-            $portfolioKey = "term1_subject_{$i}_portfolio";
-
-            if (
-                isset($mark->$subjectKey) && isset($mark->$ctKey) && isset($mark->$periodicTestKey) &&
-                isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
-                isset($mark->$portfolioKey)
-            ) {
-                $totalKey = "term1_subject_{$i}_total"; // Define the total key
-                $mark->$totalKey = $mark->$subjectKey + $mark->$ctKey + $mark->$periodicTestKey +
-                    $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
-                    $mark->$portfolioKey; // Calculate total
-            }
-        }
-
-        // Calculate Term 1 Total
-        $term1Total = 0;
-        for ($i = 1; $i <= 9; $i++) {
-            $totalKey = "term1_subject_{$i}_total"; // Get the total key
-            if (isset($mark->$totalKey)) {
-                $term1Total += $mark->$totalKey; // Add to total
-            }
-        }
-        $mark->term1_total = $term1Total;
-
-        // Calculate Term 2 Total for each subject
-        for ($i = 1; $i <= 9; $i++) {
-            $subjectKey = "term2_subject_$i";
-            $ctKey = "term2_subject_{$i}_ct";
-            $periodicTestKey = "term2_subject_{$i}_periodic_test";
-            $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
-            $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
-            $portfolioKey = "term2_subject_{$i}_portfolio";
-
-            if (
-                isset($mark->$subjectKey) && isset($mark->$ctKey) && isset($mark->$periodicTestKey) &&
-                isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
-                isset($mark->$portfolioKey)
-            ) {
-                $totalKey = "term2_subject_{$i}_total"; // Define the total key
-                $mark->$totalKey = $mark->$subjectKey + $mark->$ctKey + $mark->$periodicTestKey +
-                    $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
-                    $mark->$portfolioKey; // Calculate total
-            }
-        }
-
-        // Calculate Term 2 Total
-        $term2Total = 0;
-        for ($i = 1; $i <= 9; $i++) {
-            $totalKey = "term2_subject_{$i}_total"; // Get the total key
-            if (isset($mark->$totalKey)) {
-                $term2Total += $mark->$totalKey; // Add to total
-            }
-        }
-        $mark->term2_total = $term2Total;
-
-        if ($this->Marks->save($mark)) {
-            if (isset($mark->term1_total) && isset($mark->term2_total)) {
-                $this->handleAcademicYearAndResults($mark); // Handle results logic
-            } else {
-                $this->Flash->error(__('Term totals are missing.'));
+            if ($existingMark) {
+                // If record exists, show flash message
+                $this->Flash->error(__('Duplicate entry detected for student, year, and class.'));
+                return $this->redirect(['action' => 'add']);
             }
 
-            $this->Flash->success(__('The mark has been saved.'));
-            return $this->redirect(['controller' => 'marks', 'action' => 'index']);
+            $mark = $this->Marks->patchEntity($mark, $data);
+            // Calculate Term 1 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term1_subject_$i";
+                $periodicTestKey = "term1_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term1_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term1_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term1_subject_{$i}_portfolio";
+                $ctKey = "term1_subject_{$i}_ct"; // Define separately for completeness
+
+                // Check if all required marks are set
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term1_subject_{$i}_total"; // Define the total key
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 1 Total
+            $term1Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term1_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term1Total += $mark->$totalKey;
+                }
+            }
+            $mark->term1_total = $term1Total;
+
+            // Calculate Term 2 Total for each subject
+            for ($i = 1; $i <= 9; $i++) {
+                $subjectKey = "term2_subject_$i";
+                $periodicTestKey = "term2_subject_{$i}_periodic_test";
+                $subjectEnrichmentKey = "term2_subject_{$i}_subject_enrichment";
+                $multipleAssessmentKey = "term2_subject_{$i}_multiple_assessment";
+                $portfolioKey = "term2_subject_{$i}_portfolio";
+                $ctKey = "term2_subject_{$i}_ct"; // Define separately for completeness
+
+                if (
+                    isset($mark->$subjectKey) && isset($mark->$periodicTestKey) &&
+                    isset($mark->$subjectEnrichmentKey) && isset($mark->$multipleAssessmentKey) &&
+                    isset($mark->$portfolioKey)
+                ) {
+                    $totalKey = "term2_subject_{$i}_total";
+
+                    // Calculate total based on class range
+                    if ($mark->class >= 6 && $mark->class <= 10) {
+                        // Exclude ctKey for classes 6-10
+                        $mark->$totalKey = $mark->$subjectKey + $mark->$periodicTestKey +
+                            $mark->$subjectEnrichmentKey + $mark->$multipleAssessmentKey +
+                            $mark->$portfolioKey;
+                    } else {
+                        // Include ctKey for other classes
+                        $mark->$totalKey = $mark->$subjectKey + (isset($mark->$ctKey) ? $mark->$ctKey : 0) +
+                            $mark->$periodicTestKey + $mark->$subjectEnrichmentKey +
+                            $mark->$multipleAssessmentKey + $mark->$portfolioKey;
+                    }
+                }
+            }
+
+            // Calculate Term 2 Total
+            $term2Total = 0;
+            for ($i = 1; $i <= 9; $i++) {
+                $totalKey = "term2_subject_{$i}_total";
+                if (isset($mark->$totalKey)) {
+                    $term2Total += $mark->$totalKey;
+                }
+            }
+            $mark->term2_total = $term2Total;
+
+            if ($this->Marks->save($mark)) {
+                if (isset($mark->term1_total) && isset($mark->term2_total)) {
+                    $this->handleAcademicYearAndResults($mark); // Handle results logic
+                } else {
+                    $this->Flash->error(__('Term totals are missing.'));
+                }
+
+                $this->Flash->success(__('The mark has been saved.'));
+                return $this->redirect(['controller' => 'marks', 'action' => 'index']);
+            }
+            $this->Flash->error(__('The mark could not be saved. Please, try again.'));
         }
-        $this->Flash->error(__('The mark could not be saved. Please, try again.'));
+        $students = $this->Marks->Students->find('list',)->all();
+        $this->set(compact('mark', 'students'));
+
+        ob_end_flush(); // Flush the output buffer and turn it off
     }
-    $students = $this->Marks->Students->find('list',)->all();
-    $this->set(compact('mark', 'students'));
-
-    ob_end_flush(); // Flush the output buffer and turn it off
-}
 
     private function handleAcademicYearAndResults($mark)
     {
@@ -369,10 +658,9 @@ class MarksController extends AppController
                     ->where(['student_id' => $studentId, 'academic_year' => $academicYear])
                     ->first();
 
-                    $this->Flash->success(__('The mark has been update.'));
+                $this->Flash->success(__('The mark has been update.'));
 
-                    return $this->redirect(['controller' => 'marks', 'action' => 'index',$mark_id]);
-
+                return $this->redirect(['controller' => 'marks', 'action' => 'index', $mark_id]);
             } else {
                 $this->Flash->error(__('The marks could not be updated. Please, try again.'));
             }
@@ -423,31 +711,29 @@ class MarksController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
-    {    
-try{
-    $this->request->allowMethod(['post', 'delete']);
-    $mark = $this->Marks->get($id);
-    $this->Authorization->authorize($mark);
+    {
+        try {
+            $this->request->allowMethod(['post', 'delete']);
+            $mark = $this->Marks->get($id);
+            $this->Authorization->authorize($mark);
 
-    // Delete associated results and academic years
-    $this->deleteAssociatedData($mark);
+            // Delete associated results and academic years
+            $this->deleteAssociatedData($mark);
 
-    if ($this->Marks->delete($mark)) {
-        $this->Flash->success(__('The mark has been deleted.'));
-    } else {
-        $this->Flash->error(__('The mark could not be deleted. Please, try again.'));
-    }
+            if ($this->Marks->delete($mark)) {
+                $this->Flash->success(__('The mark has been deleted.'));
+            } else {
+                $this->Flash->error(__('The mark could not be deleted. Please, try again.'));
+            }
 
-    return $this->redirect(['action' => 'index']);
-
-} catch (ForbiddenException $e) {
-    $this->Flash->error(__('You are not authorized to perform this action.'));
-    return $this->redirect(['action' => 'index']);
-} catch (RecordNotFoundException $e) {
-    $this->Flash->error(__('The record could not be found.'));
-    return $this->redirect(['action' => 'index']);
-}
-
+            return $this->redirect(['action' => 'index']);
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not authorized to perform this action.'));
+            return $this->redirect(['action' => 'index']);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The record could not be found.'));
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     // Private method to delete associated data
@@ -464,6 +750,4 @@ try{
         $this->fetchTable('AcademicYears');
         $this->AcademicYears->deleteAll(['student_id' => $studentId, 'academic_year' => $academicYear]);
     }
-
-
 }

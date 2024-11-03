@@ -33,7 +33,7 @@
                 <a href="<?= $this->Url->build(['controller' => 'students', 'action' => 'index']); ?>" class="text-white text-decoration-none">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo h($studentCount); ?></h5>
-                        <p class="card-text">Reg'd Users</p>
+                        <p class="card-text">Reg'd Students </p>
                         <i class="fas fa-users fa-3x"></i>
                     </div>
                 </a>
@@ -46,17 +46,13 @@
             <div class="card bg-info text-white">
                 <a href="<?= $this->Url->build(['controller' => 'marks', 'action' => 'index']); ?>" class="text-white text-decoration-none">
                     <div class="card-body">
-                        <h5 class="card-title">Marks Management</h5>
+                    <h5 class="card-title"><?php echo h($marksCount); ?></h5>
                         <p class="card-text">Manage Marks</p>
                         <i class="fas fa-book-open fa-3x"></i>
                     </div>
                 </a>
             </div>
         </div>
-        <?php endif; ?>
-
-        <!-- Section for Admin only -->
-        <?php if ($this->request->getAttribute('identity')->role === 'admin'): ?>
         <div class="col-md-6 mb-4">
             <div class="card bg-success text-white">
                 <a href="<?= $this->Url->build(['controller' => 'results', 'action' => 'index']); ?>" class="text-white text-decoration-none">
@@ -64,6 +60,34 @@
                         <h5 class="card-title"><?php echo h($resultCount); ?></h5>
                         <p class="card-text">Results Declared</p>
                         <i class="fas fa-chart-line fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card bg-warning text-white">
+                <a href="<?= $this->Url->build(['controller' => 'excellence', 'action' => 'index']); ?>" class="text-white text-decoration-none">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo h($excellenceCount); ?></h5>
+                        <p class="card-text">Co-scholastics Declared</p>
+                        <i class="fas fa-chart-line fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <?php endif; ?>
+
+        <!-- Section for Admin only -->
+        <?php if ($this->request->getAttribute('identity')->role === 'admin'): ?>
+        <div class="col-md-6 mb-4">
+            <div class="card bg-danger text-white">
+                <a href="<?= $this->Url->build(['controller' => 'results', 'action' => 'index']); ?>" class="text-white text-decoration-none">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo h($userCount); ?></h5>
+                        <p class="card-text">Reg'd Users</p>
+                        <!-- <i class="fas fa-chart-line fa-3x"></i> -->
+                        <i class="bi bi-people-fill" style="font-size: 4rem;"></i>
                     </div>
                 </a>
             </div>

@@ -23,6 +23,16 @@ class markPolicy
         return $user->role === 'admin' || $user->id === $mark->user_id;
 
     }
+    public function canMarksadd(IdentityInterface $user, mark $mark)
+    {
+        return $user->role === 'admin' || $user->id === $mark->user_id;
+
+    }
+    public function canMarksedit(IdentityInterface $user, mark $mark)
+    {
+        return $user->role === 'admin' || $user->id === $mark->user_id;
+
+    }
 
     /**
      * Check if $user can edit mark

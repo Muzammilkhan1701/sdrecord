@@ -5,7 +5,6 @@ namespace App\Controller;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Authorization\Exception\ForbiddenException;
 
-
 /**
  * Students Controller
  *
@@ -14,13 +13,11 @@ use Authorization\Exception\ForbiddenException;
  */
 class StudentsController extends AppController
 {
-   
+
     /**
      * @var StudentsTable
      */
     // public $Students;
-
-    
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
 {
@@ -34,6 +31,7 @@ class StudentsController extends AppController
 public function initialize(): void
     {
         parent::initialize();
+        
         $this->fetchTable('Students'); // This loads the StudentsComponent
         $this->fetchTable('Marks'); // This loads the StudentsComponent
 
@@ -57,25 +55,36 @@ public function classwise()
 {
     $this->Authorization->skipAuthorization();
 
-    // Get the selected class from query parameters
     $class = $this->request->getQuery('class');
+    $selectedYear = $this->request->getQuery('year');
+    $section = $this->request->getQuery('section'); // Fetch section from query parameters
 
-    // Fetch students with their marks for the selected class
-    $results = $this->Students->find()
-        ->select(['Students.student_id', 'Students.name', 'Students.section', 'Marks.class'])
-        ->innerJoinWith('Marks', function ($q) use ($class) {
-            $query = $q->where(['Marks.class IS NOT' => null]);
-            if ($class) {
-                $query = $query->where(['Marks.class' => $class]);
-            }
-            return $query;
-        })
-        ->group(['Students.student_id', 'Students.name', 'Students.section', 'Marks.class'])
-        ->order(['Students.section' => 'ASC'])
-        ->all();
+    // Initialize results variable
+    $results = [];
 
-    // Pass the results and selected class to the view
-    $this->set(compact('results', 'class'));
+    if (!empty($class) && !empty($selectedYear) && !empty($section)) {
+        // Fetch students with their marks for the selected class, section, and academic year
+        $results = $this->Students->find()
+            ->select([
+                'Students.student_id',
+                'Students.name',
+                'Students.section',
+                'Marks.class',
+                'Marks.term1_total',
+                'Marks.term2_total'
+            ])
+            ->innerJoinWith('Marks', function ($q) use ($class, $selectedYear, $section) {
+                return $q->where([
+                    'Marks.class' => $class,
+                    'Marks.academic_year' => $selectedYear,
+                    'Students.section' => $section // Filter by section
+                ]);
+            })
+            ->all();
+    }
+
+    // Set variables for the view
+    $this->set(compact('results', 'class', 'selectedYear', 'section'));
 }
 
     /**
@@ -159,7 +168,6 @@ try{
     $this->Flash->error(__('The record could not be found.'));
     return $this->redirect(['action' => 'index']);
 }
-
     }
 
     /**

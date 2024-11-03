@@ -62,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <th><?= __('Class') ?></th>
-                                        <td><?= h($mark->class) ?></td>
+                                        <td id="class-level"><?= h($mark->class) ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -229,7 +229,7 @@
         </div>
 
         <!-- Science Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class5-10" <?= ($mark->class >= 5 && $mark->class <= 10) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Science</h5>
@@ -268,7 +268,7 @@
         </div>
 
         <!-- Social Science Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class5-10" <?= ($mark->class >= 5 && $mark->class <= 10) ? '' : 'style="display:none;"' ?>">
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Social Science</h5>
@@ -345,7 +345,7 @@
             </div>
         </div>
         <!-- EVS Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class1-4" <?= ($mark->class >= 1 && $mark->class <= 4) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">EVS</h5>
@@ -375,7 +375,7 @@
                             <td><?= $mark->term1_subject_8_total === null ? '' : $this->Number->format($mark->term1_subject_8_total) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Computer Grade') ?></th>
+                            <th><?= __('EVS Grade') ?></th>
                             <td><?= h($mark->term1_subject_8_grade) ?></td>
                         </tr>
                     </table>
@@ -384,7 +384,7 @@
         </div>
 
         <!-- GK Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class1-4" <?= ($mark->class >= 1 && $mark->class <= 4) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">GK</h5>
@@ -414,7 +414,7 @@
                             <td><?= $mark->term2_subject_9_total === null ? '' : $this->Number->format($mark->term2_subject_9_total) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Computer Grade') ?></th>
+                            <th><?= __('GK Grade') ?></th>
                             <td><?= h($mark->term2_subject_9_grade) ?></td>
                         </tr>
                     </table>
@@ -589,7 +589,7 @@
         </div>
 
         <!-- Science Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class5-10" <?= ($mark->class >= 5 && $mark->class <= 10) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Science</h5>
@@ -628,7 +628,7 @@
         </div>
 
         <!-- Social Science Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class5-10" <?= ($mark->class >= 5 && $mark->class <= 10) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Social Science</h5>
@@ -667,7 +667,7 @@
         </div>
 
         <!-- Computer Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 ">
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Computer</h5>
@@ -706,7 +706,7 @@
         </div>
 
         <!-- EVS Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class1-4" <?= ($mark->class >= 1 && $mark->class <= 4) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">EVS</h5>
@@ -736,7 +736,7 @@
                             <td><?= $mark->term2_subject_8_total === null ? '' : $this->Number->format($mark->term2_subject_8_total) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Computer Grade') ?></th>
+                            <th><?= __('EVS Grade') ?></th>
                             <td><?= h($mark->term2_subject_8_grade) ?></td>
                         </tr>
                     </table>
@@ -745,7 +745,7 @@
         </div>
 
         <!-- GK Card -->
-        <div class="col-md-6">
+        <div class="col-md-6 class1-4" <?= ($mark->class >= 1 && $mark->class <= 4) ? '' : 'style="display:none;"' ?>>
             <div class="card mt-4">
                 <div class="card-body">
                     <h5 class="card-title text-primary">GK</h5>
@@ -775,7 +775,7 @@
                             <td><?= $mark->term2_subject_9_total === null ? '' : $this->Number->format($mark->term2_subject_9_total) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Computer Grade') ?></th>
+                            <th><?= __('GK Grade') ?></th>
                             <td><?= h($mark->term2_subject_9_grade) ?></td>
                         </tr>
                     </table>
@@ -796,3 +796,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        var classLevel = parseInt($('#class-level').text().trim());
+
+        // Show/Hide based on class
+        if (classLevel >= 1 && classLevel <= 4) {
+            $('.class5-10').hide();
+            $('.class1-4').show();
+        } else if (classLevel >= 5 && classLevel <= 10) {
+            $('.class1-4').hide();
+            $('.class5-10').show();
+        } else {
+            $('.class1-4, .class5-10').hide();
+        }
+    });
+</script>

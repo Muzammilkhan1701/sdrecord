@@ -1,5 +1,5 @@
 <div class="marks index content">
-    <?= $this->Html->link(('New Mark'), ['action' => 'add'], ['class' => 'button float-right btn btn-primary']) ?>
+    <?= $this->Html->link(('New Mark'), ['action' => 'marksadd'], ['class' => 'button float-right btn btn-primary']) ?>
     <h3 class="text-center"><?= __('Marks List') ?></h3>
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped">
@@ -80,7 +80,7 @@
 
         <td class="actions">
             <?= $this->Html->link(('View'), ['action' => 'view', $mark->mark_id], ['class' => 'btn btn-info btn-sm']) ?>
-            <?= $this->Html->link(('Edit'), ['action' => 'edit', $mark->mark_id], ['class' => 'btn btn-warning btn-sm']) ?>
+            <?= $this->Html->link(('Edit'), ['action' => 'marksedit', $mark->mark_id], ['class' => 'btn btn-warning btn-sm']) ?>
             <?= $this->Form->postLink(('Delete'), ['action' => 'delete', $mark->mark_id], ['confirm' => __('Are you sure you want to delete # {0}?', $mark->mark_id), 'class' => 'btn btn-danger btn-sm']) ?>
         </td>
     </tr>

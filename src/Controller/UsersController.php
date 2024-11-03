@@ -64,27 +64,22 @@ class UsersController extends AppController
     }
     public function dashboard()
 {
-     // Authorize the user for the dashboard
-    //  $this->Authorization->authorize($this->Users->newEmptyEntity());
     $this->Authorization->skipAuthorization();
-
-    
     $this->viewBuilder()->setLayout('uhome');
-    
-
-    // Get the count of students
+     // Get the count of students
     $studentCount = $this->Students->find()->count();
-
-    // Set the count to the view
     $this->set('studentCount', $studentCount);
   // Get the count of results
     $resultCount = $this->Results->find()->count();
-
-    // // Set the count to the view
     $this->set('resultCount', $resultCount);
-
+  // Get the count of users
+    $userCount = $this->Users->find()->count();
+    $this->set('userCount', $userCount);
+    // Get the count of marks
+    $marksCount = $this->Marks->find()->count();
+    $this->set('marksCount', $marksCount);
+  // Get the count of excellence
     $excellenceCount = $this->Results->find()->count();
-    // // Set the count to the view
     $this->set('excellenceCount', $excellenceCount);
 
 }
