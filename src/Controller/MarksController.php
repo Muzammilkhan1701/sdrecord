@@ -331,11 +331,21 @@ class MarksController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        $query = $this->Marks->find()
-            ->contain(['Students']);
-        $marks = $this->paginate($query);
+        $search = $this->request->getQuery('search');
 
-        $this->set(compact('marks'));
+    $query = $this->Marks->find()
+        ->contain(['Students']) // Include the Students table for the search
+        ->order(['Marks.mark_id' => 'ASC']);
+
+    if (!empty($search)) {
+        $query->matching('Students', function ($q) use ($search) {
+            return $q->where(['Students.name LIKE' => '%' . $search . '%']);
+        });
+    }
+
+    $marks = $this->paginate($query);
+
+    $this->set(compact('marks', 'search'));
     }
 
     /**

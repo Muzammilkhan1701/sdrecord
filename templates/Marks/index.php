@@ -1,6 +1,27 @@
 <div class="marks index content">
     <?= $this->Html->link(('New Mark'), ['action' => 'marksadd'], ['class' => 'button float-right btn btn-primary']) ?>
     <h3 class="text-center"><?= __('Marks List') ?></h3>
+
+    <!-- Search Form -->
+    <div class="search-form mb-3">
+        <?= $this->Form->create(null, ['type' => 'get', 'url' => ['action' => 'index']]) ?>
+        <div class="form-row">
+            <div class="col-md-8">
+                <?= $this->Form->control('search', [
+                    'label' => false,
+                    'placeholder' => 'Search by Student Name...',
+                    'class' => 'form-control',
+                    'value' => $this->request->getQuery('search'),
+                    'autocomplete' => 'off', // Disable autocomplete
+                ]) ?>
+            </div>
+            <div class="col-md-4">
+                <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary w-100']) ?>
+            </div>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
+    
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped">
             <thead class="thead-dark">
